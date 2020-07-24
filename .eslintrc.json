@@ -20,16 +20,38 @@
     },
     "plugins": [
         "react",
+        "react-hooks",
         "@typescript-eslint",
         "prettier"
     ],
     "rules": {
-      "prettier/prettier": "error",
+      "prettier/prettier":"error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-filename-extension":[1, {"extensions": [".tsx" , "*.ts"]}],
+      "import/prefer-default-export":"off",
+      "react/jsx-one-expression-per-line":"off",
+      "react/jsx-props-no-spreading":"off",
+      "react/prop-types":"off",
+      "camelcase":"off",
+      "no-unused-expressions":"off",
+      "import/no-duplicates": "off",
+      "@typescript-eslint/camel-case":"off",
+      "@typescript-eslint/no-unused-vars":"off",
+      "@typescript-eslint/ban-types":"off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/explicit-function-return-type":[
+        "error",
+        {
+          "allowExpressions":true
+        }
+      ],
       "import/extensions": [
         "error",
         "ignorePackages",
         {
-          "ts": "never"
+          "ts": "never",
+          "tsx": "never"
         }
       ]
     },
