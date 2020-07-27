@@ -6,7 +6,6 @@ import Routes from './routes';
 const App: React.FC = () => (
   <>
     <GlobalStyled />
-
     <Router>
       <Routes />
     </Router>
