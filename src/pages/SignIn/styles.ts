@@ -15,6 +15,7 @@ export const Content = styled.div`
   place-content: center;
   width: 100%;
   max-width: 700px;
+  background: #312e38;
 `;
 
 const apppearFromLeft = keyframes`

@@ -5,7 +5,7 @@ import { FiLock, FiMail } from 'react-icons/fi';
 import Input from '../../components/admin/Input';
 import Button from '../../components/admin/Button';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { AnimationContainer } from './styles';
 
 interface SignInFormData {
   email: string;
@@ -17,26 +17,21 @@ const SignIn: React.FC = () => {
     console.log('submit');
   }, []);
   return (
-    <Container>
-      <Content>
-        <AnimationContainer>
-          <h1>GSP Admin</h1>
-          <Form onSubmit={handleSubmit}>
-            <h1>Faça seu logon</h1>
-            <Input icon={FiMail} name="email" placeholder="E-mail" />
-            <Input
-              icon={FiLock}
-              name="password"
-              placeholder="senha"
-              type="password"
-            />
-            <Button type="submit"> Entrar</Button>
-            <Link to="/forgot-password">Esquci minha senha</Link>
-          </Form>
-        </AnimationContainer>
-      </Content>
-      <Background />
-    </Container>
+    <AnimationContainer>
+      <h1>GSP Admin</h1>
+      <Form onSubmit={handleSubmit}>
+        <h1>Faça seu logon</h1>
+        <Input icon={FiMail} name="email" placeholder="E-mail" />
+        <Input
+          icon={FiLock}
+          name="password"
+          placeholder="senha"
+          type="password"
+        />
+        <Button type="submit"> Entrar</Button>
+        <Link to="/forgot-password">Esquci minha senha</Link>
+      </Form>
+    </AnimationContainer>
   );
 };
 

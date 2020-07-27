@@ -1,13 +1,13 @@
 import React from 'react';
+
 import { Container, Content } from './styles';
 
-const Dashboard: React.FC = () => (
+const Servicos: React.FC = () => (
   <Container>
     <Content>
-      <h1> Painel de Controle</h1>
-      <p>Guia de Serviços</p>
+      <h1>Servicos</h1>
     </Content>
   </Container>
 );
 
-export default Dashboard;
+export default Servicos;
