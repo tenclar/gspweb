@@ -9,7 +9,13 @@ export default createGlobalStyle`
 
 }
 
+html, body, #root {
+  height: 100%;
+
+}
+
 body{
+
   background: #DADBE6;
   color: #fff;
   -webkit-font-smoothing: antialiazed;
@@ -18,7 +24,7 @@ body{
 
 body, input, button {
   font-family: 'Roboto Slab', serif;
-  font-size: 14x;
+  font-size: 14px;
 }
 
 h1, h2, h3, h4, h5,h6 {
