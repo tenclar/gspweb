@@ -1,7 +1,16 @@
 import React from 'react';
-import { FiPlus } from 'react-icons/fi';
-import Button from '../../../components/admin/Button';
-import { Container, Title, Table, Panel, SearchTableContainer } from './styles';
+import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
+
+import ButtonAlterar from '../../../components/admin/ButtonAlterar';
+
+import {
+  Container,
+  Title,
+  Table,
+  Panel,
+  SearchTableContainer,
+  LinkButton,
+} from './styles';
 
 const Servicos: React.FC = () => (
   <Container>
@@ -13,17 +22,23 @@ const Servicos: React.FC = () => (
     <Panel>
       <SearchTableContainer>
         <input name="search" type="text" placeholder="Search" />
-        <button type="button">Localizar</button>
+        <button type="button">
+          <FiSearch size={20} />
+        </button>
       </SearchTableContainer>
     </Panel>
     <Panel>
       <Table cellPadding="0" cellSpacing="0">
         <thead>
           <tr>
-            <th style={{ width: '60px' }}>
-              <Button type="button">
+            <th
+              style={{
+                width: '35px',
+              }}
+            >
+              <LinkButton to="/admin/cadastro/servicos/novo">
                 <FiPlus />
-              </Button>
+              </LinkButton>
             </th>
             <th style={{ width: '60px' }}>#</th>
             <th>Título do Serviço</th>
@@ -32,23 +47,27 @@ const Servicos: React.FC = () => (
         <tbody>
           <tr>
             <td style={{ textAlign: 'center' }}>
-              <Button color="#a2d200" type="button">
-                <FiPlus />
-              </Button>
+              <ButtonAlterar type="button">
+                <FiRefreshCw />
+              </ButtonAlterar>
             </td>
             <td style={{ textAlign: 'center' }}>1</td>
             <td>resposta</td>
           </tr>
           <tr>
             <td style={{ textAlign: 'center' }}>
-              <button type="button">alterar</button>
+              <ButtonAlterar type="button">
+                <FiRefreshCw />
+              </ButtonAlterar>
             </td>
             <td style={{ textAlign: 'center' }}>1</td>
             <td>resposta</td>
           </tr>
           <tr>
             <td style={{ textAlign: 'center' }}>
-              <button type="button">alterar</button>
+              <ButtonAlterar type="button">
+                <FiRefreshCw />
+              </ButtonAlterar>
             </td>
             <td style={{ textAlign: 'center' }}>1</td>
             <td>resposta</td>

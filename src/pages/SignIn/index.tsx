@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FiLock, FiMail } from 'react-icons/fi';
-import Input from '../../components/admin/Input';
+import Input from '../../components/admin/InputAuth';
 import Button from '../../components/admin/ButtonAuth';
 
 import { AnimationContainer } from './styles';

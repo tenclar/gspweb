@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.button`
+interface ContainerProps {
+  color?: string;
+}
+export const Container = styled.button<ContainerProps>`
   background: #00bcd4;
   height: 40px;
   border-radius: 10px;
