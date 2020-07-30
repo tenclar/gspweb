@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-bottom: 10px;
+  margin: 10px 0;
   color: #444;
   hr {
     border: 1px solid #f44336;

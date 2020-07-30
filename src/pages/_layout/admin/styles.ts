@@ -16,6 +16,6 @@ export const Container = styled.div`
 export const Content = styled.div`
   flex: 1;
   background-color: #d3d2d2;
-  padding: 0 10px;
+  padding: 0 10px 50px 10px;
   height: 100%;
 `;
