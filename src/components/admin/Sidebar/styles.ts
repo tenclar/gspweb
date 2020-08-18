@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.aside`
   min-height: 100%;
+  position: absolute;
   min-width: 200px;
   background: #202225;
   padding: 20px 10px;
