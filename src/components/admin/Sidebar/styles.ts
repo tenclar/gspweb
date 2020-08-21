@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.aside`
+  position: initial;
   min-height: 100%;
-  position: absolute;
   min-width: 200px;
   background: #202225;
   padding: 20px 10px;

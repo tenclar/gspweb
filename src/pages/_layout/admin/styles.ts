@@ -2,17 +2,18 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   height: 100%;
-  /*   display: flex;
-  flex-direction: column; */
-  padding-top: -60px;
+
+  /*
+  display: flex;
+  flex-direction: column;
+  */
 `;
 
 export const Container = styled.div`
-  flex: 1;
+  padding-top: 60px;
   height: 100%;
   display: flex;
   align-items: stretch;
-  padding-top: -60px;
 `;
 
 export const Content = styled.div`
