@@ -28,6 +28,7 @@ const Route: React.FC<RouteProps> = ({
   if (signed && !isPrivate) {
     return <Redirect to="/admin" />;
   }
+
   const Layout = signed ? AdminLayout : AuthLayout;
   return (
     <ReactDOMRoute

@@ -19,7 +19,6 @@ body{
   background: #DADBE6;
   color: #fff;
   -webkit-font-smoothing: antialiazed;
-  padding-top: -100px;
 }
 
 body, input, button {

@@ -3,7 +3,7 @@ import { shade } from 'polished';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  height: 100%;
+  flex: 1;
 `;
 
 export const Title = styled.div`

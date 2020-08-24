@@ -26,7 +26,7 @@ export const Content = styled.div`
       border-right: 1px solid #eee;
     }
     > a {
-      font-weight: bold;
+      font-weight: 400;
       color: #363636;
       font-size: 16px;
       text-decoration: none;
@@ -49,6 +49,7 @@ export const Profile = styled.div`
     text-align: right;
     margin-right: 10px;
     strong {
+      font-weight: 400;
       display: block;
       color: #333;
     }
