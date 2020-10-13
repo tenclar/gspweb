@@ -20,24 +20,23 @@ interface Categoria {
 
 const Categorias: React.FC = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+
   const [loading, setLoading] = useState(false);
 
-
-
-    async function loadCategorias() : Promise<void> {
-      try {
-        setLoading(true);
-        const response = await api.get('/categorias');
-        setCategorias(response.data);
-      } catch (err) {
-        toast.error('Erro na lista');
-      } finally {
-        setLoading(false);
-      }
+  async function loadCategorias(): Promise<void> {
+    try {
+      setLoading(true);
+      const response = await api.get('/categorias');
+      setCategorias(response.data.categorias);
+    } catch (err) {
+      toast.error('Erro na lista');
+    } finally {
+      setLoading(false);
     }
-
+  }
 
   useEffect(() => {
+    // api.get('/categorias').then((response) => setCategorias(response.data));
     loadCategorias();
   }, []);
 
@@ -60,11 +59,7 @@ const Categorias: React.FC = () => {
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
-              <th
-                style={{
-                  width: '35px',
-                }}
-              >
+              <th style={{ width: '35px' }}>
                 <LinkButton to="/admin/cadastro/categorias/novo">
                   <FiPlus />
                 </LinkButton>
@@ -74,20 +69,22 @@ const Categorias: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {categorias.map((cat)=>(
-
-
-            <tr key={cat.id} >
-              <td style={{ textAlign: 'center' }}>
-                <ButtonAlterar type="button">
-                  <FiRefreshCw />
-                </ButtonAlterar>
-
-              </td>
-              <td style={{ textAlign: 'center' }}>{cat.id}</td>
-              <td>{cat.titulo}</td>
-            </tr>
-           ))}
+            {categorias.length === 0 && (
+              <tr>
+                <td colSpan={3}> Nenhum agendamento neste periodo</td>
+              </tr>
+            )}
+            {categorias.map((categoria) => (
+              <tr key={categoria.id}>
+                <td style={{ textAlign: 'center' }}>
+                  <ButtonAlterar type="button">
+                    <FiRefreshCw />
+                  </ButtonAlterar>
+                </td>
+                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
+                <td>{categoria.titulo}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Panel>
