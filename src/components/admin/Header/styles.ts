@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   position: absolute;
-  background-color: #9597a6;
+  background-color: #1474ea;
+  /* background-color: #9597a6; #006be8  #264a91ff */
   padding: 0 30px;
 `;
 
@@ -49,9 +50,11 @@ export const Profile = styled.div`
     text-align: right;
     margin-right: 10px;
     strong {
-      font-weight: 400;
+      font-weight: 700;
       display: block;
-      color: #333;
+      color: #fff;
+
+      /* color: #333; */
     }
 
     a {
@@ -72,4 +75,9 @@ export const Profile = styled.div`
     height: 32px;
     border-radius: 50%;
   }
+`;
+export const Title = styled.div`
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px;
+  color: #fff;
 `;

@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo-oca.svg';
 import prof from '../../../assets/profile.jpg';
-import { Container, Content, Profile } from './styles';
+import { Container, Content, Profile, Title } from './styles';
 
 const Header: React.FC = () => (
   <Container>
     <Content>
       <nav>
         <img src={logo} alt="Guia de Serviços" />
-        <Link to="/">Painel</Link>
+        <Link to="/">
+          <Title>Painel de Controle</Title>
+        </Link>
       </nav>
 
       <aside>

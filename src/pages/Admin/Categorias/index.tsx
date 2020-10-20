@@ -3,6 +3,7 @@ import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../../services/api';
 import ButtonAlterar from '../../../components/admin/ButtonAlterar';
+import loadingGif from '../../../assets/ajax-loader.gif';
 import {
   Container,
   Title,
@@ -44,7 +45,6 @@ const Categorias: React.FC = () => {
     <Container>
       <Title>
         <h1>Categorias</h1>
-
         <hr />
       </Title>
       <Panel>
@@ -64,11 +64,18 @@ const Categorias: React.FC = () => {
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '60px' }}>#</th>
+              <th style={{ width: '300px' }}>#</th>
               <th>Categoria</th>
             </tr>
           </thead>
           <tbody>
+            {loading && (
+              <tr>
+                <td colSpan={3}>
+                  Carregando <img src={loadingGif} alt="loading" />
+                </td>
+              </tr>
+            )}
             {categorias.length === 0 && (
               <tr>
                 <td colSpan={3}> Nenhum agendamento neste periodo</td>

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
 * {
@@ -22,7 +23,7 @@ body{
 }
 
 body, input, button {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Segoe UI', 'Century Gothic', Poppins, Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
 }
 
