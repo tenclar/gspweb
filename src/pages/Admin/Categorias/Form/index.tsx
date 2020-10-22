@@ -70,16 +70,15 @@ const FormCategorias: React.FC = () => {
               <option value="categoria1">Categoria 2</option>
             </select>
           </label>
-          <label htmlFor="titulo">
-            Título
-            <Input
-              icon={FiUser}
-              name="titulo"
-              id="titulo"
-              type="text"
-              placeholder="Título"
-            />
-          </label>
+
+          <Input
+            icon={FiUser}
+            name="titulo"
+            id="titulo"
+            type="text"
+            placeholder="Título"
+          />
+
           <hr />
           <div>
             <Button>Salvar </Button>
