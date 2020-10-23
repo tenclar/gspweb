@@ -6,9 +6,10 @@ interface ContainerProps {
   isFilled: boolean;
   isErrored: boolean;
 }
-export const Container = styled.div<ContainerProps>`
+export const Container =  styled.div <
+  ContainerProps >`
   color: #666360;
-  background: #232129;
+
   border-radius: 10px;
   border: 2px solid #233129;
   padding: 16px;
@@ -32,8 +33,8 @@ export const Container = styled.div<ContainerProps>`
       border-color: #ff9000;
     `}
 
-  ${(props) => props.isFilled &&
-    css`
+  ${(props) => props.isFilled
+    && css`
       color: #ff9900;
     `}
 
@@ -43,7 +44,7 @@ export const Container = styled.div<ContainerProps>`
     flex: 1;
     background: transparent;
     border: 0;
-    color: #fff;
+    color: #000;
 
     &::placeholder {
       color: #666360;

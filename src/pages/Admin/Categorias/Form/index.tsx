@@ -1,14 +1,16 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-
 import { useHistory } from 'react-router-dom';
+import api from '../../../../services/api';
+
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import Input from '../../../../components/admin/InputForm';
+import Select from '../../../../components/admin/Select';
 
 import { Container, Title, Panel, Button, LinkButton } from './styles';
 
@@ -18,9 +20,30 @@ interface CategoriaFormData {
   categoria_id: string;
 }
 
+interface Categoria {
+  id: string;
+  slug: string;
+  titulo: string;
+}
+
 const FormCategorias: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+  async function loadCategorias(): Promise<void> {
+    try {
+      const response = await api.get('/categorias');
+      setCategorias(response.data.categorias);
+    } catch (err) {
+      toast.error('Erro na lista');
+    }
+  }
+
+  useEffect(() => {
+    loadCategorias();
+  }, []);
+
   const handleSubmit = useCallback(
     async (data: CategoriaFormData) => {
       try {
@@ -52,23 +75,16 @@ const FormCategorias: React.FC = () => {
       </Title>
       <Panel>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <label htmlFor="categoria">
+          <label>
             Categoria
-            <select
-              id="categoria"
-              name="categoria"
-              placeholder="Selecione Categoria"
-            >
-              <option>Raíz</option>
-              <option value="categoria1">Categoria 1</option>
-              <option value="categoria1">
-                &nbsp;&nbsp;&nbsp;Categoria 1.1
-              </option>
-              <option value="categoria1">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categoria 1.1.1
-              </option>
-              <option value="categoria1">Categoria 2</option>
-            </select>
+            <Select
+              name="categoria_id"
+              options={categorias}
+              getOptionValue={(option) => option.id}
+              getOptionLabel={(option) => option.titulo}
+              isSearchable
+              isClearable
+            />
           </label>
 
           <Input
@@ -86,6 +102,7 @@ const FormCategorias: React.FC = () => {
           </div>
         </Form>
       </Panel>
+      <ToastContainer />
     </Container>
   );
 };

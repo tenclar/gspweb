@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import api from '../../../services/api';
 import ButtonAlterar from '../../../components/admin/ButtonAlterar';
 import loadingGif from '../../../assets/ajax-loader.gif';
+
 import {
   Container,
   Title,
@@ -13,22 +14,21 @@ import {
   LinkButton,
 } from './styles';
 
-interface Categoria {
+interface User {
   id: string;
-  slug: string;
-  titulo: string;
+  name: string;
+  email: string;
 }
-
-const Categorias: React.FC = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+const Users: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
 
   const [loading, setLoading] = useState(false);
 
-  async function loadCategorias(): Promise<void> {
+  async function loadUsers(): Promise<void> {
     try {
       setLoading(true);
-      const response = await api.get('/categorias');
-      setCategorias(response.data.categorias);
+      const response = await api.get('/users');
+      setUsers(response.data.users);
     } catch (err) {
       toast.error('Erro na lista');
     } finally {
@@ -37,14 +37,14 @@ const Categorias: React.FC = () => {
   }
 
   useEffect(() => {
-    // api.get('/categorias').then((response) => setCategorias(response.data));
-    loadCategorias();
+    loadUsers();
   }, []);
 
   return (
     <Container>
       <Title>
-        <h1>Categorias</h1>
+        <h1>Usuários</h1>
+
         <hr />
       </Title>
       <Panel>
@@ -58,17 +58,6 @@ const Categorias: React.FC = () => {
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
-            <tr>
-              <th style={{ width: '35px' }}>
-                <LinkButton to="/admin/cadastro/categorias/novo">
-                  <FiPlus />
-                </LinkButton>
-              </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria</th>
-            </tr>
-          </thead>
-          <tbody>
             {loading && (
               <tr>
                 <td colSpan={3}>
@@ -76,20 +65,38 @@ const Categorias: React.FC = () => {
                 </td>
               </tr>
             )}
-            {categorias.length === 0 && (
+
+            <tr>
+              <th
+                style={{
+                  width: '35px',
+                }}
+              >
+                <LinkButton to="/admin/cadastro/usuarios/novo">
+                  <FiPlus />
+                </LinkButton>
+              </th>
+              <th style={{ width: '300px' }}>#</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.length === 0 && (
               <tr>
-                <td colSpan={3}> Nenhum Cadastro efetuado </td>
+                <td colSpan={3}> Nenhum cadastro</td>
               </tr>
             )}
-            {categorias.map((categoria) => (
-              <tr key={categoria.id}>
+            {users.map((user) => (
+              <tr key={user.id}>
                 <td style={{ textAlign: 'center' }}>
                   <ButtonAlterar type="button">
                     <FiRefreshCw />
                   </ButtonAlterar>
                 </td>
-                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
-                <td>{categoria.titulo}</td>
+                <td style={{ textAlign: 'center' }}>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
               </tr>
             ))}
           </tbody>
@@ -100,4 +107,4 @@ const Categorias: React.FC = () => {
   );
 };
 
-export default Categorias;
+export default Users;

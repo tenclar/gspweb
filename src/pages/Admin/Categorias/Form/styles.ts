@@ -38,19 +38,10 @@ export const Panel = styled.div`
       font-weight: 500;
       margin-bottom: 10px;
     }
-    input,
-    textarea,
-    select {
-      color: #000;
-      border-radius: 5px;
-      border: 2px solid #ccc;
-      padding: 10px;
-      width: 100%;
-      margin: 5px 0;
-    }
+
     > div {
       display: flex;
-      margin: 10px;
+      margin: 10px 0;
     }
   }
 `;
