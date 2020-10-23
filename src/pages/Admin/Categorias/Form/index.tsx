@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FiUser } from 'react-icons/fi';
+
 import { ToastContainer, toast } from 'react-toastify';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -87,13 +87,7 @@ const FormCategorias: React.FC = () => {
             />
           </label>
 
-          <Input
-            icon={FiUser}
-            name="titulo"
-            id="titulo"
-            type="text"
-            placeholder="Título"
-          />
+          <Input name="titulo" id="titulo" type="text" placeholder="Título" />
 
           <hr />
           <div>

@@ -25,7 +25,7 @@
       "prettier"
   ],
   "rules": {
-    "prettier/prettier": ["error", {"endOfLine":"auto", "singleQuote": true, "parser": "flow"}],
+    "prettier/prettier": ["error", {"endOfLine":"auto"}],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension":[1, {"extensions": [".tsx" , "*.ts"]}],
@@ -42,6 +42,9 @@
     "@typescript-eslint/no-unused-vars":"off",
     "@typescript-eslint/ban-types":"off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    "operator-linebreak":"off",
+    "implicit-arrow-linebreak": "off",
     "@typescript-eslint/explicit-function-return-type":[
       "error",
       {

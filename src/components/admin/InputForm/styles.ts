@@ -6,10 +6,8 @@ interface ContainerProps {
   isFilled: boolean;
   isErrored: boolean;
 }
-export const Container =  styled.div <
-  ContainerProps >`
+export const Container = styled.div<ContainerProps>`
   color: #666360;
-
   border-radius: 10px;
   border: 2px solid #233129;
   padding: 16px;
@@ -22,23 +20,24 @@ export const Container =  styled.div <
     margin-top: 8px;
   }
 
-  ${(props) => props.isErrored &&
+  ${(props) =>
+    props.isErrored &&
     css`
       border-color: #c53030;
     `}
 
-  ${(props) => props.isFocused &&
+  ${(props) =>
+    props.isFocused &&
     css`
       color: #ff9900;
       border-color: #ff9000;
     `}
 
-  ${(props) => props.isFilled
-    && css`
+  ${(props) =>
+    props.isFilled &&
+    css`
       color: #ff9900;
     `}
-
-
 
   input {
     flex: 1;

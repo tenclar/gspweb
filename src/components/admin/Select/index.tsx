@@ -3,7 +3,10 @@ import ReactSelect, {
   OptionTypeBase,
   Props as SelectProps,
 } from 'react-select';
+
 import { useField } from '@unform/core';
+import { FiAlertCircle } from 'react-icons/fi';
+import { Error } from './styles';
 
 interface Props extends SelectProps<OptionTypeBase> {
   name: string;
@@ -33,12 +36,19 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
   }, [fieldName, registerField, rest.isMulti]);
 
   return (
-    <ReactSelect
-      defaultValue={defaultValue}
-      ref={selectRef}
-      classNamePrefix="react-select"
-      {...rest}
-    />
+    <>
+      <ReactSelect
+        defaultValue={defaultValue}
+        ref={selectRef}
+        classNamePrefix="react-select"
+        {...rest}
+      />
+      {error && (
+        <Error title={error}>
+          <FiAlertCircle color="#c53030" size={16} />
+        </Error>
+      )}
+    </>
   );
 };
 
