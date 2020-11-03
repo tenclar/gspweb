@@ -38,6 +38,7 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
   return (
     <>
       <ReactSelect
+        id="select"
         defaultValue={defaultValue}
         ref={selectRef}
         classNamePrefix="react-select"
