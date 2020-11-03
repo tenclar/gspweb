@@ -8,9 +8,10 @@ interface ContainerProps {
 }
 export const Container = styled.div<ContainerProps>`
   color: #666360;
-  border-radius: 10px;
-  border: 2px solid #233129;
-  padding: 16px;
+  border-radius: 4px;
+  /* border: 2px solid #233129; */
+  border: 1px solid hsl(0,0%,80%);
+  padding: 10px;
   width: 100%;
 
   display: flex;
