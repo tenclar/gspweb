@@ -75,9 +75,10 @@ const FormCategorias: React.FC = () => {
       </Title>
       <Panel>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <label>
+          <label htmlFor="categoria_id">
             Categoria
             <Select
+              id="categoria_id"
               name="categoria_id"
               options={categorias}
               getOptionValue={(option) => option.id}
@@ -86,9 +87,9 @@ const FormCategorias: React.FC = () => {
               isClearable
             />
           </label>
-
-          <Input name="titulo" id="titulo" type="text" placeholder="Título" />
-
+          <label htmlFor="titulo">
+            <Input name="titulo" id="titulo" type="text" placeholder="Título" />
+          </label>
           <hr />
           <div>
             <Button>Salvar </Button>
