@@ -1,11 +1,15 @@
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useRef } from 'react';
+import * as Yup from 'yup';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FiLock, FiMail } from 'react-icons/fi';
+import { FormHandles } from '@unform/core';
+import { useAuth } from '../../hooks/Auth';
 import Input from '../../components/admin/InputAuth';
 import Button from '../../components/admin/ButtonAuth';
 
 import { AnimationContainer } from './styles';
+import getValidationErrors from '../../utils/getValidationErrors';
 
 interface SignInFormData {
   email: string;
@@ -13,12 +17,38 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-  const handleSubmit = useCallback(() => {
-    console.log('submit');
-  }, []);
+  const formRef = useRef<FormHandles>(null);
+  const { signIn } = useAuth();
+  const history = useHistory();
+
+  const handleSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail Válido'),
+          passwrod: Yup.string().required('Senha Obrigatória'),
+        });
+        await schema.validate(data, { abortEarly: false });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+
+        history.push('/admin/painel');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
+      }
+    },
+    [signIn, history],
+  );
   return (
     <AnimationContainer>
-      <h1>GSP Admin</h1>
+      <h1>GSP - Painel Administrativo</h1>
       <Form onSubmit={handleSubmit}>
         <h1>Faça seu logon</h1>
         <Input icon={FiMail} name="email" placeholder="E-mail" />

@@ -20,7 +20,7 @@ const Route: React.FC<RouteProps> = ({
   ...rest
 }) => {
   // const { user } = useAuth();
-  const signed = true;
+  const signed = false;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
