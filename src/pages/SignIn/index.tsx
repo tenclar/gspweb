@@ -5,6 +5,8 @@ import { Form } from '@unform/web';
 import { FiLock, FiMail } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { useAuth } from '../../hooks/Auth';
+import { useToast } from '../../hooks/Toast';
+
 import Input from '../../components/admin/InputAuth';
 import Button from '../../components/admin/ButtonAuth';
 
@@ -18,7 +20,9 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+
   const { signIn } = useAuth();
+  const { addToast } = useToast();
   const history = useHistory();
 
   const handleSubmit = useCallback(
@@ -42,9 +46,14 @@ const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
         }
+        addToast({
+          type: 'error',
+          title: 'Erro na Autenticação',
+          description: 'Ocorreu um erro ao fazer login.',
+        });
       }
     },
-    [signIn, history],
+    [signIn, addToast, history],
   );
   return (
     <AnimationContainer>
