@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { string } from 'yup';
-import Users from '../pages/Admin/Users';
+
 import api from '../services/api';
 
 interface User {
