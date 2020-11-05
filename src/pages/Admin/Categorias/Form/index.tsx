@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import { FormHandles } from '@unform/core';
@@ -50,6 +50,7 @@ const FormCategorias: React.FC = () => {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
           categoria_id: Yup.string(),
+          slug: Yup.string(),
         });
 
         await schema.validate(data, { abortEarly: false });
