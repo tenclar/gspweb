@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import AdminLayout from '../pages/_layout/admin';
 import AuthLayout from '../pages/_layout/auth';
-// import { useAuth } from '../hooks/Auth';
+import { useAuth } from '../hooks/Auth';
 
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
@@ -19,8 +19,8 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  // const { user } = useAuth();
-  const signed = false;
+  const { user } = useAuth();
+  const signed = user;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
