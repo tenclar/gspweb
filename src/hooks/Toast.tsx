@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useCallback, useState } from 'react';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
+
 import ToastConainer from '../components/common/ToastContainer';
 
 export interface ToastMessage {
