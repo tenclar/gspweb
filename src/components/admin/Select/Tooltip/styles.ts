@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
+
   span {
     width: 180px;
     background: #ff9000;
