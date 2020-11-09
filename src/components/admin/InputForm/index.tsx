@@ -41,6 +41,7 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
         ref={inputRef}
         {...rest}
       />
+
       {error && (
         <Error title={error}>
           <FiAlertCircle color="#c53030" size={16} />
