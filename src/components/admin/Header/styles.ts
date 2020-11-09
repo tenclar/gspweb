@@ -43,7 +43,10 @@ export const Profile = styled.div`
   display: flex;
   margin-left: 20px;
   padding-left: 20px;
+
+  padding-right: 10px;
   border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
   align-items: center;
 
   div {
@@ -57,7 +60,7 @@ export const Profile = styled.div`
       /* color: #333; */
     }
 
-    a {
+    > a {
       display: block;
       margin-top: 2px;
       font-size: 12px;
@@ -80,4 +83,21 @@ export const Title = styled.div`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 30px;
   color: #fff;
+`;
+
+export const ButtonLogout = styled.button`
+  padding: 5px;
+  margin: 20px 30px 20px 20px;
+
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #1474ea;
+  border: 1px solid;
+
+  &:hover {
+    color: #000;
+  }
 `;
