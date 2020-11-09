@@ -7,10 +7,10 @@ interface ContainerProps {
 export const Container = styled.button<ContainerProps>`
   background: #00bcd4;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 0;
   padding: 0 16px;
-  width: 100%;
+  width: 100px;
   color: #fff;
   font-weight: 500;
 
