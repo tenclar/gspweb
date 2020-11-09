@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex: 1;
   background-color: #d3d2d2;
   padding-left: 10px;
+  width: 100%;
 `;
 export const Content = styled.div`
   height: 100%;
@@ -28,8 +29,10 @@ export const Panel = styled.div`
   padding: 8px;
   border-radius: 4px;
   margin-bottom: 4px;
+  width: 100%;
 
   form {
+    width: 100%;
     color: #000;
     display: flex;
     flex-direction: column;
