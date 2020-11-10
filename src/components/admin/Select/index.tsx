@@ -30,7 +30,13 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
         if (!ref.state.value) {
           return '';
         }
-        return ref.state.value.value;
+        return ref.state.value.id;
+      },
+      setValue: (ref, value) => {
+        ref.select.setValue(value || null);
+      },
+      clearValue: (ref) => {
+        ref.select.clearValue();
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
