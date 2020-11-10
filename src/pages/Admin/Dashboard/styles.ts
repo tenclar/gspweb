@@ -12,4 +12,17 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 3px 2px 10px rgba(0, 0, 0, 0.61);
+
+  hr {
+    width: 80%;
+    border: 1px solid #e65121;
+  }
+  > h1 {
+    font-size: 80px;
+  }
+  > p {
+    font-size: 60px;
+  }
 `;
