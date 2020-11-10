@@ -24,6 +24,7 @@ export const Title = styled.div`
 `;
 
 export const Panel = styled.div`
+  width: 90%;
   background-color: #fff;
   padding: 8px;
   border-radius: 4px;
@@ -46,7 +47,7 @@ export const Panel = styled.div`
   }
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   width: 100px;
   background: #00bcd4;
   padding: 10px;

@@ -66,6 +66,7 @@ const Categorias: React.FC = () => {
               </th>
               <th style={{ width: '300px' }}>#</th>
               <th>Categoria</th>
+              <th>slug</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +91,7 @@ const Categorias: React.FC = () => {
                 </td>
                 <td style={{ textAlign: 'center' }}>{categoria.id}</td>
                 <td>{categoria.titulo}</td>
+                <td>{categoria.slug}</td>
               </tr>
             ))}
           </tbody>

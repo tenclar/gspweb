@@ -54,9 +54,9 @@ const FormCategorias: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
-
+        await api.post('/categorias', data);
         toast.success('Cadastro realizado');
-        history.push('/admin/cadatro/categorias');
+        history.push('/admin/cadastro/categorias');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -69,37 +69,44 @@ const FormCategorias: React.FC = () => {
     [history],
   );
   return (
-    <Container>
-      <Title>
-        <h1>Formulário Categorias</h1>
-        <hr />
-      </Title>
-      <Panel>
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <label htmlFor="categoria_id">
-            Categoria
-            <Select
-              id="categoria_id"
-              name="categoria_id"
-              options={categorias}
-              getOptionValue={(option) => option.id}
-              getOptionLabel={(option) => option.titulo}
-              isSearchable
-              isClearable
-            />
-          </label>
-          <label htmlFor="titulo">
-            <Input name="titulo" id="titulo" type="text" placeholder="Título" />
-          </label>
+    <>
+      <Container>
+        <Title>
+          <h1>Formulário Categorias</h1>
           <hr />
-          <div>
-            <Button>Salvar </Button>
-            <LinkButton to="/admin/cadastro/categorias">Cancelar</LinkButton>
-          </div>
-        </Form>
-      </Panel>
+        </Title>
+        <Panel>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <label htmlFor="categoria_id">
+              Categoria
+              <Select
+                id="categoria_id"
+                name="categoria_id"
+                options={categorias}
+                getOptionValue={(option) => option.id}
+                getOptionLabel={(option) => option.titulo}
+                isSearchable
+                isClearable
+              />
+            </label>
+            <label htmlFor="titulo">
+              <Input
+                name="titulo"
+                id="titulo"
+                type="text"
+                placeholder="Título"
+              />
+            </label>
+            <hr />
+            <div>
+              <Button> Salvar </Button>
+              <LinkButton to="/admin/cadastro/categorias">Cancelar</LinkButton>
+            </div>
+          </Form>
+        </Panel>
+      </Container>
       <ToastContainer />
-    </Container>
+    </>
   );
 };
 
