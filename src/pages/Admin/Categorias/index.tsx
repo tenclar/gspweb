@@ -17,6 +17,7 @@ interface Categoria {
   id: string;
   slug: string;
   titulo: string;
+  categoria_id: string;
 }
 
 const Categorias: React.FC = () => {
@@ -65,7 +66,9 @@ const Categorias: React.FC = () => {
                 </LinkButton>
               </th>
               <th style={{ width: '300px' }}>#</th>
+              <th>Categoria id</th>
               <th>Categoria</th>
+              <th>Slug</th>
             </tr>
           </thead>
           <tbody>
@@ -89,7 +92,9 @@ const Categorias: React.FC = () => {
                   </ButtonAlterar>
                 </td>
                 <td style={{ textAlign: 'center' }}>{categoria.id}</td>
+                <td>{categoria.categoria_id}</td>
                 <td>{categoria.titulo}</td>
+                <td>{categoria.slug}</td>
               </tr>
             ))}
           </tbody>
