@@ -14,44 +14,42 @@ import ServicosForm from '../pages/Admin/Servicos/Form';
 import Users from '../pages/Admin/Users';
 import UsersForm from '../pages/Admin/Users/Form';
 
+import Guide from '../pages/Guide';
+
 const Routes: React.FC = () => (
   <Switch>
-    <Route exact path="/" component={SignIn} />
-    <Route exact path="/admin" component={Dashboard} isPrivate />
+    <Route exact path="/" component={Guide} isGuide />
+    <Route exact path="/ad/" component={SignIn} />
+    <Route exact path="/ad/painel" component={Dashboard} isPrivate />
     <Route
       exact
-      path="/admin/cadastro/categorias/"
+      path="/ad/cadastro/categorias/"
       component={Categorias}
       isPrivate
     />
     <Route
       exact
-      path="/admin/cadastro/categorias/novo"
+      path="/ad/cadastro/categorias/novo"
       component={CategoriasForm}
       isPrivate
     />
 
+    <Route exact path="/ad/cadastro/servicos" component={Servicos} isPrivate />
     <Route
       exact
-      path="/admin/cadastro/servicos"
-      component={Servicos}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/admin/cadastro/servicos/novo"
+      path="/ad/cadastro/servicos/novo"
       component={ServicosForm}
       isPrivate
     />
 
-    <Route exact path="/admin/cadastro/usuarios/" component={Users} isPrivate />
+    <Route exact path="/ad/cadastro/usuarios/" component={Users} isPrivate />
     <Route
       exact
-      path="/admin/cadastro/usuarios/novo"
+      path="/ad/cadastro/usuarios/novo"
       component={UsersForm}
       isPrivate
     />
-    <Route path="/" component={() => <h1>404</h1>} isPrivate />
+    <Route path="/ad/**" component={() => <h1>404</h1>} isPrivate />
     <Route path="/" component={() => <h1>404</h1>} />
   </Switch>
 );
