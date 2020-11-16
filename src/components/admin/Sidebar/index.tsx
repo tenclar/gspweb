@@ -15,38 +15,38 @@ const Sidebar: React.FC = () => (
           <FaRegCircle /> <div>Avisos</div>
         </LinkButton>
          */}
-      <LinkButton to="/admin/cadastro/servicos">
+      <LinkButton to="/ad/cadastro/servicos">
         <FaRegCircle /> <div>Serviços</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/categorias">
+      <LinkButton to="/ad/cadastro/categorias">
         <FaRegCircle /> <div>Categorias</div>
       </LinkButton>
       <LinkButton to="/admin/cadastro/tags">
         <FaRegCircle /> <div>Tags</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/temas">
+      <LinkButton to="/ad/cadastro/temas">
         <FaRegCircle /> <div>Temas</div>
       </LinkButton>
       <LinkButton to="/admin/cadastro/centrais">
         <FaRegCircle /> <div>Centrais</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/pracas">
+      <LinkButton to="/ad/cadastro/pracas">
         <FaRegCircle /> <div>Praças</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/superiors">
+      <LinkButton to="/ad/cadastro/superiors">
         <FaRegCircle /> <div>Inst. Superiores</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/orgaos">
+      <LinkButton to="/ad/cadastro/orgaos">
         <FaRegCircle /> <div>Ogãos</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/locais">
+      <LinkButton to="/ad/cadastro/locais">
         <FaRegCircle /> <div>Locais</div>
       </LinkButton>
 
-      <LinkButton to="/admin/cadastro/cidades">
+      <LinkButton to="/ad/cadastro/cidades">
         <FaRegCircle /> <div>Cidades</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/publicos">
+      <LinkButton to="/ad/cadastro/publicos">
         <FaRegCircle /> <div>Públicos Alvo</div>
       </LinkButton>
 
@@ -54,10 +54,10 @@ const Sidebar: React.FC = () => (
         <FaListAlt />
         <div>Acessos</div>
       </LinkHeader>
-      <LinkButton to="/admin/cadastro/usuarios">
+      <LinkButton to="/ad/cadastro/usuarios">
         <FaRegCircle /> <div>Usuários</div>
       </LinkButton>
-      <LinkButton to="/admin/cadastro/permissoes">
+      <LinkButton to="/ad/cadastro/permissoes">
         <FaRegCircle /> <div>Permissões</div>
       </LinkButton>
     </LinkList>

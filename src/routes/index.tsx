@@ -49,7 +49,7 @@ const Routes: React.FC = () => (
       component={UsersForm}
       isPrivate
     />
-    <Route path="/ad/**" component={() => <h1>404</h1>} isPrivate />
+    <Route path="/**" component={() => <h1>404</h1>} isPrivate />
     <Route path="/" component={() => <h1>404</h1>} />
   </Switch>
 );
