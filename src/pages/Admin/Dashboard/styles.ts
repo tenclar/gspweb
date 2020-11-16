@@ -13,7 +13,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   color: rgba(255, 255, 255, 0.9);
-  text-shadow: 3px 2px 10px rgba(0, 0, 0, 0.61);
+  text-shadow: 3px 2px 5px rgba(0, 0, 0, 0.61);
 
   hr {
     width: 80%;
