@@ -36,7 +36,7 @@ const Servicos: React.FC = () => (
                 width: '35px',
               }}
             >
-              <LinkButton to="/admin/cadastro/servicos/novo">
+              <LinkButton to="/ad/cadastro/servicos/novo">
                 <FiPlus />
               </LinkButton>
             </th>
