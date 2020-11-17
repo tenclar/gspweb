@@ -23,6 +23,7 @@ body{
   background: #DADBE6;
   color: #fff;
   -webkit-font-smoothing: antialiazed;
+
 }
 
 body, input, button {
