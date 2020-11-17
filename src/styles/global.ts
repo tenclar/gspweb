@@ -9,6 +9,9 @@ export default createGlobalStyle`
   outline: 0;
 
 }
+*:focus {
+    outline:0;
+  }
 
 html, body, #root {
   min-height: 100%;

@@ -26,7 +26,7 @@ const Route: React.FC<RouteProps> = ({
   const signed = user;
 
   if (!signed && isPrivate) {
-    return <Redirect to="/ad" />;
+    return <Redirect to="/ad/" />;
   }
   if (signed && !isPrivate) {
     return <Redirect to="/ad/painel" />;
