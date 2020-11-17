@@ -7,6 +7,7 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   color: #363636;
+  padding-bottom: 30px;
 `;
 
 export const SearchContent = styled.div`
