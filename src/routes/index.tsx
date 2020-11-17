@@ -19,6 +19,7 @@ import Guide from '../pages/Guide';
 const Routes: React.FC = () => (
   <Switch>
     <Route exact path="/" component={Guide} isGuide />
+    <Route path="/" component={() => <h1>404</h1>} isGuide />
     <Route exact path="/ad/" component={SignIn} />
     <Route exact path="/ad/painel" component={Dashboard} isPrivate />
     <Route
@@ -50,7 +51,6 @@ const Routes: React.FC = () => (
       isPrivate
     />
     <Route path="/**" component={() => <h1>404</h1>} isPrivate />
-    <Route path="/" component={() => <h1>404</h1>} />
   </Switch>
 );
 
