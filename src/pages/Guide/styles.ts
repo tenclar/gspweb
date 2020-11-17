@@ -171,7 +171,7 @@ export const Category = styled.div`
   justify-content: center;
   background-color: #fff;
   margin: 15px;
-
+  color: #363636;
   border-radius: 5px;
   box-shadow: 3px 3px 9px 1px rgba(0, 0, 0, 0.25);
 
