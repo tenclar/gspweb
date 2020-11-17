@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  position: absolute;
   background: #fff;
   padding: 0 30px;
+  width: 100%;
 `;
 
 export const Content = styled.div`
   height: 100px;
-  max-width: 1366px;
+  /* max-width: 1366px; */
+
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
