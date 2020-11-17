@@ -16,6 +16,7 @@ import UsersForm from '../pages/Admin/Users/Form';
 
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
+import Detail from '../pages/Guide/Detail';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -51,6 +52,7 @@ const Routes: React.FC = () => (
     />
     <Route exact path="/" component={Guide} isGuide />
     <Route exact path="/pesquisa" component={Search} isGuide />
+    <Route exact path="/detalhe" component={Detail} isGuide />
 
     <Route path="/" component={() => <h1>404 b</h1>} isGuide />
     <Route path="/**" component={() => <h1>404</h1>} isPrivate />
