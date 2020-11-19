@@ -8,9 +8,9 @@ interface ContainerProps {
 }
 export const Container = styled.div<ContainerProps>`
   color: #666360;
-  border-radius: 4px;
-  /* border: 2px solid #233129; */
- // border: 1px solid hsl(0,0%,80%);
+  border-radius: 5px 0 0 5px;
+  //border: 2px solid #233129;
+  border: 2px solid hsl(0,0%,80%);
  // padding: 10px;
   width: 80%;
 
@@ -44,7 +44,7 @@ export const Container = styled.div<ContainerProps>`
     /* font-family: 'Segoe UI', Poppins, sans-serif; */
     font-size: 18px;
     font-weight: 350;
-    margin: 5px 0 5px 5px;
+    //margin: 1px 0 1px 1px;
     padding: 10px;
     width: 900px;
     height: 50px;
