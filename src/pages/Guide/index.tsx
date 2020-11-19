@@ -176,9 +176,9 @@ const Dashboard: React.FC = () => {
           <img src={iconLogogovfooter} alt="Governo do Estado do Acre" />
         </div>
         <div>
-          <strong>Governo do Esado do Acre</strong>
+          <strong>Governo do Estado do Acre</strong>
           <p>Secretaria de Planejamento e Gestão</p>
-          <p>Diretoria de Organições Centrais</p>
+          <p>Diretoria de Organização em Centros de Atendimento</p>
           <p>Avenida Getúlio Vargas, 232. Centro</p>
           <p>CEP 69900-600 - Rio Branco - Acre</p>
           {/* <p> Rua Quintino Bocaiuva, 299. Centro</p> */}

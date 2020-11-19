@@ -5,6 +5,7 @@ import bgsearchr from '../../../assets/bgsearchr.svg';
 export const Container = styled.div`
   width: 100%;
   color: #000;
+  padding-bottom: 30px;
 `;
 
 export const Breadcrumb = styled.div`

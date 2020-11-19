@@ -105,7 +105,7 @@ export const Button = styled(Link)`
   font-weight: bold;
   color: #fff;
   background-color: #66c5a0;
-  height: 50px;
+  height: 52px;
   width: 100px;
   padding: 10px;
   border: 0;
@@ -163,7 +163,7 @@ export const CategoryList = styled.div`
 `;
 export const Category = styled.div`
   width: 340px;
-  height: 350px;
+  height: 344px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -173,9 +173,10 @@ export const Category = styled.div`
   margin: 15px;
   color: #363636;
   border-radius: 5px;
-  box-shadow: 3px 3px 9px 1px rgba(0, 0, 0, 0.25);
+  // box-shadow: 3px 3px 9px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
 
-  border: #d4d2d2 solid 1px;
+  //border: #d4d2d2 solid 1px;
   transition: all 0.2s linear;
   img {
     height: 120px;
@@ -235,6 +236,7 @@ export const Line = styled.div`
 `;
 
 export const SessionFooter = styled.div`
+  color: #000;
   background: #fff;
   width: 100%;
   display: flex;
@@ -249,6 +251,7 @@ export const SessionFooter = styled.div`
 `;
 export const Footer = styled.div`
   /* font-family: Century Gothic; */
+  color: #000;
   border-top: #dadada solid 1px;
   padding-top: 10px;
   padding-bottom: 10px;
