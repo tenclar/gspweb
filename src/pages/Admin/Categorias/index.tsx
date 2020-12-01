@@ -61,7 +61,7 @@ const Categorias: React.FC = () => {
           <thead>
             <tr>
               <th style={{ width: '35px' }}>
-                <LinkButton to="/admin/cadastro/categorias/novo">
+                <LinkButton to="/ad/cadastro/categorias/novo">
                   <FiPlus />
                 </LinkButton>
               </th>
