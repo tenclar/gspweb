@@ -99,7 +99,7 @@ const FormCategorias: React.FC = () => {
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
-            <LinkButton to="/admin/cadastro/categorias">Cancelar</LinkButton>
+            <LinkButton to="/ad/cadastro/categorias">Cancelar</LinkButton>
           </div>
         </Form>
       </Panel>
