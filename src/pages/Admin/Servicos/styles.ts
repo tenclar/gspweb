@@ -47,6 +47,7 @@ export const SearchTableContainer = styled.div`
     }
   }
 `;
+
 export const LinkButton = styled(Link)`
   background: #00bcd4;
   display: flex;
@@ -68,6 +69,7 @@ export const LinkButton = styled(Link)`
     background: ${shade(0.2, '#00bcd4')};
   }
 `;
+
 export const Table = styled.table`
   width: 100%;
   margin: 5px 0;

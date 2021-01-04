@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Title, Panel, Button, LinkButton } from './styles';
+import { Container, Title, Panel, Button, CancelButton } from './styles';
 
 const FormServicos: React.FC = () => (
   <Container>
@@ -189,7 +189,7 @@ const FormServicos: React.FC = () => (
         <hr />
         <div>
           <Button>Salvar </Button>
-          <LinkButton to="/admin/cadastro/servicos">Cancelar</LinkButton>
+          <CancelButton to="/admin/cadastro/servicos">Cancelar</CancelButton>
         </div>
       </form>
     </Panel>

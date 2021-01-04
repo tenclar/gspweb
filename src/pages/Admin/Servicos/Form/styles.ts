@@ -39,10 +39,6 @@ export const Panel = styled.div`
       width: 100%;
       margin: 5px 0;
     }
-    > div {
-      display: flex;
-      margin: 10px;
-    }
   }
 `;
 
@@ -59,7 +55,28 @@ export const Button = styled.div`
   }
 `;
 
-export const LinkButton = styled(Link)`
+export const AddButton = styled(Link)`
+  background: #00bcd4;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+  border: 0;
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#00bcd4')};
+  }
+`;
+export const CancelButton = styled(Link)`
   margin-left: 5px;
   text-align: center;
   background: #f44336;
@@ -81,4 +98,40 @@ export const LinkButton = styled(Link)`
   &:hover {
     background: ${shade(0.2, '#f44336')};
   }
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  margin: 5px 0;
+
+  /* border: 1px solid #fff; */
+
+  thead {
+    th {
+      font-weight: 400;
+      border: 1px solid #fff;
+      padding: 8px;
+      border-radius: 3px;
+      color: #fff;
+      background: steelblue;
+      font-size: 16px;
+    }
+  }
+  tbody {
+    td {
+      color: #000;
+      padding: 3px 5px;
+
+      border: 1px solid #fff;
+      border-radius: 3px;
+    }
+    > tr:nth-child(2n + 2) {
+      background: lightgray;
+    }
+  }
+`;
+
+export const BlockButton = styled.div`
+  display: flex;
+  margin: 10px;
 `;
