@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import signInBackgroundImg from '../../../assets/logo-oca.svg';
+import signInBackgroundImg from '../../../assets/logooca.svg';
 
 export const Container = styled.div`
   height: 100vh;
@@ -14,11 +14,12 @@ export const Content = styled.div`
   place-content: center;
   width: 100%;
   max-width: 700px;
-  background: #312e38;
+  background: #023e88;
+  /* background: #312e38; */
 `;
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${signInBackgroundImg}) #dadada no-repeat center;
+  background: url(${signInBackgroundImg}) #fff no-repeat center;
   background-size: 90% 90%;
 `;
