@@ -7,8 +7,10 @@ interface ContainerProps {
   isErrored: boolean;
 }
 export const Container = styled.div<ContainerProps>`
-  color: #666360;
-  background: #232129;
+  /* color: #666360; */
+  /* background: #232129; */
+  color: #000;
+  background: #dadada;
   border-radius: 10px;
   border: 2px solid #233129;
   padding: 16px;
@@ -30,23 +32,23 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      color: #ff9900;
-      border-color: #ff9000;
+      color: #60ae2a;
+      border-color: #60ae2a;
     `}
 
   ${(props) =>
     props.isFilled &&
     css`
-      color: #ff9900;
+      color: #60ae2a;
     `}
-
-
-
+/*
+    #60ae2a
+    #ff9900 */
   input {
     flex: 1;
     background: transparent;
     border: 0;
-    color: #fff;
+    color: #312e38;
 
     &::placeholder {
       color: #666360;
