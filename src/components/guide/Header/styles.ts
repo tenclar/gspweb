@@ -30,8 +30,8 @@ export const Content = styled.div`
       margin-right: 20px;
       padding-right: 20px;
 
-      width: 120px;
-      height: 120px;
+      // width: 120px;
+      height: 90px;
     }
 
     a {
@@ -58,7 +58,7 @@ export const Brasao = styled.div`
   }
 
   img {
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    height: 140px;
   }
 `;

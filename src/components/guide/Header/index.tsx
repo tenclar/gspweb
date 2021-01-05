@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/logo-oca.svg';
-import brasao from '../../../assets/brasao.svg';
+import logo from '../../../assets/logooca.svg';
+import brasao from '../../../assets/planejamentoegestao.svg';
 import { Container, Content, Brasao } from './styles';
 
 const Header: React.FC = ({ children }) => (
