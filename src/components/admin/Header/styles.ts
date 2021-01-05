@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   position: absolute;
-  background-color: #1474ea;
+  background: #023e88;
+
   /* background-color: #9597a6; #006be8  #264a91ff */
   padding: 0 30px;
 `;

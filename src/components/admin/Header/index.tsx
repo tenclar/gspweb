@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../../hooks/Auth';
-import logo from '../../../assets/logo-oca.svg';
+import logo from '../../../assets/logooca.svg';
 import prof from '../../../assets/profile.jpg';
 import { Container, Content, Profile, Title, ButtonLogout } from './styles';
 
