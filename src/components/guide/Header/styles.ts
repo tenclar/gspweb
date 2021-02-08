@@ -59,6 +59,6 @@ export const Brasao = styled.div`
 
   img {
     // width: 80px;
-    height: 140px;
+    height: 100px;
   }
 `;
