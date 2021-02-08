@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import signInBackgroundImg from '../../../assets/logooca.svg';
+import signInBackgroundImg from '../../../assets/logooca2.svg';
 
 export const Container = styled.div`
   height: 100vh;
