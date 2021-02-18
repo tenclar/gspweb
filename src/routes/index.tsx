@@ -35,6 +35,13 @@ const Routes: React.FC = () => (
       isPrivate
     />
 
+    <Route
+      exact
+      path="/ad/cadastro/categorias/editar/:id"
+      component={CategoriasForm}
+      isPrivate
+    />
+
     <Route exact path="/ad/cadastro/servicos" component={Servicos} isPrivate />
     <Route
       exact
@@ -50,6 +57,7 @@ const Routes: React.FC = () => (
       component={UsersForm}
       isPrivate
     />
+
     <Route exact path="/" component={Guide} isGuide />
     <Route exact path="/pesquisa" component={Search} isGuide />
     <Route exact path="/detalhe" component={Detail} isGuide />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../../services/api';
-import ButtonAlterar from '../../../components/admin/ButtonAlterar';
+
 import loadingGif from '../../../assets/ajax-loader.gif';
 import {
   Container,
@@ -11,6 +11,7 @@ import {
   Panel,
   SearchTableContainer,
   LinkButton,
+  EditarLinkButton,
 } from './styles';
 
 interface Categoria {
@@ -87,9 +88,11 @@ const Categorias: React.FC = () => {
             {categorias.map((categoria) => (
               <tr key={categoria.id}>
                 <td style={{ textAlign: 'center' }}>
-                  <ButtonAlterar type="button">
+                  <EditarLinkButton
+                    to={`/ad/cadastro/categorias/editar/${categoria.id}`}
+                  >
                     <FiRefreshCw />
-                  </ButtonAlterar>
+                  </EditarLinkButton>
                 </td>
                 <td style={{ textAlign: 'center' }}>{categoria.id}</td>
                 <td>{categoria.categoria_id}</td>
