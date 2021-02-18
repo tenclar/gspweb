@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
 import api from '../../../../services/api';
 
@@ -12,6 +12,10 @@ import Input from '../../../../components/admin/InputForm';
 import Select from '../../../../components/admin/Select';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
+
+interface ParamTypes {
+  id: string;
+}
 
 interface CategoriaFormData {
   titulo: string;
@@ -28,7 +32,22 @@ const FormCategorias: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const [categoria, setCategoria] = useState<Categoria>();
+  const [cateselected, setCatselected] = useState(null);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+  const { id } = useParams<ParamTypes>();
+
+  async function loadCategoria(idU: string): Promise<void> {
+    const response = await api.get(`categorias/${idU}`);
+    setCategoria(response.data);
+    setCatselected(response.data.categoriasup);
+  }
+  useEffect(() => {
+    if (id) {
+      loadCategoria(id);
+    }
+  }, [id]);
 
   useEffect(() => {
     async function loadCategorias(): Promise<void> {
@@ -55,13 +74,22 @@ const FormCategorias: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
-        await api.post('/categorias', data);
+        if (id) {
+          await api.put('/categorias', data);
+          addToast({
+            type: 'success',
+            title: 'Sucesso no Cadastro',
+            description: 'Alteração Realizada com Sucesso.',
+          });
+        } else {
+          await api.post('/categorias', data);
+          addToast({
+            type: 'success',
+            title: 'Sucesso No Cadastro',
+            description: 'Cadastro Realizado com Sucesso.',
+          });
+        }
 
-        addToast({
-          type: 'success',
-          title: 'Sucesso No Cadastro',
-          description: 'Cadastro Realizado com Sucesso.',
-        });
         history.push('/admin/cadastro/categorias');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -76,7 +104,7 @@ const FormCategorias: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, history, id],
   );
   return (
     <Container>
