@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   flex: 1;
-  background-color: #d3d2d2;
+
   /* padding-left: 10px; */
 `;
 export const Content = styled.div`
@@ -78,6 +78,35 @@ export const LinkButton = styled(Link)`
     background: ${shade(0.2, '#00bcd4')};
   }
 `;
+
+export const EditarLinkButton = styled(Link)`
+  background: #a2d200;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+  border: 0;
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+
+  transition: background-color 0.2s;
+  svg {
+    transition: transform 0.6s;
+  }
+
+  &:hover {
+    background: ${shade(0.2, '#a2d200')};
+    svg {
+      transform: rotate(100deg);
+    }
+  }
+`;
+
 export const Table = styled.table`
   width: 100%;
   margin: 5px 0;
