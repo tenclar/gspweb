@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../../hooks/Auth';
-import logo from '../../../assets/logooca.svg';
+import logo from '../../../assets/logooca2.svg';
 import prof from '../../../assets/profile.jpg';
 import { Container, Content, Profile, Title, ButtonLogout } from './styles';
 
@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <nav>
           <img src={logo} alt="Guia de Serviços" />
           <Link to="/">
-            <Title>Painel de Controle</Title>
+            <Title>Guia de Serviços - OCA</Title>
           </Link>
         </nav>
 
