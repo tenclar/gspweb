@@ -33,7 +33,11 @@ const FormServicos: React.FC = () => (
           <TabPanel>
             <label htmlFor="title">
               Título
-              <input id="title" type="text" placeholder="Título" />
+              <input
+                id="title"
+                type="text"
+                placeholder="Onde posso solicitar?"
+              />
             </label>
 
             <label htmlFor="categoria">
@@ -150,7 +154,7 @@ const FormServicos: React.FC = () => (
           </TabPanel>
           <TabPanel>
             <label htmlFor="Centrais">
-              Cidade
+              Centrais
               <select
                 id="centrais"
                 name="centrais"
@@ -163,7 +167,7 @@ const FormServicos: React.FC = () => (
               </select>
             </label>
             <label htmlFor="Praças">
-              Cidade
+              Praça
               <select id="praca" name="praca" placeholder="Selecione praca">
                 <option>Selecione ..</option>
                 <option value="cidade1">praca 1</option>

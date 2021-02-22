@@ -24,7 +24,6 @@ const Route: React.FC<RouteProps> = ({
 }) => {
   const { user } = useAuth();
   const signed = user;
-
   if (!signed && isPrivate) {
     return <Redirect to="/ad/" />;
   }
@@ -36,6 +35,7 @@ const Route: React.FC<RouteProps> = ({
   if (isGuide) {
     Layout = GuideLayout;
   }
+
   return (
     <ReactDOMRoute
       {...rest}
