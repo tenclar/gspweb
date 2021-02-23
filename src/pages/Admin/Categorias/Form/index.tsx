@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
+
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
@@ -24,6 +25,7 @@ interface CategoriaFormData {
 
 interface Categoria {
   id: string;
+  categoria_id: string;
   slug: string;
   titulo: string;
 }
@@ -33,7 +35,7 @@ const FormCategorias: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [categoria, setCategoria] = useState<Categoria>();
-  const [cateselected, setCatselected] = useState(null);
+  const [cateselected, setCatselected] = useState();
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const { id } = useParams<ParamTypes>();
@@ -41,7 +43,10 @@ const FormCategorias: React.FC = () => {
   async function loadCategoria(idU: string): Promise<void> {
     const response = await api.get(`categorias/${idU}`);
     setCategoria(response.data);
-    setCatselected(response.data.categoriasup);
+
+    //    const cat = await api.get(`categorias/${response.data.categoria_id}`);
+
+    setCatselected(response.data);
   }
   useEffect(() => {
     if (id) {
@@ -90,7 +95,7 @@ const FormCategorias: React.FC = () => {
           });
         }
 
-        history.push('/admin/cadastro/categorias');
+        history.push('/ad/cadastro/categorias');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -113,12 +118,20 @@ const FormCategorias: React.FC = () => {
         <hr />
       </Title>
       <Panel>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form
+          ref={formRef}
+          initialData={{
+            categoria_id: categoria?.categoria_id,
+            titulo: categoria?.titulo,
+          }}
+          onSubmit={handleSubmit}
+        >
           <Select
             name="categoria_id"
             options={categorias}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.titulo}
+            value={cateselected}
             isSearchable
             isClearable
           />

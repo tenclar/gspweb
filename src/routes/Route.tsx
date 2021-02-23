@@ -13,25 +13,30 @@ import { useAuth } from '../hooks/Auth';
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
   isGuide?: boolean;
+  isAd?: boolean;
   component: React.ComponentType;
 }
 
 const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   isGuide = false,
+  isAd = false,
   component: Component,
+
   ...rest
 }) => {
   const { user } = useAuth();
   const signed = user;
+  let Layout = GuideLayout;
+
   if (!signed && isPrivate) {
-    return <Redirect to="/ad/" />;
-  }
-  if (signed && !isPrivate) {
-    return <Redirect to="/ad/painel" />;
+    return <Redirect to="/ad" />;
   }
 
-  let Layout = signed ? AdminLayout : AuthLayout;
+  if (signed && !isPrivate && isAd) {
+    return <Redirect to="/ad/painel" />;
+  }
+  Layout = signed ? AdminLayout : AuthLayout;
   if (isGuide) {
     Layout = GuideLayout;
   }
