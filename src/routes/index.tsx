@@ -11,6 +11,9 @@ import CategoriasForm from '../pages/Admin/Categorias/Form';
 import Servicos from '../pages/Admin/Servicos';
 import ServicosForm from '../pages/Admin/Servicos/Form';
 
+import Superiores from '../pages/Admin/Superiores';
+import SuperioresForm from '../pages/Admin/Superiores/Form';
+
 import Users from '../pages/Admin/Users';
 import UsersForm from '../pages/Admin/Users/Form';
 
@@ -62,6 +65,26 @@ const Routes: React.FC = () => (
       isPrivate
     />
 
+    <Route
+      exact
+      path="/ad/cadastro/superiores"
+      component={Servicos}
+      isPrivate
+    />
+
+    <Route
+      exact
+      path="/ad/cadastro/superiores/novo"
+      component={ServicosForm}
+      isPrivate
+    />
+
+    <Route
+      exact
+      path="/ad/cadastro/superiores/novo"
+      component={UsersForm}
+      isPrivate
+    />
     <Route path="/" component={() => <h1>404 b</h1>} isGuide />
     <Route path="/**" component={() => <h1>404</h1>} isPrivate />
   </Switch>
