@@ -22,13 +22,10 @@ const Route: React.FC<RouteProps> = ({
   isGuide = false,
   isAd = false,
   component: Component,
-
   ...rest
 }) => {
   const { user } = useAuth();
   const signed = user;
-  let Layout = GuideLayout;
-
   if (!signed && isPrivate) {
     return <Redirect to="/ad" />;
   }
@@ -36,7 +33,10 @@ const Route: React.FC<RouteProps> = ({
   if (signed && !isPrivate && isAd) {
     return <Redirect to="/ad/painel" />;
   }
-  Layout = signed ? AdminLayout : AuthLayout;
+  let Layout = signed ? AdminLayout : AuthLayout;
+  if (isPrivate) {
+    Layout = AdminLayout;
+  }
   if (isGuide) {
     Layout = GuideLayout;
   }
