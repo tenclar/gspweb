@@ -81,7 +81,7 @@ const FormCategorias: React.FC = () => {
         //   categoria_id: Yup.string().required('Selecionar Categoria'),
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put('/categorias', data);
+          await api.put(`/categorias/${id}`, data);
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
