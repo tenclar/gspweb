@@ -1,6 +1,5 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiCheck, FiEye, FiPlus, FiRefreshCw, FiSave, FiSearch, FiX, FiXSquare } from 'react-icons/fi';
+import { FiEye, FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { Form } from '@unform/web';
 import Input from '../../../components/admin/InputSearch';
@@ -14,7 +13,6 @@ import {
   SearchTableContainer,
   LinkButton,
   EditarLinkButton,
-
   StatusLinkButton,
   PanelAcoes,
 } from './styles';
@@ -48,7 +46,7 @@ const Cidades: React.FC = () => {
         setLoading(false);
       }
     }
-    // api.get('/categorias').then((response) => setCategorias(response.data));
+
     loadCidades();
   }, [args]);
 
@@ -62,8 +60,6 @@ const Cidades: React.FC = () => {
         <h1>Cidades</h1>
         <hr />
       </Title>
-
-
       <Panel>
         <SearchTableContainer>
           <Form onSubmit={handleSubmit}>
@@ -74,13 +70,10 @@ const Cidades: React.FC = () => {
           </Form>
         </SearchTableContainer>
       </Panel>
-
-
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
-
               <th style={{ width: '65px' }}>
                 <LinkButton to="/ad/cadastro/cidades/novo">
                   <FiPlus />
@@ -106,19 +99,18 @@ const Cidades: React.FC = () => {
             )}
             {cidades.map((cidade) => (
               <tr key={cidade.id}>
-
                 <td>
                   <PanelAcoes>
                     <EditarLinkButton
-                        to={`/ad/cadastro/cidades/editar/${cidade.id}`}
-                      >
-                        <FiRefreshCw />
+                      to={`/ad/cadastro/cidades/editar/${cidade.id}`}
+                    >
+                      <FiRefreshCw />
                     </EditarLinkButton>
 
                     <StatusLinkButton
-                        to={`/ad/cadastro/cidades/desativar/${cidade.id}`}
-                      >
-                        <FiEye />
+                      to={`/ad/cadastro/cidades/desativar/${cidade.id}`}
+                    >
+                      <FiEye />
                     </StatusLinkButton>
                   </PanelAcoes>
                 </td>
@@ -133,6 +125,4 @@ const Cidades: React.FC = () => {
     </Container>
   );
 };
-
-
 export default Cidades;
