@@ -26,13 +26,6 @@ export const Content = styled.div`
       font-weight: 350;
       color: #fff;
     }
-    img {
-      margin-right: 20px;
-      padding-right: 20px;
-
-      // width: 120px;
-      height: 90px;
-    }
 
     a {
       font-weight: bold;
@@ -44,6 +37,25 @@ export const Content = styled.div`
   aside {
     display: flex;
     align-items: center;
+  }
+`;
+export const Logo = styled.div`
+  display: flex;
+  margin-left: 20px;
+  padding-left: 20px;
+  /* border-left: 1px solid #eee; */
+
+  div {
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  img {
+    margin-right: 20px;
+    padding-right: 20px;
+
+    // width: 120px;
+    height: 80px;
   }
 `;
 export const Brasao = styled.div`
@@ -59,6 +71,6 @@ export const Brasao = styled.div`
 
   img {
     // width: 80px;
-    height: 100px;
+    height: 70px;
   }
 `;
