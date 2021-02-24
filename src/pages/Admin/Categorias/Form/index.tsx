@@ -13,6 +13,7 @@ import Input from '../../../../components/admin/InputForm';
 import Select from '../../../../components/admin/Select';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
+import { Categoria } from '../../../Guide/Search/styles';
 
 interface ParamTypes {
   id: string;
@@ -20,13 +21,13 @@ interface ParamTypes {
 
 interface CategoriaFormData {
   titulo: string;
-  categoria_id: string;
+  categoria_id?: string;
 }
 
 interface Categoria {
-  id: string;
-  categoria_id: string;
-  slug: string;
+  id?: string | null | '' | undefined;
+  categoria_id?: string | null | '' | undefined;
+  slug?: string;
   titulo: string;
 }
 
@@ -35,9 +36,9 @@ const FormCategorias: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [categoria, setCategoria] = useState<Categoria>();
-  const [cateselected, setCatselected] = useState();
+  const [cateselected, setCatselected] = useState<Categoria>();
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-
+  // { id: undefined, titulo: 'Raiz', slug: 'raiz', categoria_id: undefined },
   const { id } = useParams<ParamTypes>();
 
   async function loadCategoria(idU: string): Promise<void> {
@@ -45,8 +46,9 @@ const FormCategorias: React.FC = () => {
     setCategoria(response.data);
 
     //    const cat = await api.get(`categorias/${response.data.categoria_id}`);
-
-    setCatselected(response.data);
+    if (response.data.categoria) {
+      setCatselected(response.data.categoria);
+    }
   }
   useEffect(() => {
     if (id) {
@@ -68,16 +70,15 @@ const FormCategorias: React.FC = () => {
       }
     }
     loadCategorias();
-  }, [addToast]);
+  }, [addToast, categorias]);
 
   const handleSubmit = useCallback(
     async (data: CategoriaFormData) => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          categoria_id: Yup.string().required('Selecionar Categoria'),
         });
-
+        //   categoria_id: Yup.string().required('Selecionar Categoria'),
         await schema.validate(data, { abortEarly: false });
         if (id) {
           await api.put('/categorias', data);
@@ -135,7 +136,7 @@ const FormCategorias: React.FC = () => {
             isSearchable
             isClearable
           />
-
+          {JSON.stringify(cateselected)}
           <Input name="titulo" type="text" placeholder="Título" />
           <hr />
           <div>

@@ -15,6 +15,7 @@ export const Content = styled.div`
   justify-content: center;
 `;
 
+
 export const PanelAcoes = styled.div`
   height: 100%;
   display: flex;
@@ -23,13 +24,7 @@ export const PanelAcoes = styled.div`
   justify-content: center;
 `;
 
-export const Title = styled.div`
-  margin: 10px 0;
-  color: #444;
-  hr {
-    border: 1px solid #f44336;
-  }
-`;
+
 
 export const Panel = styled.div`
   background-color: #fff;
@@ -40,12 +35,14 @@ export const Panel = styled.div`
 
 export const SearchTableContainer = styled.div`
   width: 100%;
+
   height: 42px;
   display: flex;
   form {
     width: 100%;
     display: flex;
   }
+
   input {
     color: #000;
     border-radius: 5px;
@@ -57,6 +54,8 @@ export const SearchTableContainer = styled.div`
 
   button {
     width: 10%;
+
+
 
     background: #f44336;
     padding: 8px;
@@ -77,7 +76,9 @@ export const LinkButton = styled(Link)`
   justify-content: center;
   justify-items: center;
   height: 35px;
+
   width: 65px;
+
   border-radius: 10px;
   border: 0;
   margin: 0;
@@ -92,6 +93,7 @@ export const LinkButton = styled(Link)`
 `;
 
 export const EditarLinkButton = styled(Link)`
+
   background: #808080;
   display: flex;
   flex-direction: row;
@@ -102,6 +104,7 @@ export const EditarLinkButton = styled(Link)`
   height: 35px;
   width: 35px;
   border-radius: 10px;
+
   border: 10;
   margin: 100;
   padding: 100;

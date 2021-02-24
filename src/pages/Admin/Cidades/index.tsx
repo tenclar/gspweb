@@ -1,3 +1,4 @@
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { FiCheck, FiEye, FiPlus, FiRefreshCw, FiSave, FiSearch, FiX, FiXSquare } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,6 +14,7 @@ import {
   SearchTableContainer,
   LinkButton,
   EditarLinkButton,
+
   StatusLinkButton,
   PanelAcoes,
 } from './styles';
@@ -22,6 +24,7 @@ interface Cidade {
   slug: string;
   nome: string;
 }
+
 interface CidadePesquisaData {
   nome: string;
 }
@@ -60,6 +63,7 @@ const Cidades: React.FC = () => {
         <hr />
       </Title>
 
+
       <Panel>
         <SearchTableContainer>
           <Form onSubmit={handleSubmit}>
@@ -71,15 +75,18 @@ const Cidades: React.FC = () => {
         </SearchTableContainer>
       </Panel>
 
+
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
+
               <th style={{ width: '65px' }}>
                 <LinkButton to="/ad/cadastro/cidades/novo">
                   <FiPlus />
                 </LinkButton>
               </th>
+
               <th>Nome da Cidade</th>
               <th>Slug</th>
             </tr>
@@ -99,6 +106,7 @@ const Cidades: React.FC = () => {
             )}
             {cidades.map((cidade) => (
               <tr key={cidade.id}>
+
                 <td>
                   <PanelAcoes>
                     <EditarLinkButton
@@ -125,5 +133,6 @@ const Cidades: React.FC = () => {
     </Container>
   );
 };
+
 
 export default Cidades;

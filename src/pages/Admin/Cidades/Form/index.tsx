@@ -5,11 +5,15 @@ import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
 
+
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import Input from '../../../../components/admin/InputForm';
+
+import Select from '../../../../components/admin/Select';
+
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
 
@@ -21,23 +25,31 @@ interface CidadesFormData {
   nome: string;
   id: string;
 }
-
-
 const FormCidades: React.FC = () => {
 
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const [cidade, setCidade] = useState<CidadesFormData>();
-  //console.log(cidade?.nome);
+  const [cidade, setCidade] = useState<CidadesFormData>();  
+  cidade_id: string;
+}
 
-  const { id } = useParams<ParamTypes>();
+interface Cidades {
+  id: string;
+  slug: string;
+  nome: string;
+}
 
+const FormCidades: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
+  const history = useHistory();
+  const [cidade, setCidade] = useState<Cidades>();
+    const { id } = useParams<ParamTypes>();
+  
   async function loadCidade(idU: string): Promise<void> {
     const response = await api.get(`cidades/${idU}`);
-
-    setCidade(response.data.cidade);
-  }
+    setCidade(response.data.cidade);        
   useEffect(() => {
     if (id) {
       loadCidade(id);
@@ -50,7 +62,7 @@ const FormCidades: React.FC = () => {
       try {
         const schema = Yup.object().shape({
           nome: Yup.string().required('Nome obrigatório'),
-          //id: Yup.string().required('Selecionar cidade'),
+          
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -70,6 +82,7 @@ const FormCidades: React.FC = () => {
           });
         }
 
+
         history.push('/ad/cadastro/cidades');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -77,6 +90,7 @@ const FormCidades: React.FC = () => {
           formRef.current?.setErrors(errors);
           return;
         }
+
 
         addToast({
           type: 'error',
@@ -90,6 +104,7 @@ const FormCidades: React.FC = () => {
     [addToast, history, id,cidade],
   );
 
+
   return (
     <Container>
       <Title>
@@ -97,6 +112,7 @@ const FormCidades: React.FC = () => {
         <hr />
       </Title>
       <Panel>
+
         <Form
           ref={formRef}
           initialData={cidade}
