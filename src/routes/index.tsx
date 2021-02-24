@@ -17,6 +17,7 @@ import UsersForm from '../pages/Admin/Users/Form';
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
 import Detail from '../pages/Guide/Detail';
+import Cidades from '../pages/Admin/Cidades';
 import FormCidades from '../pages/Admin/Cidades/Form';
 
 const Routes: React.FC = () => (
@@ -55,7 +56,9 @@ const Routes: React.FC = () => (
       isPrivate
     />
 
-    <Route exact path="/ad/cadastro/cidades/" component={FormCidades} isPrivate />
+    <Route exact path="/ad/cadastro/cidades/" component={Cidades} isPrivate />
+    <Route exact path="/ad/cadastro/cidades/novo" component={FormCidades} isPrivate />
+    <Route exact path="/ad/cadastro/cidades/editar/:id" component={FormCidades} isPrivate />
 
     <Route exact path="/ad/cadastro/usuarios/" component={Users} isPrivate />
 

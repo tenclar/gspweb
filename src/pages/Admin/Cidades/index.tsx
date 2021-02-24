@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FiCheck, FiEye, FiPlus, FiRefreshCw, FiSave, FiSearch, FiX, FiXSquare } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
+import { Form } from '@unform/web';
+import Input from '../../../components/admin/InputSearch';
 import api from '../../../services/api';
-
 import loadingGif from '../../../assets/ajax-loader.gif';
 import {
   Container,
@@ -12,6 +13,8 @@ import {
   SearchTableContainer,
   LinkButton,
   EditarLinkButton,
+  StatusLinkButton,
+  PanelAcoes,
 } from './styles';
 
 interface Cidade {
@@ -19,27 +22,35 @@ interface Cidade {
   slug: string;
   nome: string;
 }
-
-const Categorias: React.FC = () => {
+interface CidadePesquisaData {
+  nome: string;
+}
+const Cidades: React.FC = () => {
   const [cidades, setCidades] = useState<Cidade[]>([]);
-
+  const [args, setArgs] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function loadCidades(): Promise<void> {
-    try {
-      setLoading(true);
-      const response = await api.get('/cidades');
-      setCidades(response.data.cidades);
-    } catch (err) {
-      toast.error('Erro na lista');
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
-    // api.get('/cidades').then((response) => setCidades(response.data));
+    async function loadCidades(): Promise<void> {
+      try {
+        setLoading(true);
+        const response = await api.get('cidades', {
+          params: { nome: args },
+        });
+
+        setCidades(response.data.cidades);
+      } catch (err) {
+        toast.error('Erro na lista');
+      } finally {
+        setLoading(false);
+      }
+    }
+    // api.get('/categorias').then((response) => setCategorias(response.data));
     loadCidades();
+  }, [args]);
+
+  const handleSubmit = useCallback((data: CidadePesquisaData) => {
+    setArgs(data.nome);
   }, []);
 
   return (
@@ -48,26 +59,28 @@ const Categorias: React.FC = () => {
         <h1>Cidades</h1>
         <hr />
       </Title>
+
       <Panel>
         <SearchTableContainer>
-          <input name="search" type="text" placeholder="Search" />
-          <button type="button">
-            <FiSearch size={20} />
-          </button>
+          <Form onSubmit={handleSubmit}>
+            <Input name="nome" type="text" placeholder="Buscar cidade..." />
+            <button type="submit">
+              <FiSearch size={20} />
+            </button>
+          </Form>
         </SearchTableContainer>
       </Panel>
+
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
-              <th style={{ width: '35px' }}>
+              <th style={{ width: '65px' }}>
                 <LinkButton to="/ad/cadastro/cidades/novo">
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria id</th>
-              <th>Categoria</th>
+              <th>Nome da Cidade</th>
               <th>Slug</th>
             </tr>
           </thead>
@@ -86,17 +99,23 @@ const Categorias: React.FC = () => {
             )}
             {cidades.map((cidade) => (
               <tr key={cidade.id}>
-                <td style={{ textAlign: 'center' }}>
-                  <EditarLinkButton
-                    to={`/ad/cadastro/categorias/editar/${cidade.id}`}
-                  >
-                    <FiRefreshCw />
-                  </EditarLinkButton>
+                <td>
+                  <PanelAcoes>
+                    <EditarLinkButton
+                        to={`/ad/cadastro/cidades/editar/${cidade.id}`}
+                      >
+                        <FiRefreshCw />
+                    </EditarLinkButton>
+
+                    <StatusLinkButton
+                        to={`/ad/cadastro/cidades/desativar/${cidade.id}`}
+                      >
+                        <FiEye />
+                    </StatusLinkButton>
+                  </PanelAcoes>
                 </td>
-                <td style={{ textAlign: 'center' }}>{cidade.id}</td>
-                <td>{cidade.id}</td>
-                <td>{cidade.nome}</td>
-                <td>{cidade.slug}</td>
+                <td style={{ textAlign: 'center' }}>{cidade.nome}</td>
+                <td style={{ textAlign: 'center' }}>{cidade.slug}</td>
               </tr>
             ))}
           </tbody>
@@ -107,4 +126,4 @@ const Categorias: React.FC = () => {
   );
 };
 
-export default Categorias;
+export default Cidades;
