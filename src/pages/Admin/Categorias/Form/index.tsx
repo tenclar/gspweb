@@ -36,9 +36,21 @@ const FormCategorias: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [categoria, setCategoria] = useState<Categoria>();
-  const [cateselected, setCatselected] = useState<Categoria>();
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
-  // { id: undefined, titulo: 'Raiz', slug: 'raiz', categoria_id: undefined },
+  const [cateselected, setCatselected] = useState<Categoria>({
+    id: undefined,
+    titulo: 'Raiz',
+    slug: 'raiz',
+    categoria_id: undefined,
+  });
+  const [categorias, setCategorias] = useState<Categoria[]>([
+    {
+      id: undefined,
+      titulo: 'Raiz',
+      slug: 'raiz',
+      categoria_id: null,
+    },
+  ]);
+
   const { id } = useParams<ParamTypes>();
 
   async function loadCategoria(idU: string): Promise<void> {
@@ -60,7 +72,15 @@ const FormCategorias: React.FC = () => {
     async function loadCategorias(): Promise<void> {
       try {
         const response = await api.get('/categorias');
-        setCategorias(response.data.categorias);
+        setCategorias([
+          {
+            id: undefined,
+            titulo: 'Raiz',
+            slug: 'raiz',
+            categoria_id: null,
+          },
+          ...response.data.categorias,
+        ]);
       } catch (err) {
         addToast({
           type: 'error',
@@ -136,7 +156,7 @@ const FormCategorias: React.FC = () => {
             isSearchable
             isClearable
           />
-          {JSON.stringify(cateselected)}
+
           <Input name="titulo" type="text" placeholder="Título" />
           <hr />
           <div>
