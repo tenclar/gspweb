@@ -12,7 +12,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgba(255, 255, 245, 0.9);
+  //color: rgba(255, 255, 245, 0.9);
+  color: #333;
   text-shadow: 3px 2px 5px rgba(0, 0, 0, 0.61);
 
   hr {

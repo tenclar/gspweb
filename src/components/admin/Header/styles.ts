@@ -5,7 +5,7 @@ export const Container = styled.div`
   position: absolute;
   background: #023e88;
 
-  /* background-color: #9597a6; #006be8  #264a91ff */
+  //background-color: #9597a6; #006be8  #264a91ff */
   padding: 0 30px;
 `;
 
