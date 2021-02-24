@@ -17,6 +17,7 @@ import UsersForm from '../pages/Admin/Users/Form';
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
 import Detail from '../pages/Guide/Detail';
+import FormCidades from '../pages/Admin/Cidades/Form';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -54,7 +55,10 @@ const Routes: React.FC = () => (
       isPrivate
     />
 
+    <Route exact path="/ad/cadastro/cidades/" component={FormCidades} isPrivate />
+
     <Route exact path="/ad/cadastro/usuarios/" component={Users} isPrivate />
+
     <Route
       exact
       path="/ad/cadastro/usuarios/novo"

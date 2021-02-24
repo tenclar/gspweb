@@ -5,16 +5,13 @@ import { Container, LinkList, LinkHeader, LinkButton } from './styles';
 
 const Sidebar: React.FC = () => (
   <Container>
+  
     <LinkList>
       <LinkHeader>
         <FaListAlt />
         <div>Cadastros</div>
       </LinkHeader>
-      {/*
-           <LinkButton to="/admin/cadastro/avisos">
-          <FaRegCircle /> <div>Avisos</div>
-        </LinkButton>
-         */}
+
       <LinkButton to="/ad/cadastro/servicos">
         <FaRegCircle /> <div>Serviços</div>
       </LinkButton>
@@ -49,6 +46,20 @@ const Sidebar: React.FC = () => (
       <LinkButton to="/ad/cadastro/publicos">
         <FaRegCircle /> <div>Públicos Alvo</div>
       </LinkButton>
+
+      <LinkHeader>
+        <FaListAlt />
+        <div>Páginas</div>
+      </LinkHeader>
+      <LinkButton to="/ad/cadastro/publicos">
+        <FaRegCircle /> <div>Avisos</div>
+      </LinkButton>
+
+      <LinkButton to="/ad/cadastro/publicos">
+        <FaRegCircle /> <div>Informações</div>
+      </LinkButton>
+
+
 
       <LinkHeader>
         <FaListAlt />
