@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
+
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
@@ -12,6 +13,7 @@ import Input from '../../../../components/admin/InputForm';
 import Select from '../../../../components/admin/Select';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
+import { Categoria } from '../../../Guide/Search/styles';
 
 interface ParamTypes {
   id: string;
@@ -19,12 +21,13 @@ interface ParamTypes {
 
 interface CategoriaFormData {
   titulo: string;
-  categoria_id: string;
+  categoria_id?: string;
 }
 
 interface Categoria {
-  id: string;
-  slug: string;
+  id?: string | null | '' | undefined;
+  categoria_id?: string | null | '' | undefined;
+  slug?: string;
   titulo: string;
 }
 
@@ -33,15 +36,31 @@ const FormCategorias: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [categoria, setCategoria] = useState<Categoria>();
-  const [cateselected, setCatselected] = useState(null);
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [cateselected, setCatselected] = useState<Categoria>({
+    id: undefined,
+    titulo: 'Raiz',
+    slug: 'raiz',
+    categoria_id: undefined,
+  });
+  const [categorias, setCategorias] = useState<Categoria[]>([
+    {
+      id: undefined,
+      titulo: 'Raiz',
+      slug: 'raiz',
+      categoria_id: null,
+    },
+  ]);
 
   const { id } = useParams<ParamTypes>();
 
   async function loadCategoria(idU: string): Promise<void> {
     const response = await api.get(`categorias/${idU}`);
     setCategoria(response.data);
-    setCatselected(response.data.categoriasup);
+
+    //    const cat = await api.get(`categorias/${response.data.categoria_id}`);
+    if (response.data.categoria) {
+      setCatselected(response.data.categoria);
+    }
   }
   useEffect(() => {
     if (id) {
@@ -53,7 +72,15 @@ const FormCategorias: React.FC = () => {
     async function loadCategorias(): Promise<void> {
       try {
         const response = await api.get('/categorias');
-        setCategorias(response.data.categorias);
+        setCategorias([
+          {
+            id: undefined,
+            titulo: 'Raiz',
+            slug: 'raiz',
+            categoria_id: null,
+          },
+          ...response.data.categorias,
+        ]);
       } catch (err) {
         addToast({
           type: 'error',
@@ -63,19 +90,18 @@ const FormCategorias: React.FC = () => {
       }
     }
     loadCategorias();
-  }, [addToast]);
+  }, [addToast, categorias]);
 
   const handleSubmit = useCallback(
     async (data: CategoriaFormData) => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          categoria_id: Yup.string().required('Selecionar Categoria'),
         });
-
+        //   categoria_id: Yup.string().required('Selecionar Categoria'),
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put('/categorias', data);
+          await api.put(`/categorias/${id}`, data);
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
@@ -90,7 +116,7 @@ const FormCategorias: React.FC = () => {
           });
         }
 
-        history.push('/admin/cadastro/categorias');
+        history.push('/ad/cadastro/categorias');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -113,12 +139,20 @@ const FormCategorias: React.FC = () => {
         <hr />
       </Title>
       <Panel>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form
+          ref={formRef}
+          initialData={{
+            categoria_id: categoria?.categoria_id,
+            titulo: categoria?.titulo,
+          }}
+          onSubmit={handleSubmit}
+        >
           <Select
             name="categoria_id"
             options={categorias}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.titulo}
+            value={cateselected}
             isSearchable
             isClearable
           />

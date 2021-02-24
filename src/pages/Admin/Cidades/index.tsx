@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
+import { FiEye, FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { Form } from '@unform/web';
 import Input from '../../../components/admin/InputSearch';
@@ -13,75 +13,74 @@ import {
   SearchTableContainer,
   LinkButton,
   EditarLinkButton,
+  StatusLinkButton,
+  PanelAcoes,
 } from './styles';
 
-interface Categoria {
+interface Cidade {
   id: string;
   slug: string;
-  titulo: string;
-  categoria_id: string;
+  nome: string;
 }
-interface CategoriaPesquisaData {
-  titulo: string;
+
+interface CidadePesquisaData {
+  nome: string;
 }
-const Categorias: React.FC = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+const Cidades: React.FC = () => {
+  const [cidades, setCidades] = useState<Cidade[]>([]);
   const [args, setArgs] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function loadCategorias(): Promise<void> {
+    async function loadCidades(): Promise<void> {
       try {
         setLoading(true);
-        const response = await api.get('categorias', {
-          params: { titulo: args },
+        const response = await api.get('cidades', {
+          params: { nome: args },
         });
 
-        setCategorias(response.data.categorias);
+        setCidades(response.data.cidades);
       } catch (err) {
         toast.error('Erro na lista');
       } finally {
         setLoading(false);
       }
     }
-    // api.get('/categorias').then((response) => setCategorias(response.data));
-    loadCategorias();
+
+    loadCidades();
   }, [args]);
 
-  const handleSubmit = useCallback((data: CategoriaPesquisaData) => {
-    setArgs(data.titulo);
+  const handleSubmit = useCallback((data: CidadePesquisaData) => {
+    setArgs(data.nome);
   }, []);
 
   return (
     <Container>
       <Title>
-        <h1>Categorias</h1>
+        <h1>Cidades</h1>
         <hr />
       </Title>
-
       <Panel>
         <SearchTableContainer>
           <Form onSubmit={handleSubmit}>
-            <Input name="titulo" type="text" placeholder="Search" />
+            <Input name="nome" type="text" placeholder="Buscar cidade..." />
             <button type="submit">
               <FiSearch size={20} />
             </button>
           </Form>
         </SearchTableContainer>
       </Panel>
-
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
             <tr>
-              <th style={{ width: '35px' }}>
-                <LinkButton to="/ad/cadastro/categorias/novo">
+              <th style={{ width: '65px' }}>
+                <LinkButton to="/ad/cadastro/cidades/novo">
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria id</th>
-              <th>Categoria</th>
+
+              <th>Nome da Cidade</th>
               <th>Slug</th>
             </tr>
           </thead>
@@ -93,24 +92,30 @@ const Categorias: React.FC = () => {
                 </td>
               </tr>
             )}
-            {categorias.length === 0 && (
+            {cidades.length === 0 && (
               <tr>
                 <td colSpan={3}> Nenhum Cadastro efetuado </td>
               </tr>
             )}
-            {categorias.map((categoria) => (
-              <tr key={categoria.id}>
-                <td style={{ textAlign: 'center' }}>
-                  <EditarLinkButton
-                    to={`/ad/cadastro/categorias/editar/${categoria.id}`}
-                  >
-                    <FiRefreshCw />
-                  </EditarLinkButton>
+            {cidades.map((cidade) => (
+              <tr key={cidade.id}>
+                <td>
+                  <PanelAcoes>
+                    <EditarLinkButton
+                      to={`/ad/cadastro/cidades/editar/${cidade.id}`}
+                    >
+                      <FiRefreshCw />
+                    </EditarLinkButton>
+
+                    <StatusLinkButton
+                      to={`/ad/cadastro/cidades/desativar/${cidade.id}`}
+                    >
+                      <FiEye />
+                    </StatusLinkButton>
+                  </PanelAcoes>
                 </td>
-                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
-                <td>{categoria.categoria_id}</td>
-                <td>{categoria.titulo}</td>
-                <td>{categoria.slug}</td>
+                <td style={{ textAlign: 'center' }}>{cidade.nome}</td>
+                <td style={{ textAlign: 'center' }}>{cidade.slug}</td>
               </tr>
             ))}
           </tbody>
@@ -120,5 +125,4 @@ const Categorias: React.FC = () => {
     </Container>
   );
 };
-
-export default Categorias;
+export default Cidades;

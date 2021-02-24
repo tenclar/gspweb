@@ -32,12 +32,9 @@ export const Panel = styled.div`
 
 export const SearchTableContainer = styled.div`
   width: 100%;
-  height: 42px;
+  height: 35px;
   display: flex;
-  form {
-    width: 100%;
-    display: flex;
-  }
+
   input {
     color: #000;
     border-radius: 5px;
@@ -49,7 +46,6 @@ export const SearchTableContainer = styled.div`
 
   button {
     width: 10%;
-
     background: #f44336;
     padding: 8px;
     color: #fff;

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   flex: 1;
-
-  /* padding-left: 10px; */
+  background-color: #d3d2d2;
+  padding-left: 10px;
+  width: 100%;
 `;
 export const Content = styled.div`
   height: 100%;
@@ -24,90 +25,65 @@ export const Title = styled.div`
 `;
 
 export const Panel = styled.div`
+  width: 90%;
   background-color: #fff;
   padding: 8px;
   border-radius: 4px;
   margin-bottom: 4px;
-`;
-
-export const SearchTableContainer = styled.div`
   width: 100%;
-  height: 42px;
-  display: flex;
+
   form {
     width: 100%;
-    display: flex;
-  }
-  input {
     color: #000;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    margin-right: 5px;
-  }
+    display: flex;
+    flex-direction: column;
 
-  button {
-    width: 10%;
+    label {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
 
-    background: #f44336;
-    padding: 8px;
-    color: #fff;
-    border-radius: 5px;
-    border: 0;
-    &:hover {
-      background: ${shade(0.2, '#f44336')};
+    > div {
+      display: flex;
+      margin: 10px 0;
     }
   }
 `;
 
-export const LinkButton = styled(Link)`
+export const Button = styled.button`
+  width: 100px;
   background: #00bcd4;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  justify-items: center;
-  height: 35px;
-  width: 35px;
-  border-radius: 10px;
-  border: 0;
-  margin: 0;
+  padding: 10px;
   color: #fff;
-  font-weight: 500;
-
-  transition: background-color 0.2s;
-
+  border-radius: 5px;
+  border: 0;
+  text-align: center;
   &:hover {
     background: ${shade(0.2, '#00bcd4')};
   }
 `;
 
-export const EditarLinkButton = styled(Link)`
-  background: #a2d200;
+export const LinkButton = styled(Link)`
+  margin-left: 5px;
+  text-align: center;
+  background: #f44336;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  align-content: center;
   justify-content: center;
-  justify-items: center;
-  height: 35px;
-  width: 35px;
-  border-radius: 10px;
+  height: 40px;
+  border-radius: 5px;
   border: 0;
-  margin: 0;
+  padding: 0 16px;
+  width: 100px;
   color: #fff;
   font-weight: 500;
+  text-decoration: none;
 
   transition: background-color 0.2s;
-  svg {
-    transition: transform 0.6s;
-  }
 
   &:hover {
-    background: ${shade(0.2, '#a2d200')};
-    svg {
-      transform: rotate(100deg);
-    }
+    background: ${shade(0.2, '#f44336')};
   }
 `;
 

@@ -32,6 +32,15 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
       },
       setValue: (ref, value) => {
         ref.select.setValue(value || null);
+        /* let selectedOptions;
+
+        if (rest.isMulti) {
+          selectedOptions = options?.filter((option) => value.includes(option));
+        } else {
+          selectedOptions = options?.find((option) => option.value === value);
+        }
+
+        ref.select.setValue(selectedOptions, 'select-option'); */
       },
       clearValue: (ref) => {
         ref.state.clearValue();
