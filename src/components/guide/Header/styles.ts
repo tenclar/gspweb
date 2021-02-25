@@ -39,6 +39,7 @@ export const Content = styled.div`
     align-items: center;
   }
 `;
+
 export const Logo = styled.div`
   display: flex;
   margin-left: 20px;

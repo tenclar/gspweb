@@ -9,7 +9,7 @@ import api from '../../../../services/api';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import Input from '../../../../components/admin/InputForm';
-import Select from '../../../../components/admin/Select';
+
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
 
@@ -92,7 +92,7 @@ const FormSuperiores: React.FC = () => {
         <hr />
       </Title>
       <Panel>
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} initialData={superior} onSubmit={handleSubmit}>
           <Input name="titulo" type="text" placeholder="Título" />
           <hr />
           <div>

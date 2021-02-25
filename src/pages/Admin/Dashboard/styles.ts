@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 100%;
-  flex: 1;
+  //min-height: 100%;
+  //flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 export const Content = styled.div`
@@ -25,5 +26,19 @@ export const Content = styled.div`
   }
   > p {
     font-size: 60px;
+  }
+`;
+export const Logo = styled.div`
+  display: flex;
+  margin: 30px;
+  //padding: 20px;
+  /* border-left: 1px solid #eee; */
+
+  img {
+    margin-right: 20px;
+    padding-right: 20px;
+
+    // width: 120px;
+    height: 300px;
   }
 `;

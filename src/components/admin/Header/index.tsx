@@ -13,7 +13,7 @@ const Header: React.FC = () => {
       <Content>
         <nav>
           <img src={logo} alt="Guia de Serviços" />
-          <Link to="/">
+          <Link to="/ad/painel">
             <Title>Guia de Serviços - OCA</Title>
           </Link>
         </nav>
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           <Profile>
             <div>
               <strong>{user.name}</strong>
-              <Link to="/admin/profile"> Meu Perfil</Link>
+              <Link to="/ad/profile"> Meu Perfil</Link>
             </div>
             <img src={prof} alt="perfil" />
           </Profile>

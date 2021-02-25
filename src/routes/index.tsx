@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Switch, Route as ReactDOMRoute } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Route from './Route';
-
+import Error404 from '../pages/common/Error404';
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
 import Detail from '../pages/Guide/Detail';
@@ -116,8 +116,12 @@ const Routes: React.FC = () => (
       component={FormCidades}
       isPrivate
     />
-    <Route path="/" component={() => <h1>404 b</h1>} isGuide />
-    <Route path="/**" component={() => <h1>404</h1>} isPrivate />
+    <Route exact path="/ad/**" component={Error404} isPrivate />
+    <Route
+      path="*"
+      component={() => <h1 style={{ color: '#000' }}>404 b</h1>}
+      isGuide
+    />
   </Switch>
 );
 

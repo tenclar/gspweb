@@ -48,7 +48,6 @@ const FormCidades: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          console.log(data);
           await api.put(`/cidades/${id}`, data);
           addToast({
             type: 'success',
@@ -56,7 +55,6 @@ const FormCidades: React.FC = () => {
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          console.log('cadastro');
           await api.post('/cidades', data);
           addToast({
             type: 'success',
