@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 import { Link } from 'react-router-dom';
 
+interface StatusProps {
+  isStatus: boolean;
+}
+
 export const Container = styled.div`
   flex: 1;
 
@@ -153,7 +157,6 @@ export const StatusLinkButton = styled(Link)`
     }
   }
 `;
-
 export const Table = styled.table`
   width: 100%;
   margin: 5px 0;
