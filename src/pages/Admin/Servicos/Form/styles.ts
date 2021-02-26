@@ -19,6 +19,7 @@ export const Panel = styled.div`
   padding: 15px;
   border-radius: 4px;
   margin-bottom: 4px;
+  font-size: 14px;
 
   form {
     color: #000;
@@ -55,7 +56,7 @@ export const Button = styled.div`
   }
 `;
 
-export const AddButton = styled(Link)`
+export const AddButton = styled.button`
   background: #00bcd4;
   display: flex;
   align-items: center;
@@ -76,7 +77,52 @@ export const AddButton = styled(Link)`
     background: ${shade(0.2, '#00bcd4')};
   }
 `;
-export const CancelButton = styled(Link)`
+export const CancelButton = styled.button`
+  margin-left: 5px;
+  text-align: center;
+  background: #f44336;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 5px;
+  border: 0;
+  padding: 0 16px;
+  width: 100px;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#f44336')};
+  }
+`;
+
+export const AddLinkButton = styled(Link)`
+  background: #00bcd4;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+  border: 0;
+  margin: 0;
+  color: #fff;
+  font-weight: 500;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#00bcd4')};
+  }
+`;
+export const CancelLinkButton = styled(Link)`
   margin-left: 5px;
   text-align: center;
   background: #f44336;
