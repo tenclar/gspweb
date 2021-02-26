@@ -189,7 +189,7 @@ const FormServicos: React.FC = () => (
         <hr />
         <div>
           <Button>Salvar </Button>
-          <CancelButton to="/admin/cadastro/servicos">Cancelar</CancelButton>
+          <CancelButton>Cancelar</CancelButton>
         </div>
       </form>
     </Panel>
