@@ -21,6 +21,7 @@ interface Cidade {
   id: string;
   slug: string;
   nome: string;
+  // status: boolean;
 }
 
 interface CidadePesquisaData {
@@ -108,7 +109,7 @@ const Cidades: React.FC = () => {
                     </EditarLinkButton>
 
                     <StatusLinkButton
-                      to={`/ad/cadastro/cidades/desativar/${cidade.id}`}
+                      to={`/ad/cadastro/cidades/status/${cidade.id}`}
                     >
                       <FiEye />
                     </StatusLinkButton>
