@@ -4,12 +4,12 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
+
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import Input from '../../../../components/admin/InputForm';
-
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
 
@@ -18,27 +18,20 @@ interface ParamTypes {
 }
 
 interface SuperiorFormData {
-  titulo: string;
-  superior_id: string;
-}
-
-interface Superior {
-  id: string;
-  slug: string;
-  titulo: string;
+  nome: string;
 }
 
 const FormSuperiores: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const [superior, setSuperior] = useState<Superior>();
+  const [superior, setSuperior] = useState<SuperiorFormData>();
 
   const { id } = useParams<ParamTypes>();
 
   async function loadSuperior(idU: string): Promise<void> {
-    const response = await api.get(`superiores/${idU}`);
-    setSuperior(response.data);
+    const response = await api.get(`/superiores/${idU}`);
+    setSuperior(response.data.superior);
   }
   useEffect(() => {
     if (id) {
@@ -49,12 +42,12 @@ const FormSuperiores: React.FC = () => {
     async (data: SuperiorFormData) => {
       try {
         const schema = Yup.object().shape({
-          nome: Yup.string().required('Título obrigatório'),
+          nome: Yup.string().required('Nome obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put('/superiores', data);
+          await api.put(`/superiores/${id}`, data);
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
@@ -79,7 +72,8 @@ const FormSuperiores: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
-          description: 'Ocorreu um erro ao fazer Cadastro de Superiores.',
+          description:
+            'Ocorreu um erro ao fazer Cadastro de Instituições Superiores.',
         });
       }
     },
@@ -88,12 +82,19 @@ const FormSuperiores: React.FC = () => {
   return (
     <Container>
       <Title>
-        <h1>Formulário Superiores</h1>
+        <h1>Formulário de Instituições superiores</h1>
         <hr />
       </Title>
       <Panel>
-        <Form ref={formRef} initialData={superior} onSubmit={handleSubmit}>
-          <Input name="titulo" type="text" placeholder="Título" />
+        <Form
+          ref={formRef}
+          initialData={{
+            nome: superior?.nome,
+          }}
+          onSubmit={handleSubmit}
+        >
+          <Input name="nome" type="text" placeholder="Nome" />
+
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
+import { Form } from '@unform/web';
+import Input from '../../../components/admin/InputSearch';
 import api from '../../../services/api';
-
 import loadingGif from '../../../assets/ajax-loader.gif';
 import {
   Container,
@@ -14,49 +15,60 @@ import {
   EditarLinkButton,
 } from './styles';
 
-interface Categoria {
+interface Superior {
   id: string;
   slug: string;
-  titulo: string;
-  categoria_id: string;
+  nome: string;
 }
-
+interface SuperiorPesquisaData {
+  nome: string;
+}
 const Superiores: React.FC = () => {
-  const [superiores, setSuperiores] = useState<Categoria[]>([]);
-
+  const [superiores, setSuperiores] = useState<Superior[]>([]);
+  const [args, setArgs] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function loadSuperiores(): Promise<void> {
-    try {
-      setLoading(true);
-      const response = await api.get('/superiores');
-      setSuperiores(response.data.superiores);
-    } catch (err) {
-      toast.error('Erro na lista');
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
-    // api.get('/superiores').then((response) => setSuperiores(response.data));
+    async function loadSuperiores(): Promise<void> {
+      try {
+        setLoading(true);
+        const response = await api.get('superiores', {
+          params: { nome: args },
+        });
+
+        setSuperiores(response.data.superiores);
+      } catch (err) {
+        toast.error('Erro na lista');
+      } finally {
+        setLoading(false);
+      }
+    }
+    // api.get('/categorias').then((response) => setCategorias(response.data));
     loadSuperiores();
+  }, [args]);
+
+  const handleSubmit = useCallback((data: SuperiorPesquisaData) => {
+    setArgs(data.nome);
   }, []);
 
   return (
     <Container>
       <Title>
-        <h1>Superiores</h1>
+        <h1>Instituições Superiores</h1>
         <hr />
       </Title>
+
       <Panel>
         <SearchTableContainer>
-          <input name="search" type="text" placeholder="Search" />
-          <button type="button">
-            <FiSearch size={20} />
-          </button>
+          <Form onSubmit={handleSubmit}>
+            <Input name="nome" type="text" placeholder="Procurar" />
+            <button type="submit">
+              <FiSearch size={20} />
+            </button>
+          </Form>
         </SearchTableContainer>
       </Panel>
+
       <Panel>
         <Table cellPadding="0" cellSpacing="0">
           <thead>
@@ -66,9 +78,7 @@ const Superiores: React.FC = () => {
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria id</th>
-              <th>Categoria</th>
+              <th>Instituição superior</th>
               <th>Slug</th>
             </tr>
           </thead>
@@ -85,19 +95,17 @@ const Superiores: React.FC = () => {
                 <td colSpan={3}> Nenhum Cadastro efetuado </td>
               </tr>
             )}
-            {superiores.map((categoria) => (
-              <tr key={categoria.id}>
+            {superiores.map((superior) => (
+              <tr key={superior.id}>
                 <td style={{ textAlign: 'center' }}>
                   <EditarLinkButton
-                    to={`/ad/cadastro/superiores/editar/${categoria.id}`}
+                    to={`/ad/cadastro/superiores/editar/${superior.id}`}
                   >
                     <FiRefreshCw />
                   </EditarLinkButton>
                 </td>
-                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
-                <td>{categoria.categoria_id}</td>
-                <td>{categoria.titulo}</td>
-                <td>{categoria.slug}</td>
+                <td>{superior.nome}</td>
+                <td>{superior.slug}</td>
               </tr>
             ))}
           </tbody>
