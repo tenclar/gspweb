@@ -46,6 +46,7 @@ const FormAvisos: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [aviso, setAviso] = useState<AvisoFormData>();
+  const [imagemurl, setImagemurl] = useState<String>();
 
   const { id = null } = useParams<ParamTypes>();
 
@@ -63,26 +64,28 @@ const FormAvisos: React.FC = () => {
   function getBase64(file: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = function load(): void {
         resolve(reader.result);
       };
       reader.onerror = reject;
-      reader.readAsDataURL(file);
     });
   }
 
   const handleChangeFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const data = new FormData();
-      data.append('imagem', e.target.files[0]);
+      //      const data = new FormData();
+      //    data.append('imagem', e.target.files[0]);
 
-      const promise = getBase64(data);
+      const promise = getBase64(e.target.files[0]);
       promise.then((result) => {
         const test_variable = result;
         console.log(test_variable);
+        setImagemurl(test_variable);
       });
     }
   }, []);
+
   const handleSubmit = useCallback(
     async (data: AvisoFormData) => {
       try {
@@ -94,7 +97,12 @@ const FormAvisos: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         if (id) {
-          await api.put(`/avisos/${id}`, data);
+          await api.put(`/avisos/${id}`, {
+            titulo: data.titulo,
+            conteudo: data.conteudo,
+            imagem: imagemurl,
+            status: true,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
@@ -104,7 +112,7 @@ const FormAvisos: React.FC = () => {
           await api.post('/avisos', {
             titulo: data.titulo,
             conteudo: data.conteudo,
-            imagem: data.imagem,
+            imagem: imagemurl,
             status: true,
           });
           addToast({
