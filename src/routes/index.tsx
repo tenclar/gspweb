@@ -26,8 +26,25 @@ import UsersForm from '../pages/Admin/Users/Form';
 import Cidades from '../pages/Admin/Cidades';
 import FormCidades from '../pages/Admin/Cidades/Form';
 
+import Avisos from '../pages/Admin/Avisos';
+import FormAvisos from '../pages/Admin/Avisos/Form';
+
 const Routes: React.FC = () => (
   <Switch>
+    <Route exact path="/ad/cadastro/avisos/" component={Avisos} isPrivate />
+    <Route
+      exact
+      path="/ad/cadastro/avisos/novo"
+      component={FormAvisos}
+      isPrivate
+    />
+    <Route
+      exact
+      path="/ad/cadastro/avisos/editar/:id"
+      component={FormAvisos}
+      isPrivate
+    />
+
     <Route exact path="/" component={Guide} isGuide />
     <Route exact path="/pesquisa" component={Search} isGuide />
     <Route exact path="/detalhe" component={Detail} isGuide />

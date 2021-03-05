@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => (
         <FaListAlt />
         <div>Páginas</div>
       </LinkHeader>
-      <LinkButton to="/ad/cadastro/publicos">
+      <LinkButton to="/ad/cadastro/avisos">
         <FaRegCircle /> <div>Avisos</div>
       </LinkButton>
 
