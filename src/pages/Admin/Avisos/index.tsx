@@ -22,7 +22,7 @@ interface Aviso {
   id: string;
   titulo: string;
   conteudo: string;
-  slug: string;
+  imagem: string;
 }
 interface AvisoPesquisaData {
   titulo: string;
@@ -99,7 +99,6 @@ const Avisos: React.FC = () => {
 
               <th>Título</th>
               <th>Conteúdo</th>
-              <th>Slug</th>
             </tr>
           </thead>
           <tbody>
@@ -126,14 +125,22 @@ const Avisos: React.FC = () => {
                   </EditarLinkButton>
                 </td>
                 <td style={{ textAlign: 'center' }}>{aviso.titulo}</td>
-
-                <td style={{ textAlign: 'center' }}>{aviso.conteudo}</td>
-                <td style={{ textAlign: 'center' }}>{aviso.slug}</td>
+                <td style={{ textAlign: 'left' }}>
+                  {!!aviso.imagem && (
+                    <img
+                      src={aviso.imagem}
+                      alt="img"
+                      width="50px"
+                      height="50px"
+                    />
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </Panel>
+
       <ToastContainer />
     </Container>
   );

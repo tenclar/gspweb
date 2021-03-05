@@ -36,7 +36,7 @@ interface ParamTypes {
 interface AvisoFormData {
   id: string;
   titulo: string;
-  conteudo: string;
+  conteudo?: string;
   imagem: string;
   status: boolean;
 }
@@ -46,7 +46,7 @@ const FormAvisos: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [aviso, setAviso] = useState<AvisoFormData>();
-  const [imagemurl, setImagemurl] = useState<String>();
+  const [imagemurl, setImagemurl] = useState<String>('');
 
   const { id = null } = useParams<ParamTypes>();
 
@@ -72,19 +72,15 @@ const FormAvisos: React.FC = () => {
     });
   }
 
-  const handleChangeFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      //      const data = new FormData();
-      //    data.append('imagem', e.target.files[0]);
-
-      const promise = getBase64(e.target.files[0]);
-      promise.then((result) => {
-        const test_variable = result;
-        console.log(test_variable);
-        setImagemurl(test_variable);
-      });
-    }
-  }, []);
+  const handleChangeFile = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files) {
+        const promise = await getBase64(e.target.files[0]);
+        setImagemurl(promise);
+      }
+    },
+    [],
+  );
 
   const handleSubmit = useCallback(
     async (data: AvisoFormData) => {
@@ -101,8 +97,9 @@ const FormAvisos: React.FC = () => {
             titulo: data.titulo,
             conteudo: data.conteudo,
             imagem: imagemurl,
-            status: true,
+            status: false,
           });
+
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
@@ -135,7 +132,7 @@ const FormAvisos: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, imagemurl],
   );
   return (
     <>
@@ -171,6 +168,7 @@ const FormAvisos: React.FC = () => {
             </label>
 
             <input type="file" id="imagem" onChange={handleChangeFile} />
+            {JSON.stringify('')}
             <br />
             <br />
 
