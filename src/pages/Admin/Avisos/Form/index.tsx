@@ -1,24 +1,26 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  ChangeEvent,
+} from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { useHistory, useParams } from 'react-router-dom';
-import ButtonAlterar from '../../../../components/admin/ButtonAlterar';
+import Input from '../../../../components/admin/InputForm';
+
 import QEditor from '../../../../components/common/QEditor';
-import Modal from '../../../../components/common/Modal';
+
 import {
   Container,
   Title,
   Panel,
   Button,
-  CancelButton,
-  AddButton,
-  AddLinkButton,
   CancelLinkButton,
-  Table,
   BlockButton,
 } from './styles';
 import { useToast } from '../../../../hooks/Toast';
@@ -45,7 +47,7 @@ const FormAvisos: React.FC = () => {
   const history = useHistory();
   const [aviso, setAviso] = useState<AvisoFormData>();
 
-  const { id } = useParams<ParamTypes>();
+  const { id = null } = useParams<ParamTypes>();
 
   async function loadAviso(idU: string): Promise<void> {
     const response = await api.get(`avisos/${idU}`);
@@ -56,18 +58,41 @@ const FormAvisos: React.FC = () => {
       loadAviso(id);
     }
   }, [id]);
+
+  // BEGIN from:  https://stackoverflow.com/a/47245396/1063287
+  function getBase64(file: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function load(): void {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const handleChangeFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const data = new FormData();
+      data.append('imagem', e.target.files[0]);
+
+      const promise = getBase64(data);
+      promise.then((result) => {
+        const test_variable = result;
+        console.log(test_variable);
+      });
+    }
+  }, []);
   const handleSubmit = useCallback(
     async (data: AvisoFormData) => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          conteudo: Yup.string(),
-          imagem: Yup.string(),
-          status: Yup.string().required('Título obrigatório'),
+          conteudo: Yup.string().required('Título obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
-        /*
+
         if (id) {
           await api.put(`/avisos/${id}`, data);
           addToast({
@@ -88,23 +113,18 @@ const FormAvisos: React.FC = () => {
             description: 'Cadastro Realizado com Sucesso.',
           });
         }
-        */
-        console.log('text_');
         history.push('/ad/cadastro/avisos');
       } catch (err) {
-        /*
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
           return;
-
         }
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
           description: 'Ocorreu um erro ao fazer Cadastro de Cidades.',
         });
-        */
       }
     },
     [addToast, history, id],
@@ -122,41 +142,29 @@ const FormAvisos: React.FC = () => {
             initialData={{
               titulo: aviso?.titulo,
               conteudo: aviso?.conteudo,
-              imagem: aviso?.imagem,
-              status: aviso?.status,
             }}
             onSubmit={handleSubmit}
           >
-            <Tabs>
-              <TabList>
-                <Tab>Título</Tab>
-                <Tab>Conteúdo </Tab>
-                <Tab>Imagem </Tab>
-              </TabList>
-              <TabPanel>
-                <label htmlFor="title">
-                  Título
-                  <input id="title" type="text" placeholder="Titulo do aviso" />
-                </label>
-              </TabPanel>
-              <TabPanel>
-                <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
-                  Conteúdo do aviso
-                </label>
-                <QEditor />
-              </TabPanel>
+            {JSON.stringify(aviso)}
 
-              <TabPanel>
-                <label style={{ fontWeight: 'bold' }} htmlFor="Etapas">
-                  Inserir imagem no aviso
-                </label>
+            <label htmlFor="titulo">
+              Título
+              <Input name="titulo" id="titulo" placeholder="Titulo do aviso" />
+            </label>
 
-                <input type="text" id="my_pdf_file" />
-                <br />
-                <br />
-                <button type="submit">click me</button>
-              </TabPanel>
-            </Tabs>
+            <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
+              Conteúdo do aviso
+            </label>
+            <Input type="text" name="conteudo" />
+            <QEditor />
+
+            <label style={{ fontWeight: 'bold' }} htmlFor="Etapas">
+              Inserir imagem no aviso
+            </label>
+
+            <input type="file" id="imagem" onChange={handleChangeFile} />
+            <br />
+            <br />
 
             <hr />
             <BlockButton>

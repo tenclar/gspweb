@@ -30,7 +30,7 @@ export const Panel = styled.div`
       font-weight: 500;
       margin-bottom: 10px;
     }
-    input,
+    /*  input,
     textarea,
     select {
       color: #000;
@@ -39,7 +39,7 @@ export const Panel = styled.div`
       padding: 10px;
       width: 100%;
       margin: 5px 0;
-    }
+    } */
   }
 `;
 

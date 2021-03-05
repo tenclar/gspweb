@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FormHandles } from '@unform/core';
+/* import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import * as Yup from 'yup';
+import * as Yup from 'yup'; */
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
@@ -22,7 +22,6 @@ import {
 } from './styles';
 
 const FormServicos: React.FC = () => {
-  const [teste, setTeste] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   function toggleModal(): void {
     setModalOpen(!modalOpen);

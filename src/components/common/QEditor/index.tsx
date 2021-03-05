@@ -45,10 +45,17 @@ const QEditor: React.FC = () => {
     'clean',
   ];
   const { quill, quillRef } = useQuill({ modules, formats });
+  // console.log(quill?.root.innerHTML);
   return (
-    <Container>
-      <div ref={quillRef} style={{ minHeight: '300px' }} />
-    </Container>
+    <>
+      <Container>
+        <div
+          ref={quillRef}
+          style={{ minHeight: '300px' }}
+          placeholder={placeholder}
+        />
+      </Container>
+    </>
   );
 };
 
