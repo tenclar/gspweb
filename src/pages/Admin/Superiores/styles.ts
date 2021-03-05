@@ -32,20 +32,26 @@ export const Panel = styled.div`
 
 export const SearchTableContainer = styled.div`
   width: 100%;
-  height: 35px;
+  height: 42px;
   display: flex;
 
+  form {
+    width: 100%;
+    display: flex;
+  }
+  /*
   input {
     color: #000;
     border-radius: 5px;
     border: 2px solid #ccc;
     padding: 10px;
     width: 100%;
-    margin-right: 5px;
+    margin-right: 0px;
   }
-
+*/
   button {
     width: 10%;
+
     background: #f44336;
     padding: 8px;
     color: #fff;
@@ -56,7 +62,6 @@ export const SearchTableContainer = styled.div`
     }
   }
 `;
-
 export const LinkButton = styled(Link)`
   background: #00bcd4;
   display: flex;

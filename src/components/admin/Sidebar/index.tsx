@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => (
       <LinkButton to="/ad/cadastro/pracas">
         <FaRegCircle /> <div>Praças</div>
       </LinkButton>
-      <LinkButton to="/ad/cadastro/superiors">
+      <LinkButton to="/ad/cadastro/superiores">
         <FaRegCircle /> <div>Inst. Superiores</div>
       </LinkButton>
       <LinkButton to="/ad/cadastro/orgaos">
