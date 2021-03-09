@@ -1,6 +1,18 @@
 import React from 'react';
 
 import { Switch } from 'react-router-dom';
+import AvisosRoute from './admin/Avisos.Route';
+import CategoriasRoute from './admin/Categorias.Route';
+import CentraisRoute from './admin/Centrais.Route';
+import CidadesRoute from './admin/Cidades.Route';
+import LocaisRoute from './admin/Locais.Route';
+import OrgaosRoute from './admin/Orgaos.Route';
+import PracasRoute from './admin/Pracas.Route';
+import ServicosRoute from './admin/Servicos.Route';
+import SuperioresRoute from './admin/Superiores.Route';
+import TagsRoute from './admin/Tags.Route';
+import TemasRoute from './admin/Temas.Route';
+import UsersRoute from './admin/Users.Route';
 import Route from './Route';
 import Error404 from '../pages/common/Error404';
 import Guide from '../pages/Guide';
@@ -11,128 +23,66 @@ import SignIn from '../pages/SignIn';
 
 import Dashboard from '../pages/Admin/Dashboard';
 
-import Categorias from '../pages/Admin/Categorias';
-import CategoriasForm from '../pages/Admin/Categorias/Form';
-
-import Servicos from '../pages/Admin/Servicos';
-import ServicosForm from '../pages/Admin/Servicos/Form';
-
-import Superiores from '../pages/Admin/Superiores';
-import SuperioresForm from '../pages/Admin/Superiores/Form';
-
-import Users from '../pages/Admin/Users';
-import UsersForm from '../pages/Admin/Users/Form';
-
-import Cidades from '../pages/Admin/Cidades';
-import FormCidades from '../pages/Admin/Cidades/Form';
-
 import Avisos from '../pages/Admin/Avisos';
-import FormAvisos from '../pages/Admin/Avisos/Form';
+import Categorias from '../pages/Admin/Categorias';
+import Centrais from '../pages/Admin/Centrais';
+import Cidades from '../pages/Admin/Cidades';
+import Locais from '../pages/Admin/Locais';
+import Orgaos from '../pages/Admin/Orgaos';
+import Pracas from '../pages/Admin/Pracas';
+import Servicos from '../pages/Admin/Servicos';
+import Superiores from '../pages/Admin/Superiores';
+import Tags from '../pages/Admin/Tags';
+import Temas from '../pages/Admin/Temas';
+import Users from '../pages/Admin/Users';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route exact path="/ad/cadastro/avisos/" component={Avisos} isPrivate />
-    <Route
-      exact
-      path="/ad/cadastro/avisos/novo"
-      component={FormAvisos}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/avisos/editar/:id"
-      component={FormAvisos}
-      isPrivate
-    />
-
     <Route exact path="/" component={Guide} isGuide />
     <Route exact path="/pesquisa" component={Search} isGuide />
     <Route exact path="/detalhe" component={Detail} isGuide />
 
     <Route exact path="/ad/" component={SignIn} isAd />
     <Route exact path="/ad/painel" component={Dashboard} isPrivate />
-    <Route exact path="/ad/cadastro/usuarios/" component={Users} isPrivate />
-    <Route
-      exact
-      path="/ad/cadastro/usuarios/novo"
-      component={UsersForm}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/usuarios/editar/:id"
-      component={UsersForm}
-      isPrivate
-    />
 
-    <Route exact path="/ad/cadastro/servicos" component={Servicos} isPrivate />
-    <Route
-      exact
-      path="/ad/cadastro/servicos/novo"
-      component={ServicosForm}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/servicos/editar/id"
-      component={ServicosForm}
-      isPrivate
-    />
+    <Route path="/ad/cadastro/avisos" component={Avisos} isPrivate>
+      <AvisosRoute />
+    </Route>
+    <Route path="/ad/cadastro/categorias" component={Categorias} isPrivate>
+      <CategoriasRoute />
+    </Route>
 
-    <Route
-      exact
-      path="/ad/cadastro/superiores"
-      component={Superiores}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/superiores/novo"
-      component={SuperioresForm}
-      isPrivate
-    />
+    <Route path="/ad/cadastro/centrais" component={Centrais} isPrivate>
+      <CentraisRoute />
+    </Route>
 
-    <Route
-      exact
-      path="/ad/cadastro/superiores/editar/:id"
-      component={SuperioresForm}
-      isPrivate
-    />
-
-    <Route
-      exact
-      path="/ad/cadastro/categorias"
-      component={Categorias}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/categorias/novo"
-      component={CategoriasForm}
-      isPrivate
-    />
-
-    <Route
-      exact
-      path="/ad/cadastro/categorias/editar/:id"
-      component={CategoriasForm}
-      isPrivate
-    />
-
-    <Route exact path="/ad/cadastro/cidades" component={Cidades} isPrivate />
-
-    <Route
-      exact
-      path="/ad/cadastro/cidades/novo"
-      component={FormCidades}
-      isPrivate
-    />
-    <Route
-      exact
-      path="/ad/cadastro/cidades/editar/:id"
-      component={FormCidades}
-      isPrivate
-    />
+    <Route path="/ad/cadastro/cidades" component={Cidades} isPrivate>
+      <CidadesRoute />
+    </Route>
+    <Route path="/ad/cadastro/superiores" component={Superiores} isPrivate>
+      <SuperioresRoute />
+    </Route>
+    <Route path="/ad/cadastro/locais" component={Locais} isPrivate>
+      <LocaisRoute />
+    </Route>
+    <Route path="/ad/cadastro/orgaos" component={Orgaos} isPrivate>
+      <OrgaosRoute />
+    </Route>
+    <Route path="/ad/cadastro/pracas" component={Pracas} isPrivate>
+      <PracasRoute />
+    </Route>
+    <Route path="/ad/cadastro/servicos" component={Servicos} isPrivate>
+      <ServicosRoute />
+    </Route>
+    <Route path="/ad/cadastro/tags" component={Tags} isPrivate>
+      <TagsRoute />
+    </Route>
+    <Route path="/ad/cadastro/temas" component={Temas} isPrivate>
+      <TemasRoute />
+    </Route>
+    <Route path="/ad/cadastro/usuarios" component={Users} isPrivate>
+      <UsersRoute />
+    </Route>
     <Route exact path="/ad/**" component={Error404} isPrivate />
     <Route
       path="*"
