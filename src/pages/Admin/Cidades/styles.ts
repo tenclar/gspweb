@@ -51,7 +51,7 @@ export const SearchTableContainer = styled.div`
     display: flex;
   }
 
-  input {
+  /*  input {
     color: #000;
     border-radius: 5px;
     border: 2px solid #ccc;
@@ -59,7 +59,7 @@ export const SearchTableContainer = styled.div`
     width: 100%;
     margin-right: 5px;
   }
-
+ */
   button {
     width: 10%;
 
