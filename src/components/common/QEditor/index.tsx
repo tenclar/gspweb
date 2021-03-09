@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
 import { Container } from './styles';
 
 const QEditor: React.FC = () => {
+  const [texto, seTexto] = useState(String);
   const modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -46,6 +47,13 @@ const QEditor: React.FC = () => {
   ];
   const { quill, quillRef } = useQuill({ modules, formats });
   // console.log(quill?.root.innerHTML);
+  useEffect(() => {
+    if (quill) {
+      quill.on('text-change', () => {
+        seTexto(quill?.root.innerHTML);
+      });
+    }
+  }, [quill]);
   return (
     <>
       <Container>
@@ -55,6 +63,7 @@ const QEditor: React.FC = () => {
           placeholder={placeholder}
         />
       </Container>
+      {JSON.stringify(texto)}
     </>
   );
 };

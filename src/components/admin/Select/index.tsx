@@ -1,10 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { OptionTypeBase, Props as SelectProps } from 'react-select';
 
 import { useField } from '@unform/core';
 import { FiAlertCircle } from 'react-icons/fi';
-
-import { OptionProps } from 'react-select/src/types';
 import { Container, SelectCustom, Error } from './styles';
 
 interface Props extends SelectProps<OptionTypeBase> {
@@ -13,7 +11,7 @@ interface Props extends SelectProps<OptionTypeBase> {
 
 const Select: React.FC<Props> = ({ name, options, ...rest }) => {
   const selectRef = useRef(null);
-  const [val, setVal] = useState();
+
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
