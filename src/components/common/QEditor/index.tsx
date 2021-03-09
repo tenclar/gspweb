@@ -51,7 +51,7 @@ const QEditor: React.FC = () => {
       <Container>
         <div
           ref={quillRef}
-          style={{ minHeight: '300px' }}
+          style={{ height: '260px' }}
           placeholder={placeholder}
         />
       </Container>
