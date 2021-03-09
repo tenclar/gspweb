@@ -4,28 +4,29 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup'; */
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { FiPlus, FiRefreshCw } from 'react-icons/fi';
-import ButtonAlterar from '../../../../components/admin/ButtonAlterar';
 import QEditor from '../../../../components/common/QEditor';
-import Modal from '../../../../components/common/Modal';
+
+import EtapasForm from './Etapas';
+import CentraisForm from './Centrais';
+import LocaisForm from './Locais';
+import CidadesForm from './Cidades';
 import {
   Container,
   Title,
   Panel,
   Button,
-  CancelButton,
-  AddButton,
-  AddLinkButton,
   CancelLinkButton,
-  Table,
   BlockButton,
 } from './styles';
 
 const FormServicos: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  function toggleModal(): void {
-    setModalOpen(!modalOpen);
-  }
+  const [tabIndex, setTabIndex] = useState(0);
+
+  /*
+   onSelect={index => console.log(index)}
+{(index) => setTabIndex(index)}
+   */
+
   return (
     <>
       <Container>
@@ -35,18 +36,22 @@ const FormServicos: React.FC = () => {
         </Title>
         <Panel>
           <form>
-            <Tabs>
+            <Tabs
+              selectedIndex={tabIndex}
+              onSelect={(index) => {
+                setTabIndex(index);
+              }}
+            >
               <TabList>
                 <Tab>Cadastro</Tab>
-                <Tab>Serviço </Tab>
-                <Tab>Etapas </Tab>
-                <Tab>Locais </Tab>
-                <Tab>Cidade </Tab>
-                <Tab>Centrais </Tab>
+                <Tab disabled>Etapas</Tab>
+                <Tab>Locais</Tab>
+                <Tab>Cidade</Tab>
+                <Tab>Centrais</Tab>
               </TabList>
               <TabPanel>
-                <label htmlFor="title">
-                  Título
+                <label style={{ fontWeight: 'bold' }} htmlFor="titulo">
+                  Título do Serviço
                   <input
                     id="title"
                     type="text"
@@ -54,7 +59,7 @@ const FormServicos: React.FC = () => {
                   />
                 </label>
 
-                <label htmlFor="categoria">
+                <label style={{ fontWeight: 'bold' }} htmlFor="categoria">
                   Categoria
                   <select
                     id="categoria"
@@ -86,8 +91,6 @@ const FormServicos: React.FC = () => {
                     <option value="orgao 4">Orgão 3</option>
                   </select>
                 </label>
-              </TabPanel>
-              <TabPanel>
                 <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
                   Informações detalhadas do Serviço
                 </label>
@@ -98,167 +101,30 @@ const FormServicos: React.FC = () => {
                 <label style={{ fontWeight: 'bold' }} htmlFor="Etapas">
                   Informações Etapas
                 </label>
-                <Table cellPadding="0" cellSpacing="0">
-                  <thead>
-                    <tr>
-                      <th
-                        style={{
-                          width: '40px',
-                        }}
-                      >
-                        <AddButton type="button" onClick={toggleModal}>
-                          <FiPlus />
-                        </AddButton>
-                      </th>
-
-                      <th>Título</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ textAlign: 'center' }}>
-                        <ButtonAlterar type="button">
-                          <FiRefreshCw />
-                        </ButtonAlterar>
-                      </td>
-
-                      <td>titulo</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <EtapasForm />
               </TabPanel>
               <TabPanel>
-                <label htmlFor="local">
-                  Localidade
-                  <select
-                    id="local"
-                    name="local"
-                    placeholder="Selecione Localidade"
-                  >
-                    <option>Selecione ..</option>
-                    <option value="local1">local 1</option>
-                    <option value="local2">local 2</option>
-                    <option value="local3">local 3</option>
-                  </select>
-                </label>
-
-                <Table cellPadding="0" cellSpacing="0">
-                  <thead>
-                    <tr>
-                      <th
-                        style={{
-                          width: '35px',
-                        }}
-                      >
-                        <AddLinkButton to="/ad/cadastro/servicos/novo">
-                          <FiPlus />
-                        </AddLinkButton>
-                      </th>
-                      <th style={{ width: '60px' }}>#</th>
-                      <th>Local</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ textAlign: 'center' }}>
-                        <ButtonAlterar type="button">
-                          <FiRefreshCw />
-                        </ButtonAlterar>
-                      </td>
-                      <td style={{ textAlign: 'center' }}>1</td>
-                      <td>Local 1</td>
-                    </tr>
-                    <tr>
-                      <td style={{ textAlign: 'center' }}>
-                        <ButtonAlterar type="button">
-                          <FiRefreshCw />
-                        </ButtonAlterar>
-                      </td>
-                      <td style={{ textAlign: 'center' }}>1</td>
-                      <td>local 2</td>
-                    </tr>
-                    <tr>
-                      <td style={{ textAlign: 'center' }}>
-                        <ButtonAlterar type="button">
-                          <FiRefreshCw />
-                        </ButtonAlterar>
-                      </td>
-                      <td style={{ textAlign: 'center' }}>1</td>
-                      <td>local 3</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <LocaisForm />
               </TabPanel>
               <TabPanel>
-                <label htmlFor="Cidade">
-                  Cidade
-                  <select
-                    id="cidade"
-                    name="cidade"
-                    placeholder="Selecione cidade"
-                  >
-                    <option>Selecione ..</option>
-                    <option value="cidade1">cidade 1</option>
-                    <option value="cidade2">cidade 2</option>
-                    <option value="cidade3">cidade 3</option>
-                  </select>
-                </label>
+                <CidadesForm />
               </TabPanel>
               <TabPanel>
-                <label htmlFor="Centrais">
-                  Centrais
-                  <select
-                    id="centrais"
-                    name="centrais"
-                    placeholder="Selecione Centrais"
-                  >
-                    <option>Selecione ..</option>
-                    <option value="cidade1">centrais 1</option>
-                    <option value="cidade2">centrais 2</option>
-                    <option value="cidade3">centrais 3</option>
-                  </select>
-                </label>
-                <label htmlFor="Praças">
-                  Praça
-                  <select id="praca" name="praca" placeholder="Selecione praca">
-                    <option>Selecione ..</option>
-                    <option value="cidade1">praca 1</option>
-                    <option value="cidade2">praca 2</option>
-                    <option value="cidade3">praca 3</option>
-                  </select>
-                </label>
+                <label htmlFor="Centrais">Centrais</label>
+                <CentraisForm />
               </TabPanel>
             </Tabs>
 
             <hr />
             <BlockButton>
               <Button>Salvar </Button>
-              <CancelLinkButton to="/admin/cadastro/servicos">
+              <CancelLinkButton to="/ad/cadastro/servicos">
                 Cancelar
               </CancelLinkButton>
             </BlockButton>
           </form>
         </Panel>
       </Container>
-      <Modal isOpen={modalOpen} setIsOpen={toggleModal}>
-        <Panel>
-          <form>
-            <label>
-              Titulo
-              <input type="text" />
-            </label>
-            <label htmlFor="ed">
-              Descrição
-              <QEditor />
-            </label>
-            <hr />
-            <BlockButton>
-              <Button onClick={toggleModal}>Salvar </Button>
-              <CancelButton onClick={toggleModal}>Cancelar</CancelButton>
-            </BlockButton>
-          </form>
-        </Panel>
-      </Modal>
     </>
   );
 };
