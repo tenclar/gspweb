@@ -1,17 +1,19 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { OptionTypeBase, Props as SelectProps } from 'react-select';
 
 import { useField } from '@unform/core';
 import { FiAlertCircle } from 'react-icons/fi';
 
+import { OptionProps } from 'react-select/src/types';
 import { Container, SelectCustom, Error } from './styles';
 
 interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, ...rest }) => {
   const selectRef = useRef(null);
+  const [val, setVal] = useState();
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
@@ -28,33 +30,48 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
         if (!ref.state.value) {
           return '';
         }
+
         return ref.state.value.id;
-      },
-      setValue: (ref, value) => {
-        ref.select.setValue(value || null);
-        /* let selectedOptions;
-
-        if (rest.isMulti) {
-          selectedOptions = options?.filter((option) => value.includes(option));
-        } else {
-          selectedOptions = options?.find((option) => option.value === value);
-        }
-
-        ref.select.setValue(selectedOptions, 'select-option'); */
       },
       clearValue: (ref) => {
         ref.state.clearValue();
       },
-    });
-  }, [fieldName, registerField, rest.isMulti]);
+      setValue: (ref, value) => {
+        // ref.select.setValue(value || null);
+        ref.select.select.setValue(value.id, 'select-option');
+        // let selectedOptions;
+        /* if (rest.isMulti) {
+          selectedOptions = options?.filter((option) => value.includes(option));
+        } else {
 
+        } */
+        // const selectedOptions = options?.find((option) => option.id === value);
+        // defaultValue = selectedOptions;
+        // ref.select.setValue(selectedOptions, 'select-option');
+      },
+    });
+  }, [fieldName, registerField, rest.isMulti, options]);
+  /*
+  function getDefaultValue() {
+    if (!defaultValue) return null;
+
+    if (!multiple) {
+      return options.find(option => option.id === defaultValue);
+    }
+
+    return options?.find((option) => option.id === defaultValue);
+  } */
   return (
     <>
       <Container>
         <SelectCustom
           classNamePrefix="react-select"
-          defaultValue={defaultValue}
+          defaultValue={
+            defaultValue &&
+            options?.find((option) => option.value === defaultValue)
+          }
           ref={selectRef}
+          options={options}
           {...rest}
         />
 
