@@ -152,7 +152,7 @@ const FormOrgaos: React.FC = () => {
             isClearable
           />
           <Input name="nome" type="text" placeholder="Nome" />
-          {/*   <RadioInput name="status" options={radioOptions} /> */}
+          <RadioInput name="status" options={radioOptions} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
