@@ -97,6 +97,7 @@ const FormCategorias: React.FC = () => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
+          categoria_id: Yup.string().required('Selecionar Categoria'),
         });
         //   categoria_id: Yup.string().required('Selecionar Categoria'),
         await schema.validate(data, { abortEarly: false });
