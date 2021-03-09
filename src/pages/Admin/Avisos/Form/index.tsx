@@ -8,7 +8,6 @@ import React, {
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useHistory, useParams } from 'react-router-dom';
 import Input from '../../../../components/admin/InputForm';
@@ -61,7 +60,7 @@ const FormAvisos: React.FC = () => {
   }, [id]);
 
   // BEGIN from:  https://stackoverflow.com/a/47245396/1063287
-  function getBase64(file: any): Promise<any> {
+  function getBase64(file: Blob): Promise<any> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
