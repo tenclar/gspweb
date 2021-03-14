@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import { FormHandles } from '@unform/core';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
+import { Form } from '@unform/web';
 import Modal from '../../../../../components/common/Modal';
 import QEditor from '../../../../../components/common/QEditor';
 import ButtonAlterar from '../../../../../components/admin/ButtonAlterar';
+import Select from '../../../../../components/admin/Select';
 import {
   Container,
   Table,
@@ -19,11 +22,26 @@ interface Props {
 
 const LocaisServicos: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const formRef = useRef<FormHandles>(null);
+  const [servico, setServico] = useState();
+  const [locais, setLocais] = useState([
+    {
+      value: '1',
+      label: 'CAC',
+    },
+    {
+      value: '2',
+      label: 'Eletroacre',
+    },
+  ]);
 
   function toggleModal(): void {
     setModalOpen(!modalOpen);
   }
 
+  const handleSubmit = useCallback(() => {
+    console.log('ok');
+  }, []);
   return (
     <>
       <Container>
@@ -60,21 +78,18 @@ const LocaisServicos: React.FC = () => {
       <Modal isOpen={modalOpen} setIsOpen={toggleModal}>
         <Panel>
           <h1>Locais</h1>
-          <form>
-            <label>
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <label htmlFor="nome">
               Nome
-              <input type="text" />
+              <Select options={locais} name="nome" isSearchable isClearable />
             </label>
-            <label htmlFor="ed">
-              Descrição
-              <QEditor />
-            </label>
+
             <hr />
             <BlockButton>
               <Button onClick={toggleModal}>Salvar </Button>
               <CancelButton onClick={toggleModal}>Cancelar</CancelButton>
             </BlockButton>
-          </form>
+          </Form>
         </Panel>
       </Modal>
     </>
