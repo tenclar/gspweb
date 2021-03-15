@@ -44,7 +44,7 @@ const FormServicos: React.FC = () => {
             >
               <TabList>
                 <Tab>Cadastro</Tab>
-                <Tab disabled>Etapas</Tab>
+                <Tab>Etapas</Tab>
                 <Tab>Locais</Tab>
                 <Tab>Cidade</Tab>
                 <Tab>Centrais</Tab>
