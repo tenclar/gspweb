@@ -3,7 +3,7 @@ import { FormHandles } from '@unform/core';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import Modal from '../../../../../components/common/Modal';
-import QEditor from '../../../../../components/common/QEditor';
+
 import ButtonAlterar from '../../../../../components/admin/ButtonAlterar';
 import Select from '../../../../../components/admin/Select';
 import {
@@ -23,7 +23,7 @@ interface Props {
 const LocaisServicos: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const formRef = useRef<FormHandles>(null);
-  const [servico, setServico] = useState();
+// eslint-disable-next-line
   const [locais, setLocais] = useState([
     {
       value: '1',
@@ -35,7 +35,9 @@ const LocaisServicos: React.FC = () => {
     },
   ]);
 
+
   function toggleModal(): void {
+
     setModalOpen(!modalOpen);
   }
 

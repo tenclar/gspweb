@@ -22,6 +22,7 @@ import Detail from '../pages/Guide/Detail';
 import SignIn from '../pages/SignIn';
 
 import Dashboard from '../pages/Admin/Dashboard';
+import Dash from '../pages/ad/Dashs';
 
 import Avisos from '../pages/Admin/Avisos';
 import Categorias from '../pages/Admin/Categorias';
@@ -38,6 +39,7 @@ import Users from '../pages/Admin/Users';
 
 const Routes: React.FC = () => (
   <Switch>
+
     <Route exact path="/" component={Guide} isGuide />
     <Route exact path="/pesquisa" component={Search} isGuide />
     <Route exact path="/detalhe" component={Detail} isGuide />
@@ -83,6 +85,8 @@ const Routes: React.FC = () => (
     <Route path="/ad/cadastro/usuarios" component={Users} isPrivate>
       <UsersRoute />
     </Route>
+
+    <Route exact path="/dash" component={Dash} isDash />
     <Route exact path="/ad/**" component={Error404} isPrivate />
     <Route
       path="*"

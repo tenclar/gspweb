@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import React from 'react';
 import {
   Route as ReactDOMRoute,
@@ -8,12 +7,14 @@ import {
 import AdminLayout from '../pages/_layout/admin';
 import AuthLayout from '../pages/_layout/auth';
 import GuideLayout from '../pages/_layout/guide';
+import DashLayout from '../pages/_layout/dash';
 import { useAuth } from '../hooks/Auth';
 
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
   isGuide?: boolean;
   isAd?: boolean;
+  isDash?: boolean;
   component: React.ComponentType;
 }
 
@@ -21,11 +22,13 @@ const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   isGuide = false,
   isAd = false,
+  isDash = false,
   component: Component,
   ...rest
 }) => {
   const { user } = useAuth();
   const signed = user;
+
   if (!signed && isPrivate) {
     return <Redirect to="/ad" />;
   }
@@ -41,6 +44,10 @@ const Route: React.FC<RouteProps> = ({
     Layout = GuideLayout;
   }
 
+  if (isDash)
+  {
+    Layout = DashLayout;
+  }
   return (
     <ReactDOMRoute
       {...rest}
