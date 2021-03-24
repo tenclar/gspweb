@@ -34,11 +34,21 @@ export const SearchTableContainer = styled.div`
   width: 100%;
   height: 42px;
   display: flex;
+
   form {
     width: 100%;
     display: flex;
   }
-
+  /*
+  input {
+    color: #000;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    margin-right: 0px;
+  }
+*/
   button {
     width: 10%;
 
@@ -52,7 +62,6 @@ export const SearchTableContainer = styled.div`
     }
   }
 `;
-
 export const LinkButton = styled(Link)`
   background: #00bcd4;
   display: flex;
