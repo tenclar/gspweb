@@ -44,8 +44,6 @@ const FormOrgaos: React.FC = () => {
   ];
   const [orgao, setOrgao] = useState<OrgaosFormData>();
 
-  const [selected, setSelected] = useState<Superiores>();
-
   const [superiores, setSuperiores] = useState<Superiores[]>();
 
   const { id } = useParams<ParamTypes>();
@@ -55,7 +53,11 @@ const FormOrgaos: React.FC = () => {
       setOrgao(response.data.orgao);
 
       if (response.data.orgao.superior) {
-        setSelected(response.data.orgao.superior);
+        const c = response.data.orgao.superior;
+        console.log(c);
+        formRef.current?.setData({
+          superiores_id: { id: c.id, nome: c.nome },
+        });
       }
     }
     if (id) {
@@ -147,12 +149,11 @@ const FormOrgaos: React.FC = () => {
             options={superiores}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.nome}
-            value={superiores?.find((option) => option.id === selected?.id)}
             isSearchable
             isClearable
           />
           <Input name="nome" type="text" placeholder="Nome" />
-          <RadioInput name="status" options={radioOptions} />
+
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

@@ -52,7 +52,6 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
   }, [fieldName, registerField, rest.isMulti]);
   return (
     <>
-      {JSON.stringify(defaultValue)}
       <Container>
         <SelectCustom
           classNamePrefix="react-select"
