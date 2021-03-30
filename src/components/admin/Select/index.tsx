@@ -9,9 +9,8 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, options, ...rest }) => {
+const Select: React.FC<Props> = ({ name, ...rest }) => {
   const selectRef = useRef(null);
-
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
@@ -32,44 +31,32 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
         return ref.state.value.id;
       },
       clearValue: (ref) => {
-        ref.state.clearValue();
+        ref.select.clearValue();
       },
       setValue: (ref, value) => {
+        console.log(value);
         // ref.select.setValue(value || null);
-        ref.select.select.setValue(value.id, 'select-option');
-        // let selectedOptions;
-        /* if (rest.isMulti) {
+        ref.select.setValue(value, 'select-option');
+
+        /*
+        let selectedOptions;
+        if (rest.isMulti) {
           selectedOptions = options?.filter((option) => value.includes(option));
         } else {
+          selectedOptions = options?.find((option) => option.id === value);
+        }
 
-        } */
-        // const selectedOptions = options?.find((option) => option.id === value);
-        // defaultValue = selectedOptions;
-        // ref.select.setValue(selectedOptions, 'select-option');
+        ref.select.setValue(selectedOptions, 'select-option'); */
       },
     });
-  }, [fieldName, registerField, rest.isMulti, options]);
-  /*
-  function getDefaultValue() {
-    if (!defaultValue) return null;
-
-    if (!multiple) {
-      return options.find(option => option.id === defaultValue);
-    }
-
-    return options?.find((option) => option.id === defaultValue);
-  } */
+  }, [fieldName, registerField, rest.isMulti]);
   return (
     <>
       <Container>
         <SelectCustom
           classNamePrefix="react-select"
-          defaultValue={
-            defaultValue &&
-            options?.find((option) => option.value === defaultValue)
-          }
+          defaultValue={defaultValue}
           ref={selectRef}
-          options={options}
           {...rest}
         />
 

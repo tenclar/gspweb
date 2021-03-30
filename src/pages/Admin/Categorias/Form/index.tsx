@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
+
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
 
@@ -13,7 +14,7 @@ import Input from '../../../../components/admin/InputForm';
 import Select from '../../../../components/admin/Select';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
-import { Categoria } from '../../../Guide/Search/styles';
+/// import { Categoria } from '../../../Guide/Search/styles';
 
 interface ParamTypes {
   id: string;
@@ -23,7 +24,6 @@ interface CategoriaFormData {
   titulo: string;
   categoria_id?: string;
 }
-
 interface Categoria {
   id?: string | null | '' | undefined;
   categoria_id?: string | null | '' | undefined;
@@ -31,56 +31,55 @@ interface Categoria {
   titulo: string;
 }
 
+const RAIZ = {
+  titulo: 'Raiz',
+};
 const FormCategorias: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
   const [categoria, setCategoria] = useState<Categoria>();
-  const [cateselected, setCatselected] = useState<Categoria>({
-    id: undefined,
-    titulo: 'Raiz',
-    slug: 'raiz',
-    categoria_id: undefined,
-  });
-  const [categorias, setCategorias] = useState<Categoria[]>([
-    {
-      id: undefined,
-      titulo: 'Raiz',
-      slug: 'raiz',
-      categoria_id: null,
-    },
-  ]);
+
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const { id } = useParams<ParamTypes>();
-
-  async function loadCategoria(idU: string): Promise<void> {
-    const response = await api.get(`categorias/${idU}`);
-    setCategoria(response.data);
-
-    //    const cat = await api.get(`categorias/${response.data.categoria_id}`);
-    if (response.data.categoria) {
-      setCatselected(response.data.categoria);
-    }
-  }
   useEffect(() => {
+    async function loadCategoria(idU: string): Promise<void> {
+      try {
+        const response = await api.get(`categorias/${idU}`);
+        setCategoria(response.data);
+        if (response.data.categoria) {
+          const c = response.data.categoria;
+          formRef.current?.setData({
+            categoria_id: { id: c.id, titulo: c.titulo },
+          });
+          /*  formRef.current?.setFieldValue('categoria_id', {
+          value: response.data.categoria.id,
+          label: response.data.categoria.titulo,
+        }); */
+        } else {
+          formRef.current?.setData({
+            categoria_id: RAIZ,
+          });
+        }
+      } catch (error) {
+        addToast({
+          type: 'error',
+          title: 'Erro na Listagem',
+          description: 'Ocorreu um erro ao listar Categorias.',
+        });
+      }
+    }
     if (id) {
       loadCategoria(id);
     }
-  }, [id]);
+  }, [id, addToast]);
 
   useEffect(() => {
     async function loadCategorias(): Promise<void> {
       try {
-        const response = await api.get('/categorias');
-        setCategorias([
-          {
-            id: undefined,
-            titulo: 'Raiz',
-            slug: 'raiz',
-            categoria_id: null,
-          },
-          ...response.data.categorias,
-        ]);
+        const response = await api.get('/categorias/recursive');
+        setCategorias([RAIZ, ...response.data.categorias]);
       } catch (err) {
         addToast({
           type: 'error',
@@ -90,17 +89,18 @@ const FormCategorias: React.FC = () => {
       }
     }
     loadCategorias();
-  }, [addToast, categorias]);
+  }, [addToast]);
 
   const handleSubmit = useCallback(
     async (data: CategoriaFormData) => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          categoria_id: Yup.string().required('Selecionar Categoria'),
+          categoria_id: Yup.string(),
         });
         //   categoria_id: Yup.string().required('Selecionar Categoria'),
         await schema.validate(data, { abortEarly: false });
+
         if (id) {
           await api.put(`/categorias/${id}`, data);
           addToast({
@@ -148,12 +148,14 @@ const FormCategorias: React.FC = () => {
           }}
           onSubmit={handleSubmit}
         >
+          <p style={{ color: '#000' }}>
+            {JSON.stringify(categoria?.categoria_id)}
+          </p>
           <Select
             name="categoria_id"
             options={categorias}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.titulo}
-            value={cateselected}
             isSearchable
             isClearable
           />

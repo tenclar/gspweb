@@ -9,8 +9,6 @@ const ServicoRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormServicos} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormServicos} isPrivate />
       <Route path={`${url}/`} component={Servicos} isPrivate />

@@ -9,8 +9,6 @@ const SuperioreRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormSuperiores} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormSuperiores} isPrivate />
       <Route path={`${url}/`} component={Superiores} isPrivate />

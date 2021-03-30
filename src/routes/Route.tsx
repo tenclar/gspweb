@@ -22,6 +22,7 @@ const Route: React.FC<RouteProps> = ({
   isGuide = false,
   isAd = false,
   component: Component,
+
   ...rest
 }) => {
   const { user } = useAuth();

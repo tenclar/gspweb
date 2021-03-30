@@ -9,8 +9,6 @@ const UserRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormUsers} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormUsers} isPrivate />
       <Route path={`${url}/`} component={Users} isPrivate />

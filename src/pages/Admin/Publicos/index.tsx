@@ -15,54 +15,53 @@ import {
   EditarLinkButton,
 } from './styles';
 
-interface Categoria {
+interface Publicos {
   id: string;
   slug: string;
-  titulo: string;
-  categoria_id: string;
+  nome: string;
 }
-interface CategoriaPesquisaData {
-  titulo: string;
+interface PublicosPesquisaData {
+  nome: string;
 }
-const Categorias: React.FC = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+const Publicos: React.FC = () => {
+  const [publicos, setPublicos] = useState<Publicos[]>([]);
   const [args, setArgs] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function loadCategorias(): Promise<void> {
+    async function loadPublicos(): Promise<void> {
       try {
         setLoading(true);
-        const response = await api.get('categorias/recursive', {
-          params: { titulo: args },
+        const response = await api.get('publicos', {
+          params: { nome: args },
         });
 
-        setCategorias(response.data.categorias);
+        setPublicos(response.data.publicos);
       } catch (err) {
         toast.error('Erro na lista');
       } finally {
         setLoading(false);
       }
     }
-    // api.get('/categorias').then((response) => setCategorias(response.data));
-    loadCategorias();
+
+    loadPublicos();
   }, [args]);
 
-  const handleSubmit = useCallback((data: CategoriaPesquisaData) => {
-    setArgs(data.titulo);
+  const handleSubmit = useCallback((data: PublicosPesquisaData) => {
+    setArgs(data.nome);
   }, []);
 
   return (
     <Container>
       <Title>
-        <h1>Categorias</h1>
+        <h1> Públicos</h1>
         <hr />
       </Title>
 
       <Panel>
         <SearchTableContainer>
           <Form onSubmit={handleSubmit}>
-            <Input name="titulo" type="text" placeholder="Search" />
+            <Input name="nome" type="text" placeholder="Procurar" />
             <button type="submit">
               <FiSearch size={20} />
             </button>
@@ -75,13 +74,11 @@ const Categorias: React.FC = () => {
           <thead>
             <tr>
               <th style={{ width: '35px' }}>
-                <LinkButton to="/ad/cadastro/categorias/novo">
+                <LinkButton to="/ad/cadastro/publicos/novo">
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria id</th>
-              <th>Categoria</th>
+              <th>Público</th>
               <th>Slug</th>
             </tr>
           </thead>
@@ -93,24 +90,22 @@ const Categorias: React.FC = () => {
                 </td>
               </tr>
             )}
-            {categorias.length === 0 && (
+            {publicos.length === 0 && (
               <tr>
                 <td colSpan={3}> Nenhum Cadastro efetuado </td>
               </tr>
             )}
-            {categorias.map((categoria) => (
-              <tr key={categoria.id}>
+            {publicos.map((tag) => (
+              <tr key={tag.id}>
                 <td style={{ textAlign: 'center' }}>
                   <EditarLinkButton
-                    to={`/ad/cadastro/categorias/editar/${categoria.id}`}
+                    to={`/ad/cadastro/publicos/editar/${tag.id}`}
                   >
                     <FiRefreshCw />
                   </EditarLinkButton>
                 </td>
-                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
-                <td>{categoria.categoria_id}</td>
-                <td>{categoria.titulo}</td>
-                <td>{categoria.slug}</td>
+                <td>{tag.nome}</td>
+                <td>{tag.slug}</td>
               </tr>
             ))}
           </tbody>
@@ -121,4 +116,4 @@ const Categorias: React.FC = () => {
   );
 };
 
-export default Categorias;
+export default Publicos;

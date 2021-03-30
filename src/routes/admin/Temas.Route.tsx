@@ -9,8 +9,6 @@ const TemaRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormTemas} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormTemas} isPrivate />
       <Route path={`${url}/`} component={Temas} isPrivate />
