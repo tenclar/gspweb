@@ -32,7 +32,8 @@ interface Categoria {
 }
 
 const RAIZ = {
-  titulo: 'Raiz',
+  id: '',
+  titulo: 'RAIZ',
 };
 const FormCategorias: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -49,17 +50,17 @@ const FormCategorias: React.FC = () => {
         const response = await api.get(`categorias/${idU}`);
         setCategoria(response.data);
         if (response.data.categoria) {
-          const c = response.data.categoria;
-          formRef.current?.setData({
+          // const c = response.data.categoria;
+          /*  formRef.current?.setData({
             categoria_id: { id: c.id, titulo: c.titulo },
+          }); */
+          formRef.current?.setFieldValue('categoria_id', {
+            id: response.data.categoria.id,
+            titulo: response.data.categoria.titulo,
           });
-          /*  formRef.current?.setFieldValue('categoria_id', {
-          value: response.data.categoria.id,
-          label: response.data.categoria.titulo,
-        }); */
         } else {
           formRef.current?.setData({
-            categoria_id: RAIZ,
+            categoria_id: { id: '', titulo: 'RAIZ' },
           });
         }
       } catch (error) {
@@ -98,15 +99,16 @@ const FormCategorias: React.FC = () => {
           titulo: Yup.string().required('Título obrigatório'),
           categoria_id: Yup.string(),
         });
-        //   categoria_id: Yup.string().required('Selecionar Categoria'),
+
         await schema.validate(data, { abortEarly: false });
 
         if (id) {
           await api.put(`/categorias/${id}`, data);
+
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
-            description: 'Alteração Realizada com Sucesso.',
+            description: 'Alteração Realizada com Sucesso. ',
           });
         } else {
           await api.post('/categorias', data);

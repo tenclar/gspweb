@@ -8,7 +8,7 @@ import Select from '../../../../components/admin/Select';
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import RadioInput from '../../../../components/admin/RadioInput';
+// import RadioInput from '../../../../components/admin/RadioInput';
 import Input from '../../../../components/admin/InputForm';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
@@ -38,10 +38,10 @@ const FormOrgaos: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const radioOptions: RadioOption[] = [
+  /*  const radioOptions: RadioOption[] = [
     { id: 'true', value: 'true', label: 'Ativo' },
     { id: 'false', value: 'false', label: 'Inaivo' },
-  ];
+  ]; */
   const [orgao, setOrgao] = useState<OrgaosFormData>();
 
   const [superiores, setSuperiores] = useState<Superiores[]>();
