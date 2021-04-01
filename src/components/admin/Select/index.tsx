@@ -7,9 +7,10 @@ import { Container, SelectCustom, Error } from './styles';
 
 interface Props extends SelectProps<OptionTypeBase> {
   name: string;
+  // options: GroupedOptionsType<OptionTypeBase> | OptionsType<OptionTypeBase>;
 }
 
-const Select: React.FC<Props> = ({ name, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, ...rest }) => {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -35,8 +36,8 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
       },
       setValue: (ref, value) => {
         console.log(value);
-        // ref.select.setValue(value || null);
-        ref.select.setValue(value, 'select-option');
+        ref.select.setValue(value || null);
+        // ref.select.setValue(value, 'select-option');
 
         /*
         let selectedOptions;
@@ -56,6 +57,7 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
         <SelectCustom
           classNamePrefix="react-select"
           defaultValue={defaultValue}
+          options={options}
           ref={selectRef}
           {...rest}
         />
