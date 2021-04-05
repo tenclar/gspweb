@@ -60,7 +60,7 @@ const FormCategorias: React.FC = () => {
           });
         } else {
           formRef.current?.setData({
-            categoria_id: RAIZ,
+            categoria_id: { id: '', titulo: 'RAIZ' },
           });
         }
       } catch (error) {
