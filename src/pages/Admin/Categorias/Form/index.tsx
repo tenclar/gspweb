@@ -32,7 +32,7 @@ interface Categoria {
 }
 
 const RAIZ = {
-  id: '',
+  id: null,
   titulo: 'RAIZ',
 };
 const FormCategorias: React.FC = () => {
@@ -97,7 +97,7 @@ const FormCategorias: React.FC = () => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          categoria_id: Yup.string(),
+          categoria_id: Yup.string().nullable(),
         });
 
         await schema.validate(data, { abortEarly: false });

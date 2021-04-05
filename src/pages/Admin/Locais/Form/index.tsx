@@ -6,9 +6,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
 
 import api from '../../../../services/api';
-
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
+import Select from '../../../../components/admin/Select';
 import Input from '../../../../components/admin/InputForm';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
@@ -17,14 +16,21 @@ interface ParamTypes {
   id: string;
 }
 
+interface LocaLFormData {
+  id: null;
+  nome: string;
+}
 interface LocaisFormData {
   nome: string;
+  cidade_id: string;
+  orgao_id: string;
 }
 
 const FormLocais: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const [local, setLocal] = useState<LocaisFormData>();
   const [locais, setLocais] = useState<LocaisFormData>();
 
   const { id } = useParams<ParamTypes>();
@@ -89,9 +95,25 @@ const FormLocais: React.FC = () => {
           ref={formRef}
           initialData={{
             nome: locais?.nome,
+            cidade_id: locais?.cidade_id,
+            orgao_id: locais?.orgao_id,
           }}
           onSubmit={handleSubmit}
         >
+          <Select
+            name="cidade_id"
+            getOptionValue={(option) => option.id}
+            getOptionLabel={(option) => option.nome}
+            isSearchable
+            isClearable
+          />
+          <Select
+            name="orgao_id"
+            getOptionValue={(option) => option.id}
+            getOptionLabel={(option) => option.nome}
+            isSearchable
+            isClearable
+          />
           <Input name="nome" type="text" placeholder="Nome" />
 
           <hr />
