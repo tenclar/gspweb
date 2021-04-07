@@ -9,8 +9,6 @@ const TagRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormTags} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormTags} isPrivate />
       <Route path={`${url}/`} component={Tags} isPrivate />

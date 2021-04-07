@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch } from 'react-router-dom';
+import { Switch, Route as ReactDOMRoute } from 'react-router-dom';
 import AvisosRoute from './admin/Avisos.Route';
 import CategoriasRoute from './admin/Categorias.Route';
 import CentraisRoute from './admin/Centrais.Route';
@@ -8,6 +8,7 @@ import CidadesRoute from './admin/Cidades.Route';
 import LocaisRoute from './admin/Locais.Route';
 import OrgaosRoute from './admin/Orgaos.Route';
 import PracasRoute from './admin/Pracas.Route';
+import PublicosRoute from './admin/Publicos.Route';
 import ServicosRoute from './admin/Servicos.Route';
 import SuperioresRoute from './admin/Superiores.Route';
 import TagsRoute from './admin/Tags.Route';
@@ -24,12 +25,13 @@ import SignIn from '../pages/SignIn';
 import Dashboard from '../pages/Admin/Dashboard';
 
 import Avisos from '../pages/Admin/Avisos';
-import Categorias from '../pages/Admin/Categorias';
+
 import Centrais from '../pages/Admin/Centrais';
 import Cidades from '../pages/Admin/Cidades';
 import Locais from '../pages/Admin/Locais';
 import Orgaos from '../pages/Admin/Orgaos';
 import Pracas from '../pages/Admin/Pracas';
+import Publicos from '../pages/Admin/Publicos';
 import Servicos from '../pages/Admin/Servicos';
 import Superiores from '../pages/Admin/Superiores';
 import Tags from '../pages/Admin/Tags';
@@ -48,9 +50,9 @@ const Routes: React.FC = () => (
     <Route path="/ad/cadastro/avisos" component={Avisos} isPrivate>
       <AvisosRoute />
     </Route>
-    <Route path="/ad/cadastro/categorias" component={Categorias} isPrivate>
+    <ReactDOMRoute path="/ad/cadastro/categorias">
       <CategoriasRoute />
-    </Route>
+    </ReactDOMRoute>
 
     <Route path="/ad/cadastro/centrais" component={Centrais} isPrivate>
       <CentraisRoute />
@@ -70,6 +72,9 @@ const Routes: React.FC = () => (
     </Route>
     <Route path="/ad/cadastro/pracas" component={Pracas} isPrivate>
       <PracasRoute />
+    </Route>
+    <Route path="/ad/cadastro/publicos" component={Publicos} isPrivate>
+      <PublicosRoute />
     </Route>
     <Route path="/ad/cadastro/servicos" component={Servicos} isPrivate>
       <ServicosRoute />

@@ -8,7 +8,7 @@ import Select from '../../../../components/admin/Select';
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import RadioInput from '../../../../components/admin/RadioInput';
+// import RadioInput from '../../../../components/admin/RadioInput';
 import Input from '../../../../components/admin/InputForm';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
@@ -38,13 +38,11 @@ const FormOrgaos: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const radioOptions: RadioOption[] = [
+  /*  const radioOptions: RadioOption[] = [
     { id: 'true', value: 'true', label: 'Ativo' },
     { id: 'false', value: 'false', label: 'Inaivo' },
-  ];
+  ]; */
   const [orgao, setOrgao] = useState<OrgaosFormData>();
-
-  const [selected, setSelected] = useState<Superiores>();
 
   const [superiores, setSuperiores] = useState<Superiores[]>();
 
@@ -55,7 +53,11 @@ const FormOrgaos: React.FC = () => {
       setOrgao(response.data.orgao);
 
       if (response.data.orgao.superior) {
-        setSelected(response.data.orgao.superior);
+        const c = response.data.orgao.superior;
+        console.log(c);
+        formRef.current?.setData({
+          superiores_id: { id: c.id, nome: c.nome },
+        });
       }
     }
     if (id) {
@@ -147,12 +149,11 @@ const FormOrgaos: React.FC = () => {
             options={superiores}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.nome}
-            value={superiores?.find((option) => option.id === selected?.id)}
             isSearchable
             isClearable
           />
           <Input name="nome" type="text" placeholder="Nome" />
-          <RadioInput name="status" options={radioOptions} />
+
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

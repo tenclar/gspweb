@@ -9,8 +9,6 @@ const PracaRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormPracas} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormPracas} isPrivate />
       <Route path={`${url}/`} component={Pracas} isPrivate />

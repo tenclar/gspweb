@@ -34,6 +34,7 @@ const RadioInput: React.FC<Props> = ({ name, options, ...rest }: Props) => {
 
   return (
     <>
+      {/* defaultValue && options.find(option => option.value === defaultValue) */}
       <Container>
         {options.map((option) => (
           <label htmlFor={option.id} key={option.id}>
@@ -42,7 +43,7 @@ const RadioInput: React.FC<Props> = ({ name, options, ...rest }: Props) => {
               id={option.id}
               type="radio"
               name={name}
-              defaultChecked={defaultValue.includes(option.id)}
+              defaultChecked
               value={option.value}
               {...rest}
             />

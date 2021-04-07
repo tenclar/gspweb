@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ReactSelect from 'react-select';
 
-import ToolTip from './Tooltip';
+import ToolTip from '../Tooltip';
 
 export const Container = styled.div`
   width: 80%;

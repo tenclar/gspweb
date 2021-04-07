@@ -9,8 +9,6 @@ const CentraisRoutes: React.FC = () => {
 
   return (
     <>
-      {JSON.stringify(url)}
-
       <Route path={`${url}/novo`} component={FormCentrais} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormCentrais} isPrivate />
       <Route path={`${url}/`} component={Centrais} isPrivate />
