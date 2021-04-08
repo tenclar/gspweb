@@ -11,7 +11,7 @@ const ServicoRoutes: React.FC = () => {
     <>
       <Route path={`${url}/novo`} component={FormServicos} isPrivate />
       <Route path={`${url}/editar/:id`} component={FormServicos} isPrivate />
-      <Route path={`${url}/`} component={Servicos} isPrivate />
+      <Route exact path={`${url}/`} component={Servicos} isPrivate />
     </>
   );
 };

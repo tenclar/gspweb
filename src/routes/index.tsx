@@ -89,11 +89,7 @@ const Routes: React.FC = () => (
       <UsersRoute />
     </Route>
     <Route exact path="/ad/**" component={Error404} isPrivate />
-    <Route
-      path="*"
-      component={() => <h1 style={{ color: '#000' }}>404 b</h1>}
-      isGuide
-    />
+    <Route path="*" component={Error404} isGuide />
   </Switch>
 );
 
