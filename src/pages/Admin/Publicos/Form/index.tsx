@@ -3,6 +3,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
 
 import api from '../../../../services/api';
@@ -19,6 +20,7 @@ interface ParamTypes {
 
 interface PublicosFormData {
   nome: string;
+  status: boolean;
 }
 
 const FormPublicos: React.FC = () => {
@@ -26,12 +28,14 @@ const FormPublicos: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [publicos, setPublicos] = useState<PublicosFormData>();
+  const [checked, setChecked] = useState(false);
 
   const { id } = useParams<ParamTypes>();
 
   async function loadPublicos(idU: string): Promise<void> {
     const response = await api.get(`/publicos/${idU}`);
     setPublicos(response.data.publicos);
+    setChecked(response.data.status);
   }
   useEffect(() => {
     if (id) {
@@ -46,6 +50,7 @@ const FormPublicos: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+        data.status = checked;
         if (id) {
           await api.put(`/publicos/${id}`, data);
           addToast({
@@ -78,6 +83,11 @@ const FormPublicos: React.FC = () => {
     },
     [addToast, history, id],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -93,6 +103,7 @@ const FormPublicos: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Input name="nome" type="text" placeholder="Nome" />
+          <Switch onChange={changeStatus} checked={checked} />
 
           <hr />
           <div>
