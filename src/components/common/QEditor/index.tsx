@@ -63,7 +63,7 @@ const QEditor: React.FC = () => {
           placeholder={placeholder}
         />
       </Container>
-      {JSON.stringify(texto)}
+      {/* JSON.stringify(texto) */}
     </>
   );
 };
