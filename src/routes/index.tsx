@@ -53,10 +53,9 @@ const Routes: React.FC = () => (
     <ReactDOMRoute path="/ad/cadastro/categorias">
       <CategoriasRoute />
     </ReactDOMRoute>
-
-    <Route path="/ad/cadastro/centrais" component={Centrais} isPrivate>
+    <ReactDOMRoute path="/ad/cadastro/centrais">
       <CentraisRoute />
-    </Route>
+    </ReactDOMRoute>
 
     <Route path="/ad/cadastro/cidades" component={Cidades} isPrivate>
       <CidadesRoute />

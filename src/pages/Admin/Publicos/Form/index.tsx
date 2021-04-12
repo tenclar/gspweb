@@ -34,8 +34,8 @@ const FormPublicos: React.FC = () => {
 
   async function loadPublicos(idU: string): Promise<void> {
     const response = await api.get(`/publicos/${idU}`);
-    setPublicos(response.data.publicos);
-    setChecked(response.data.status);
+    setPublicos(response.data.publico);
+    setChecked(response.data.publico.status);
   }
   useEffect(() => {
     if (id) {
@@ -81,7 +81,7 @@ const FormPublicos: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
 
   const changeStatus = useCallback((event) => {

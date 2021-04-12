@@ -14,7 +14,6 @@ import Input from '../../../../components/admin/InputForm';
 import Select from '../../../../components/admin/Select';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
-/// import { Categoria } from '../../../Guide/Search/styles';
 
 interface ParamTypes {
   id: string;
@@ -129,7 +128,7 @@ const FormCategorias: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
-          description: 'Ocorreu um erro ao fazer Cadastro de Categorias.',
+          description: 'Ocorreu um erro ao fazer Cadastro de Categorias',
         });
       }
     },
