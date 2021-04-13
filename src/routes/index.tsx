@@ -14,29 +14,15 @@ import SuperioresRoute from './admin/Superiores.Route';
 import TagsRoute from './admin/Tags.Route';
 import TemasRoute from './admin/Temas.Route';
 import UsersRoute from './admin/Users.Route';
+import InformacoesRoute from './admin/Informacoes.Route';
 import Route from './Route';
+
 import Error404 from '../pages/common/Error404';
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
 import Detail from '../pages/Guide/Detail';
-
 import SignIn from '../pages/SignIn';
-
 import Dashboard from '../pages/Admin/Dashboard';
-
-import Avisos from '../pages/Admin/Avisos';
-
-import Centrais from '../pages/Admin/Centrais';
-import Cidades from '../pages/Admin/Cidades';
-import Locais from '../pages/Admin/Locais';
-import Orgaos from '../pages/Admin/Orgaos';
-import Pracas from '../pages/Admin/Pracas';
-import Publicos from '../pages/Admin/Publicos';
-import Servicos from '../pages/Admin/Servicos';
-import Superiores from '../pages/Admin/Superiores';
-import Tags from '../pages/Admin/Tags';
-import Temas from '../pages/Admin/Temas';
-import Users from '../pages/Admin/Users';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -45,48 +31,65 @@ const Routes: React.FC = () => (
     <Route exact path="/detalhe" component={Detail} isGuide />
 
     <Route exact path="/ad/" component={SignIn} isAd />
+
     <Route exact path="/ad/painel" component={Dashboard} isPrivate />
 
-    <Route path="/ad/cadastro/avisos" component={Avisos} isPrivate>
+    <ReactDOMRoute path="/ad/cadastro/avisos">
       <AvisosRoute />
-    </Route>
+    </ReactDOMRoute>
+
     <ReactDOMRoute path="/ad/cadastro/categorias">
       <CategoriasRoute />
     </ReactDOMRoute>
+
     <ReactDOMRoute path="/ad/cadastro/centrais">
       <CentraisRoute />
     </ReactDOMRoute>
 
-    <Route path="/ad/cadastro/cidades" component={Cidades} isPrivate>
+    <ReactDOMRoute path="/ad/cadastro/cidades">
       <CidadesRoute />
-    </Route>
-    <Route path="/ad/cadastro/superiores" component={Superiores} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/superiores">
       <SuperioresRoute />
-    </Route>
-    <Route path="/ad/cadastro/locais" component={Locais} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/locais">
       <LocaisRoute />
-    </Route>
-    <Route path="/ad/cadastro/orgaos" component={Orgaos} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/orgaos">
       <OrgaosRoute />
-    </Route>
-    <Route path="/ad/cadastro/pracas" component={Pracas} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/pracas">
       <PracasRoute />
-    </Route>
-    <Route path="/ad/cadastro/publicos" component={Publicos} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/publicos">
       <PublicosRoute />
-    </Route>
-    <Route path="/ad/cadastro/servicos" component={Servicos} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/informacoes">
+      <InformacoesRoute />
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/servicos">
       <ServicosRoute />
-    </Route>
-    <Route path="/ad/cadastro/tags" component={Tags} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/tags">
       <TagsRoute />
-    </Route>
-    <Route path="/ad/cadastro/temas" component={Temas} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/temas">
       <TemasRoute />
-    </Route>
-    <Route path="/ad/cadastro/usuarios" component={Users} isPrivate>
+    </ReactDOMRoute>
+
+    <ReactDOMRoute path="/ad/cadastro/usuarios">
       <UsersRoute />
-    </Route>
+    </ReactDOMRoute>
+
     <Route exact path="/ad/**" component={Error404} isPrivate />
     <Route path="*" component={Error404} isGuide />
   </Switch>

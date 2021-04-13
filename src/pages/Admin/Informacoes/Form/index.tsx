@@ -33,7 +33,7 @@ interface ParamTypes {
   id: string;
 }
 
-interface AvisoFormData {
+interface InformacaoFormData {
   id: string;
   titulo: string;
   conteudo?: string;
@@ -41,23 +41,23 @@ interface AvisoFormData {
   status: boolean;
 }
 
-const FormAvisos: React.FC = () => {
+const FormInformacoes: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const [aviso, setAviso] = useState<AvisoFormData>();
+  const [informacao, setInformacao] = useState<InformacaoFormData>();
   const [imagemurl, setImagemurl] = useState<String>('');
   const [checked, setChecked] = useState(false);
   const { id = null } = useParams<ParamTypes>();
 
-  async function loadAviso(idU: string): Promise<void> {
-    const response = await api.get(`avisos/${idU}`);
-    setAviso(response.data.aviso);
-    setChecked(response.data.aviso.status);
+  async function loadInformacao(idU: string): Promise<void> {
+    const response = await api.get(`informacoes/${idU}`);
+    setInformacao(response.data.informacao);
+    setChecked(response.data.informacao.status);
   }
   useEffect(() => {
     if (id) {
-      loadAviso(id);
+      loadInformacao(id);
     }
   }, [id]);
 
@@ -84,17 +84,17 @@ const FormAvisos: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    async (data: AvisoFormData) => {
+    async (data: InformacaoFormData) => {
       try {
         const schema = Yup.object().shape({
           titulo: Yup.string().required('Título obrigatório'),
-          conteudo: Yup.string().required('Título obrigatório'),
+          conteudo: Yup.string().required('Conteúdo obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
         if (id) {
-          await api.put(`/avisos/${id}`, {
+          await api.put(`/informacoes/${id}`, {
             titulo: data.titulo,
             conteudo: data.conteudo,
             imagem: imagemurl,
@@ -104,10 +104,10 @@ const FormAvisos: React.FC = () => {
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
-            description: 'Alteração de aviso Realizada com Sucesso.',
+            description: 'Alteração de informações Realizada com Sucesso.',
           });
         } else {
-          await api.post('/avisos', {
+          await api.post('/informacoes', {
             titulo: data.titulo,
             conteudo: data.conteudo,
             imagem: imagemurl,
@@ -116,10 +116,10 @@ const FormAvisos: React.FC = () => {
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
-            description: 'Cadastro de Aviso realizado com sucesso.',
+            description: 'Cadastro de informações realizado com sucesso.',
           });
         }
-        history.push('/ad/cadastro/avisos');
+        history.push('/ad/cadastro/informacoes');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -129,7 +129,7 @@ const FormAvisos: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
-          description: 'Ocorreu um erro ao fazer Cadastro de Avisos.',
+          description: 'Ocorreu um erro ao fazer Cadastro de informações.',
         });
       }
     },
@@ -144,15 +144,15 @@ const FormAvisos: React.FC = () => {
     <>
       <Container>
         <Title>
-          <h1>Formulário Aviso</h1>
+          <h1>Formulário de Informações</h1>
           <hr />
         </Title>
         <Panel>
           <Form
             ref={formRef}
             initialData={{
-              titulo: aviso?.titulo,
-              conteudo: aviso?.conteudo,
+              titulo: informacao?.titulo,
+              conteudo: informacao?.conteudo,
             }}
             onSubmit={handleSubmit}
           >
@@ -186,7 +186,7 @@ const FormAvisos: React.FC = () => {
             <hr />
             <BlockButton>
               <Button type="submit">Salvar </Button>
-              <CancelLinkButton to="/ad/cadastro/avisos">
+              <CancelLinkButton to="/ad/cadastro/informacoes">
                 Cancelar
               </CancelLinkButton>
             </BlockButton>
@@ -197,4 +197,4 @@ const FormAvisos: React.FC = () => {
   );
 };
 
-export default FormAvisos;
+export default FormInformacoes;
