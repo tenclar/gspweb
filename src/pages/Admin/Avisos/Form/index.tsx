@@ -13,7 +13,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Switch from 'react-switch';
 import Input from '../../../../components/admin/InputForm';
 
-import QEditor from '../../../../components/common/QEditor';
+import QuillEditor from '../../../../components/common/EditorQuill';
 
 import {
   Container,
@@ -167,7 +167,8 @@ const FormAvisos: React.FC = () => {
               Conteúdo do aviso
             </label>
             <Input type="text" name="conteudo" />
-            <QEditor />
+
+            <QuillEditor name="conteudo" />
 
             <label style={{ fontWeight: 'bold' }} htmlFor="Etapas">
               Status do aviso

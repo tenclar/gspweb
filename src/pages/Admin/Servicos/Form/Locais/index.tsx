@@ -41,6 +41,7 @@ const LocaisServicos: React.FC = () => {
 
   const handleSubmit = useCallback(() => {
     console.log('ok');
+    setLocais([]);
   }, []);
   return (
     <>

@@ -31,17 +31,16 @@ const FormLocais: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [local, setLocal] = useState<LocaisFormData>();
-  const [locais, setLocais] = useState<LocaisFormData>();
 
   const { id } = useParams<ParamTypes>();
 
-  async function loadLocais(idU: string): Promise<void> {
+  async function loadLocal(idU: string): Promise<void> {
     const response = await api.get(`/locais/${idU}`);
-    setLocais(response.data.locais);
+    setLocal(response.data.local);
   }
   useEffect(() => {
     if (id) {
-      loadLocais(id);
+      loadLocal(id);
     }
   }, [id]);
   const handleSubmit = useCallback(
@@ -94,9 +93,9 @@ const FormLocais: React.FC = () => {
         <Form
           ref={formRef}
           initialData={{
-            nome: locais?.nome,
-            cidade_id: locais?.cidade_id,
-            orgao_id: locais?.orgao_id,
+            nome: local?.nome,
+            cidade_id: local?.cidade_id,
+            orgao_id: local?.orgao_id,
           }}
           onSubmit={handleSubmit}
         >

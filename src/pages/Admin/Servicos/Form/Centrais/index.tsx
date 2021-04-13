@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiPlus, FiRefreshCw } from 'react-icons/fi';
 import Modal from '../../../../../components/common/Modal';
-import QEditor from '../../../../../components/common/QEditor';
+
 import ButtonAlterar from '../../../../../components/admin/ButtonAlterar';
 import {
   Container,
@@ -64,10 +64,7 @@ const CentraisServicos: React.FC = () => {
               Nome
               <input type="text" />
             </label>
-            <label htmlFor="ed">
-              Descrição
-              <QEditor />
-            </label>
+            <label htmlFor="ed">Descrição</label>
             <hr />
             <BlockButton>
               <Button onClick={toggleModal}>Salvar </Button>

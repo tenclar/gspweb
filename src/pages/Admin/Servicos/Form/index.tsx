@@ -4,7 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup'; */
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import QEditor from '../../../../components/common/QEditor';
+// import QEditor from '../../../../components/common/QEditor';
 
 import EtapasForm from './Etapas';
 import CentraisForm from './Centrais';
@@ -94,7 +94,6 @@ const FormServicos: React.FC = () => {
                 <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
                   Informações detalhadas do Serviço
                 </label>
-                <QEditor />
               </TabPanel>
 
               <TabPanel>
