@@ -35,7 +35,6 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
         ref.select.clearValue();
       },
       setValue: (ref, value) => {
-        console.log(value);
         ref.select.setValue(value || null);
         // ref.select.setValue(value, 'select-option');
 

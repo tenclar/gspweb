@@ -53,6 +53,7 @@ const FormInformacoes: React.FC = () => {
     setInformacao(response.data.informacao);
     setChecked(response.data.informacao.status);
   }
+
   useEffect(() => {
     if (id) {
       loadInformacao(id);
@@ -124,6 +125,7 @@ const FormInformacoes: React.FC = () => {
           formRef.current?.setErrors(errors);
           return;
         }
+
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
