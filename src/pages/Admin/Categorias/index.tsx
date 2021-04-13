@@ -62,7 +62,11 @@ const Categorias: React.FC = () => {
       <Panel>
         <SearchTableContainer>
           <Form onSubmit={handleSubmit}>
-            <Input name="titulo" type="text" placeholder="Search" />
+            <Input
+              name="titulo"
+              type="text"
+              placeholder="Digite algo para pesquisar..."
+            />
             <button type="submit">
               <FiSearch size={20} />
             </button>
@@ -79,10 +83,7 @@ const Categorias: React.FC = () => {
                   <FiPlus />
                 </LinkButton>
               </th>
-              <th style={{ width: '300px' }}>#</th>
-              <th>Categoria id</th>
               <th>Categoria</th>
-              <th>Slug</th>
             </tr>
           </thead>
           <tbody>
@@ -107,10 +108,7 @@ const Categorias: React.FC = () => {
                     <FiRefreshCw />
                   </EditarLinkButton>
                 </td>
-                <td style={{ textAlign: 'center' }}>{categoria.id}</td>
-                <td>{categoria.categoria_id}</td>
                 <td>{categoria.titulo}</td>
-                <td>{categoria.slug}</td>
               </tr>
             ))}
           </tbody>

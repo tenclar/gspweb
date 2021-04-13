@@ -1,3 +1,4 @@
+import Switch from 'react-switch';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -22,12 +23,14 @@ interface ParamTypes {
 interface CategoriaFormData {
   titulo: string;
   categoria_id?: string;
+  status: boolean;
 }
 interface Categoria {
   id?: string | null | '' | undefined;
   categoria_id?: string | null | '' | undefined;
   slug?: string;
   titulo: string;
+  status?: boolean;
 }
 
 const RAIZ = {
@@ -43,30 +46,32 @@ const FormCategorias: React.FC = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const { id } = useParams<ParamTypes>();
+
+  const [checked, setChecked] = useState(false);
+
   useEffect(() => {
     async function loadCategoria(idU: string): Promise<void> {
       try {
         const response = await api.get(`categorias/${idU}`);
         setCategoria(response.data);
+
         if (response.data.categoria) {
-          // const c = response.data.categoria;
-          /*  formRef.current?.setData({
-            categoria_id: { id: c.id, titulo: c.titulo },
-          }); */
           formRef.current?.setFieldValue('categoria_id', {
             id: response.data.categoria.id,
             titulo: response.data.categoria.titulo,
           });
         } else {
           formRef.current?.setData({
-            categoria_id: { id: '', titulo: 'RAIZ' },
+            categoria_id: { id: null, titulo: 'RAIZ' },
           });
         }
+
+        setChecked(response.data.status);
       } catch (error) {
         addToast({
           type: 'error',
           title: 'Erro na Listagem',
-          description: 'Ocorreu um erro ao listar Categorias.',
+          description: `Ocorreu um erro ao listar Categorias. ${error}`,
         });
       }
     }
@@ -102,7 +107,11 @@ const FormCategorias: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         if (id) {
-          await api.put(`/categorias/${id}`, data);
+          await api.put(`/categorias/${id}`, {
+            titulo: data.titulo,
+            categoria_id: data.categoria_id,
+            status: checked,
+          });
 
           addToast({
             type: 'success',
@@ -128,14 +137,20 @@ const FormCategorias: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro na Autenticação',
-          description: 'Ocorreu um erro ao fazer Cadastro de Categorias',
+          description: 'Ocorreu um erro ao fazer o cadastro de Categorias',
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
+
   return (
     <Container>
+      {/* JSON.stringify(categoria) */}
       <Title>
         <h1>Formulário Categorias</h1>
         <hr />
@@ -149,9 +164,6 @@ const FormCategorias: React.FC = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <p style={{ color: '#000' }}>
-            {JSON.stringify(categoria?.categoria_id)}
-          </p>
           <Select
             name="categoria_id"
             options={categorias}
@@ -162,10 +174,14 @@ const FormCategorias: React.FC = () => {
           />
 
           <Input name="titulo" type="text" placeholder="Título" />
+          <br />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
             <LinkButton to="/ad/cadastro/categorias">Cancelar</LinkButton>
+            <div style={{ marginLeft: '2vh', marginTop: '0.6vh' }}>
+              <Switch onChange={changeStatus} checked={checked} />
+            </div>
           </div>
         </Form>
       </Panel>
