@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
+import { useField } from '@unform/core';
 import { Container } from './styles';
 
-const QEditor: React.FC = () => {
+interface InputProps {
+  name: string;
+}
+const QEditor: React.FC<InputProps> = ({ name, ...rest }) => {
   const [texto, seTexto] = useState(String);
   const modules = {
     toolbar: [
@@ -16,7 +20,7 @@ const QEditor: React.FC = () => {
 
       [{ size: ['small', false, 'large', 'huge'] }],
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ['link', 'video'],
+      ['link'],
       [{ color: [] }, { background: [] }],
 
       ['clean'],
@@ -40,15 +44,19 @@ const QEditor: React.FC = () => {
     'header',
     'link',
     /*  'image', */
-    'video',
+    /* 'video', */
     'color',
     'background',
     'clean',
   ];
   const { quill, quillRef } = useQuill({ modules, formats });
+  const editorRef = useRef(null);
+  const { fieldName, defaultValue, error, registerField } = useField(name);
+
   // console.log(quill?.root.innerHTML);
   useEffect(() => {
     if (quill) {
+      quill.clipboard.dangerouslyPasteHTML('<h1>React Hook for Quill!</h1>');
       quill.on('text-change', () => {
         seTexto(quill?.root.innerHTML);
       });
@@ -58,12 +66,13 @@ const QEditor: React.FC = () => {
     <>
       <Container>
         <div
+          id={fieldName}
           ref={quillRef}
           style={{ height: '260px' }}
           placeholder={placeholder}
         />
       </Container>
-      {/* JSON.stringify(texto) */}
+      {JSON.stringify(texto)}
     </>
   );
 };
