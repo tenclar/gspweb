@@ -61,7 +61,7 @@ const EditorQuill: React.FC<InputProps> = ({ name }) => {
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
     setIsFilled(!!editorRef.current?.value);
-    console.log(editorRef);
+    // console.log(editorRef);
   }, []);
 
   useEffect(() => {

@@ -12,7 +12,10 @@ const Header: React.FC = () => {
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="Guia de Serviços" />
+          <Link to="/">
+            <img src={logo} alt="Guia de Serviços" />
+          </Link>
+
           <Link to="/ad/painel">
             <Title>Guia de Serviços - OCA</Title>
           </Link>

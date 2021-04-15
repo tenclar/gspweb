@@ -43,13 +43,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Search>
         <TitleGuide>
-          <Guia>
-            Guia <De>de</De>
-          </Guia>
-
-          <Servico>
-            Servicos<Publico>Públicos</Publico>
-          </Servico>
+          <De>Guia de Serviços Públicos</De>
           <Frase>
             Serviços prestados pela Organização Central de Atendimento
           </Frase>
