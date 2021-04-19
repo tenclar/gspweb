@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -25,7 +25,7 @@ import {
   Footer,
   Button,
 } from './styles';
-
+import Carosel from '../../components/common/Carousel';
 import iconPredio from '../../assets/predioicon.svg';
 import iconCidadao from '../../assets/cidicons.svg';
 import iconFunc from '../../assets/funcicon.svg';
@@ -36,9 +36,34 @@ import iconLocal from '../../assets/gps.svg';
 import iconOgao from '../../assets/orgaogov.png';
 import iconService from '../../assets/servicos.jpg';
 import iconInternet from '../../assets/internet.jpg';
+import api from '../../services/api';
 
+interface Aviso {
+  id: string;
+  titulo: string;
+  conteudo: string;
+  imagem: string;
+}
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [avisos, setAvisos] = useState<Aviso[]>([]);
+  // const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    async function loadAvisos(): Promise<void> {
+      try {
+        //   setLoading(true);
+        const response = await api.get('avisos');
+        setAvisos(response.data.avisos);
+      } catch (err) {
+        console.log(`Erro: ${err}`);
+      } finally {
+        //  setLoading(false);
+      }
+    }
+
+    loadAvisos();
+  }, []);
+
   return (
     <Container>
       <Search>
@@ -48,6 +73,7 @@ const Dashboard: React.FC = () => {
             Serviços prestados pela Organização Central de Atendimento
           </Frase>
         </TitleGuide>
+
         <SearchInput>
           <Form
             ref={formRef}
@@ -95,6 +121,9 @@ const Dashboard: React.FC = () => {
           </Category>
         </CategoryList>
       </SessionCategory>
+
+      <Carosel items={avisos} />
+
       <SessionCategory>
         <HeaderCategory>
           <SessionTitle>
