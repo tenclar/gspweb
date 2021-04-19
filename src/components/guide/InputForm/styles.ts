@@ -8,11 +8,15 @@ interface ContainerProps {
 }
 export const Container = styled.div<ContainerProps>`
   color: #666360;
-  border-radius: 5px 0 0 5px;
-  //border: 2px solid #233129;
-  border: 2px solid hsl(0,0%,80%);
+  border-radius: 8px 0 0 8px;
+  // border: 2px solid #233129;
+  // border: 2px solid hsl(0,0%,80%);
+  border: 2px solid rgba(255, 255, 255, 0);
+  // border: 0;
  // padding: 10px;
+  // border: 1px;
   width: 80%;
+
 
   display: flex;
   align-items: center;
@@ -32,12 +36,14 @@ export const Container = styled.div<ContainerProps>`
     css`
       color: #ff9900;
       border-color: #ff9000;
+      border: 2px solid;
     `}
 
   ${(props) =>
     props.isFilled &&
     css`
       color: #ff9900;
+      border 2px;
     `}
 
     input {
@@ -45,13 +51,14 @@ export const Container = styled.div<ContainerProps>`
     font-size: 18px;
     font-weight: 350;
     //margin: 1px 0 1px 1px;
+
     padding: 10px;
     width: 900px;
     height: 50px;
     border: 0;
 
-    border-radius: 5px 0 0 5px;
-    box-shadow: -3px 3px 9px 1px rgba(0, 0, 0, 0.25);
+      border-radius: 5px 0 0 5px;
+      box-shadow: -3px 3px 9px 1px rgba(0, 0, 0, 0.25);
 
     &::placeholder {
       font-style: italic;

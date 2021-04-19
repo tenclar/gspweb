@@ -9,10 +9,10 @@ import {
   Search,
   SearchInput,
   TitleGuide,
-  Guia,
+  // Guia,
   De,
-  Servico,
-  Publico,
+  // Servico,
+  // Publico,
   Frase,
   SessionCategory,
   ServiceTitle,
@@ -25,16 +25,16 @@ import {
   Footer,
   Button,
 } from './styles';
-import Carosel from '../../components/common/Carousel';
-import iconPredio from '../../assets/predioicon.svg';
-import iconCidadao from '../../assets/cidicons.svg';
-import iconFunc from '../../assets/funcicon.svg';
+// import Carosel from '../../components/common/Carousel';
+// import iconPredio from '../../assets/predioicon.svg';
+// import iconCidadao from '../../assets/cidicons.svg';
+// import iconFunc from '../../assets/funcicon.svg';
 import iconBrasaofooter from '../../assets/brasaofooter.svg';
 import iconLogogovfooter from '../../assets/logogov.svg';
-import iconPraca from '../../assets/pracaicon.svg';
+// import iconPraca from '../../assets/pracaicon.svg';
 import iconLocal from '../../assets/gps.svg';
 import iconOgao from '../../assets/orgaogov.png';
-import iconService from '../../assets/servicos.jpg';
+import iconService from '../../assets/PANDEMIA-150x150.png';
 import iconInternet from '../../assets/internet.jpg';
 import api from '../../services/api';
 
@@ -98,18 +98,18 @@ const Dashboard: React.FC = () => {
           </SessionTitle>
         </HeaderCategory>
         <CategoryList>
-          <Category>
+          {/*  <Category>
             <Link to="/pesquisa/pracas/">
               <img src={iconPraca} alt="" />
             </Link>
             <strong>PRAÇAS</strong>
             <p>Localize os serviços por praças</p>
-          </Category>
+          </Category> */}
           <Category>
             <Link to="/pesquisa/local/">
               <img src={iconLocal} alt="" />
             </Link>
-            <strong>LOCAIS</strong>
+            <strong>Unidades</strong>
             <p>Serviços por Unidade de Atendimento</p>
           </Category>
           <Category>
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
         </CategoryList>
       </SessionCategory>
 
-      <Carosel items={avisos} />
+      {/* <Carosel items={avisos} /> */}
 
       <SessionCategory>
         <HeaderCategory>
@@ -144,13 +144,13 @@ const Dashboard: React.FC = () => {
             <Link to="/multiservico">
               <img src={iconService} alt="" />
             </Link>
-            <strong>BALCÃO MULTISERVIÇO</strong>
+            <strong>SERVIÇOS DURANTE PANDEMIA</strong>
 
-            <p>Formulário de Atendimento</p>
+            <p>Informações e serviços durantea pandemia</p>
           </Category>
         </CategoryList>
       </SessionCategory>
-      <SessionCategory>
+      {/* <SessionCategory>
         <HeaderCategory>
           <SessionTitle>
             Pesquise serviços prestados de acordo com público alvo
@@ -188,7 +188,7 @@ const Dashboard: React.FC = () => {
             </p>
           </Category>
         </CategoryList>
-      </SessionCategory>
+      </SessionCategory> */}
 
       <Line />
       <SessionFooter>
