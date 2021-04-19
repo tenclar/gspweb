@@ -12,6 +12,7 @@ import 'react-tabs/style/react-tabs.css';
 import { useHistory, useParams } from 'react-router-dom';
 import Switch from 'react-switch';
 import Input from '../../../../components/admin/InputForm';
+import QuillEditor from '../../../../components/common/EditorQuill';
 
 import {
   Container,
@@ -166,7 +167,7 @@ const FormInformacoes: React.FC = () => {
             <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
               Conteúdo do aviso
             </label>
-            <Input type="text" name="conteudo" />
+            <QuillEditor name="conteudo" />
 
             <label style={{ fontWeight: 'bold' }} htmlFor="Etapas">
               Status do aviso

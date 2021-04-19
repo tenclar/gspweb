@@ -166,7 +166,6 @@ const FormAvisos: React.FC = () => {
             <label style={{ fontWeight: 'bold' }} htmlFor="informacao">
               Conteúdo do aviso
             </label>
-            <Input type="text" name="conteudo" />
 
             <QuillEditor name="conteudo" />
 

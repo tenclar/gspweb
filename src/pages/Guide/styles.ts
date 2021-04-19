@@ -21,7 +21,7 @@ export const Search = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 400px;
+  height: 30vh;
   /* background: url(${background}), linear-gradient(-90deg, #1c75bc, #fff); */
 
 
