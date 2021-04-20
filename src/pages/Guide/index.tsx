@@ -46,6 +46,7 @@ interface Aviso {
 }
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  // eslint-disable-next-line
   const [avisos, setAvisos] = useState<Aviso[]>([]);
   // const [loading, setLoading] = useState(false);
   useEffect(() => {

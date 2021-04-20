@@ -1,0 +1,63 @@
+# cadastro de cidades
+1. listar as cidades com pesquisa
+2. cadastrar a cidade com botao de status, enviar notificação de ok ou erro.
+3. editar a cidade, enviar notificação status;
+
+# Cadastro de Orgão
+1. Listar os orgãos , nome e status
+2. cadastrar orgão com nome, selecionar instituição superior
+3. Editar cadastro de orgão, enviar notificação
+4. com botao de status
+
+# cadasto de locais físicos
+1. listar os locais com pesquisa;
+2. cadastrar com nome, escolher a partir de uma lista cidade, orgão
+3. editar cadastro locais, carregando a lista selecionada.
+4. com botao de status
+
+# Temas
+1. Cadastro nome do tema;
+2. Editar nome do tema;
+3. listar temas;
+4. com botao de status;
+
+# Tags
+1. Cadastro nome do tema;
+2. editar nome do tema;
+3. listar temas
+4. com botao de status
+
+# Centrais
+1. Cadastrar nome da central, com notificação
+2. Editar nome da sentral , com notificacao
+3. listar centrais com pesquisa por nome
+4. com botao de status
+
+# Praças
+1. Cadastrar nome da praça, selecionar unidade pertence a praça
+2. Editar nome da praça, unidade
+3 listar praças com pesquisa por nome
+4. com botao de status
+
+# Publicos
+
+1. cadatrar nome publico
+2 editar nome do publico
+3 listar com pesquisa
+4. botao de status
+
+# Serviços
+1. Cadastro por tab;
+1.1. Selecionar Categoria;
+1.2. Selecionar Orgão responsável pelas informações;
+1.3. Informar Titulo do servico;
+1.4. escrever a informação do serviço;
+1.5. Escolher Etapas das informações do Serviço;
+2. Escolher Unidade OCA prestação do servico;
+2.1 Escolher Praças caso tenha;
+3. Locais de prestação dos serviços;
+4. Cadastrar tags correspondente ao servico;
+5. selecionar públicos alvo;
+6. selecionar Temas;
+
+
