@@ -99,7 +99,7 @@ export const LinkButton = styled(Link)`
 `;
 
 export const EditarLinkButton = styled(Link)`
-  background: #808080;
+  background: #a2d200;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -122,7 +122,7 @@ export const EditarLinkButton = styled(Link)`
   }
 
   &:hover {
-    background: ${shade(0.2, '#5e5e5e')};
+    background: ${shade(0.2, '#a2d200')};
     svg {
       transform: rotate(360deg);
     }

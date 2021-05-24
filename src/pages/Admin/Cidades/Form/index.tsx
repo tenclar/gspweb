@@ -3,6 +3,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
 
 import api from '../../../../services/api';
@@ -26,6 +27,7 @@ const FormCidades: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const [checked, setChecked] = useState(false);
   const [cidade, setCidade] = useState<CidadeFormData>();
 
   const { id } = useParams<ParamTypes>();
@@ -33,6 +35,7 @@ const FormCidades: React.FC = () => {
   async function loadCidade(idU: string): Promise<void> {
     const response = await api.get(`cidades/${idU}`);
     setCidade(response.data.cidade);
+    setChecked(response.data.cidade.status);
   }
   useEffect(() => {
     if (id) {
@@ -47,15 +50,22 @@ const FormCidades: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+
         if (id) {
-          await api.put(`/cidades/${id}`, data);
+          await api.put(`/cidades/${id}`, {
+            nome: data.nome,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso no Cadastro',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/cidades', data);
+          await api.post('/cidades', {
+            nome: data.nome,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -77,8 +87,13 @@ const FormCidades: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -95,7 +110,7 @@ const FormCidades: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Input name="nome" type="text" placeholder="Nome" />
-
+          <Switch onChange={changeStatus} checked={checked} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

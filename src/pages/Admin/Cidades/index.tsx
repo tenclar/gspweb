@@ -107,12 +107,6 @@ const Cidades: React.FC = () => {
                     >
                       <FiRefreshCw />
                     </EditarLinkButton>
-
-                    <StatusLinkButton
-                      to={`/ad/cadastro/cidades/status/${cidade.id}`}
-                    >
-                      <FiEye />
-                    </StatusLinkButton>
                   </PanelAcoes>
                 </td>
                 <td style={{ textAlign: 'center' }}>{cidade.nome}</td>
