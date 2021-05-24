@@ -3,8 +3,9 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
+import { checkServerIdentity } from 'tls';
 import { useToast } from '../../../../hooks/Toast';
-
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
@@ -25,6 +26,7 @@ const FormCentrais: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const [checked, setChecked] = useState(false);
   const [centrais, setCentrais] = useState<CentraisFormData>();
 
   const { id } = useParams<ParamTypes>();
@@ -32,6 +34,7 @@ const FormCentrais: React.FC = () => {
   async function loadCentrais(idU: string): Promise<void> {
     const response = await api.get(`/centrais/${idU}`);
     setCentrais(response.data.centrais);
+    setChecked(response.data.cemtrais.status);
   }
   useEffect(() => {
     if (id) {
@@ -47,14 +50,20 @@ const FormCentrais: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/centrais/${id}`, data);
+          await api.put(`/centrais/${id}`, {
+            nome: data.nome,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/centrais', data);
+          await api.post('/centrais', {
+            nome: data.nome,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -78,6 +87,10 @@ const FormCentrais: React.FC = () => {
     },
     [addToast, history, id],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
   return (
     <Container>
       <Title>
@@ -93,7 +106,8 @@ const FormCentrais: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Input name="nome" type="text" placeholder="Nome" />
-
+          <Switch onChange={changeStatus} checked={checked} />
+          <hr />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
