@@ -3,6 +3,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
 import Select from '../../../../components/admin/Select';
 import api from '../../../../services/api';
@@ -43,7 +44,7 @@ const FormOrgaos: React.FC = () => {
     { id: 'false', value: 'false', label: 'Inaivo' },
   ]; */
   const [orgao, setOrgao] = useState<OrgaosFormData>();
-
+  const [checked, setChecked] = useState(false);
   const [superiores, setSuperiores] = useState<Superiores[]>();
 
   const { id } = useParams<ParamTypes>();
@@ -51,10 +52,10 @@ const FormOrgaos: React.FC = () => {
     async function loadOrgao(idU: string): Promise<void> {
       const response = await api.get(`orgaos/${idU}`);
       setOrgao(response.data.orgao);
-
+      setChecked(response.data.orgao.status);
       if (response.data.orgao.superior) {
         const c = response.data.orgao.superior;
-        console.log(c);
+
         formRef.current?.setData({
           superiores_id: { id: c.id, nome: c.nome },
         });
@@ -128,6 +129,9 @@ const FormOrgaos: React.FC = () => {
     },
     [addToast, history, id],
   );
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
 
   return (
     <Container>
@@ -154,6 +158,7 @@ const FormOrgaos: React.FC = () => {
           />
           <Input name="nome" type="text" placeholder="Nome" />
 
+          <Switch onChange={changeStatus} checked={checked} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
