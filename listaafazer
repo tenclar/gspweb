@@ -1,10 +1,11 @@
 # cadastro de cidades
 1. listar as cidades com pesquisa
 2. cadastrar a cidade com botao de status, enviar notificação de ok ou erro.
-3. editar a cidade, enviar notificação status;
+3. editar a cidade;
+
 
 # Cadastro de Orgão
-1. Listar os orgãos , nome e status
+1. Listar os orgãos, nome e status
 2. cadastrar orgão com nome, selecionar instituição superior
 3. Editar cadastro de orgão, enviar notificação
 4. com botao de status
