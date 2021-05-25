@@ -86,7 +86,9 @@ const FormLocais: React.FC = () => {
   return (
     <Container>
       <Title>
-        <h1>Formulário de {id ? 'Cadastro' : 'Alteração'} de Locais</h1>
+        <h1>
+          Formulário de {id ? 'Cadastro' : 'Alteração'} Locais de Atendimento
+        </h1>
         <hr />
       </Title>
       <Panel>
@@ -99,22 +101,29 @@ const FormLocais: React.FC = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Select
-            name="cidade_id"
-            getOptionValue={(option) => option.id}
-            getOptionLabel={(option) => option.nome}
-            isSearchable
-            isClearable
-          />
-          <Select
-            name="orgao_id"
-            getOptionValue={(option) => option.id}
-            getOptionLabel={(option) => option.nome}
-            isSearchable
-            isClearable
-          />
-          <Input name="nome" type="text" placeholder="Nome" />
-
+          <label htmlFor="Cidade">
+            Cidade
+            <Select
+              name="cidade_id"
+              getOptionValue={(option) => option.id}
+              getOptionLabel={(option) => option.nome}
+              isSearchable
+              isClearable
+            />
+          </label>
+          <label htmlFor="Orgao">
+            Órgão
+            <Select
+              name="orgao_id"
+              getOptionValue={(option) => option.id}
+              getOptionLabel={(option) => option.nome}
+              isSearchable
+              isClearable
+            />
+          </label>
+          <label htmlFor="Locais">
+            <Input name="nome" type="text" placeholder="Nome" />
+          </label>
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

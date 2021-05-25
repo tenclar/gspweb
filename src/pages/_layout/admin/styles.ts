@@ -21,5 +21,6 @@ export const Content = styled.div`
   min-height: 100%;
   // background-color: #d3d2d2;
   background-color: #ececec;
+  // background-color: #fff;
   padding: 0 10px 0px 10px;
 `;

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { FiEye, FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
+import { FiPlus, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import { Form } from '@unform/web';
 import Input from '../../../components/admin/InputSearch';
@@ -13,7 +13,6 @@ import {
   SearchTableContainer,
   LinkButton,
   EditarLinkButton,
-  StatusLinkButton,
   PanelAcoes,
 } from './styles';
 

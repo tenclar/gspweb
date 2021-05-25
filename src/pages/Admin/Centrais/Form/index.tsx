@@ -4,7 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import Switch from 'react-switch';
-import { checkServerIdentity } from 'tls';
+
 import { useToast } from '../../../../hooks/Toast';
 import api from '../../../../services/api';
 
@@ -85,7 +85,7 @@ const FormCentrais: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
 
   const changeStatus = useCallback((event) => {
