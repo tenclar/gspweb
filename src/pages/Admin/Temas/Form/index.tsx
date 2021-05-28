@@ -3,10 +3,10 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
 
 import api from '../../../../services/api';
-
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import Input from '../../../../components/admin/InputForm';
@@ -25,6 +25,7 @@ const FormTemas: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const [checked, setChecked] = useState(false);
   const [temas, setTemas] = useState<TemasFormData>();
 
   const { id } = useParams<ParamTypes>();
@@ -32,6 +33,7 @@ const FormTemas: React.FC = () => {
   async function loadTemas(idU: string): Promise<void> {
     const response = await api.get(`/temas/${idU}`);
     setTemas(response.data.temas);
+    setChecked(response.data.temas.status);
   }
   useEffect(() => {
     if (id) {
@@ -47,14 +49,14 @@ const FormTemas: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/temas/${id}`, data);
+          await api.put(`/temas/${id}`, { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/temas', data);
+          await api.post('/temas', { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -76,8 +78,13 @@ const FormTemas: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -93,7 +100,7 @@ const FormTemas: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Input name="nome" type="text" placeholder="Nome" />
-
+          <Switch onChange={changeStatus} checked={checked} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

@@ -92,12 +92,12 @@ const FormOrgaos: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
-        const { nome, superiores_id, status } = data;
+
         if (id) {
           await api.put(`/orgaos/${id}`, {
-            nome,
-            superiores_id,
-            status,
+            nome: data.nome,
+            superiores_id: data.superiores_id,
+            status: checked,
           });
           addToast({
             type: 'success',
@@ -105,7 +105,11 @@ const FormOrgaos: React.FC = () => {
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/orgaos', data);
+          await api.post('/orgaos', {
+            nome: data.nome,
+            superiores_id: data.superiores_id,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -127,7 +131,7 @@ const FormOrgaos: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
   const changeStatus = useCallback((event) => {
     setChecked(event);
