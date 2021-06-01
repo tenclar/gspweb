@@ -8,6 +8,7 @@ import { Container, Content, Profile, Title, ButtonLogout } from './styles';
 
 const Header: React.FC = () => {
   const { signOut, user } = useAuth();
+
   return (
     <Container>
       <Content>

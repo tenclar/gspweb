@@ -59,6 +59,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     },
     [setData, data.token],
   );
+
   const signOut = useCallback(() => {
     localStorage.removeItem('@GSP:token');
     localStorage.removeItem('@GSP:user');

@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { Container, Content, Logo } from './styles';
+
 import logo from '../../../assets/logooca2.svg';
+import api from '../../../services/api';
 
-const Dashboard: React.FC = () => (
-  <Container>
-    <Logo>
-      <img src={logo} alt="Guia de Serviços" />
-    </Logo>
-    <Content>
-      <h1> Painel de Controle</h1>
-      <hr />
-      <p>Guia de Serviços</p>
-    </Content>
-  </Container>
-);
+const Dashboard: React.FC = () => {
+  useEffect(() => {
+    async function loadMe(): Promise<void> {
+      try {
+        await api.get('/profile');
+      } catch (err) {
+        toast.error('Erro na lista');
+      }
+    }
 
+    loadMe();
+  }, []);
+
+  return (
+    <Container>
+      <Logo>
+        <img src={logo} alt="Guia de Serviços" />
+      </Logo>
+      <Content>
+        {' '}
+        <h1> Painel de Controle</h1>
+        <hr />
+        <p>Guia de Serviços</p>
+      </Content>
+      <ToastContainer />
+    </Container>
+  );
+};
 export default Dashboard;
