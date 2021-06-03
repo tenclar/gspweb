@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import Switch from 'react-switch';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../../../hooks/Toast';
@@ -23,6 +24,7 @@ interface TagsFormData {
 
 const FormTags: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [checked, setChecked] = useState(false);
   const { addToast } = useToast();
   const history = useHistory();
   const [tags, setTags] = useState<TagsFormData>();
@@ -32,6 +34,7 @@ const FormTags: React.FC = () => {
   async function loadTags(idU: string): Promise<void> {
     const response = await api.get(`/tags/${idU}`);
     setTags(response.data.tags);
+    setChecked(response.data.tags.status);
   }
   useEffect(() => {
     if (id) {
@@ -47,14 +50,14 @@ const FormTags: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/tags/${id}`, data);
+          await api.put(`/tags/${id}`, { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/tags', data);
+          await api.post('/tags', { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -76,12 +79,16 @@ const FormTags: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
+
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
   return (
     <Container>
       <Title>
-        <h1>Formulário de Instituições tags</h1>
+        <h1>Formulário de Tags</h1>
         <hr />
       </Title>
       <Panel>
@@ -93,7 +100,7 @@ const FormTags: React.FC = () => {
           onSubmit={handleSubmit}
         >
           <Input name="nome" type="text" placeholder="Nome" />
-
+          <Switch onChange={changeStatus} checked={checked} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
