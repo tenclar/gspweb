@@ -3,6 +3,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
 
 import api from '../../../../services/api';
@@ -15,34 +16,66 @@ import { Container, Title, Panel, LinkButton } from './styles';
 interface ParamTypes {
   id: string;
 }
-
-interface LocaLFormData {
+interface ICidade {
+  id: null;
+  nome: string;
+}
+interface IOrgao {
   id: null;
   nome: string;
 }
 interface LocaisFormData {
   nome: string;
   cidade_id: string;
+  cidade?: ICidade;
+  orgao: IOrgao;
   orgao_id: string;
+  conteudo: string;
+  status: boolean;
 }
 
 const FormLocais: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [checked, setChecked] = useState(false);
   const { addToast } = useToast();
   const history = useHistory();
   const [local, setLocal] = useState<LocaisFormData>();
+  const [cidades, setCidades] = useState<ICidade[]>([]);
+  const [orgaos, setOrgaos] = useState<IOrgao[]>([]);
 
   const { id } = useParams<ParamTypes>();
-
-  async function loadLocal(idU: string): Promise<void> {
-    const response = await api.get(`/locais/${idU}`);
-    setLocal(response.data.local);
-  }
   useEffect(() => {
+    async function loadLocal(idU: string): Promise<void> {
+      const response = await api.get(`/locais/${idU}`);
+      setLocal(response.data.local);
+      setChecked(response.data.local.status);
+      if (response.data.local.cidade && response.data.local.orgao) {
+        const c = response.data.local.cidade;
+        const org = response.data.local.orgao;
+        formRef.current?.setData({
+          cidade_id: { id: c.id, nome: c.nome },
+          orgao_id: { id: org.id, nome: org.nome },
+        });
+      }
+    }
     if (id) {
       loadLocal(id);
     }
   }, [id]);
+
+  useEffect(() => {
+    async function loadCidades(): Promise<void> {
+      const response = await api.get('/cidades');
+      setCidades(response.data.cidades);
+    }
+    async function loadOrgaos(): Promise<void> {
+      const response = await api.get('/orgaos');
+      setOrgaos(response.data.orgaos);
+    }
+
+    loadCidades();
+    loadOrgaos();
+  }, []);
   const handleSubmit = useCallback(
     async (data: LocaisFormData) => {
       try {
@@ -52,14 +85,26 @@ const FormLocais: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/locais/${id}`, data);
+          await api.put(`/locais/${id}`, {
+            nome: data.nome,
+            cidade_id: data.cidade_id,
+            orgao_id: data.orgao_id,
+            conteudo: data.conteudo,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/locais', data);
+          await api.post('/locais', {
+            nome: data.nome,
+            cidade_id: data.cidade_id,
+            orgao_id: data.orgao_id,
+            conteudo: data.conteudo,
+            status: checked,
+          });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -81,8 +126,11 @@ const FormLocais: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, history, id, checked],
   );
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
   return (
     <Container>
       <Title>
@@ -92,12 +140,14 @@ const FormLocais: React.FC = () => {
         <hr />
       </Title>
       <Panel>
+        <p style={{ color: '#000' }}>{JSON.stringify(local)}</p>
         <Form
           ref={formRef}
           initialData={{
             nome: local?.nome,
             cidade_id: local?.cidade_id,
             orgao_id: local?.orgao_id,
+            conteudo: local?.conteudo,
           }}
           onSubmit={handleSubmit}
         >
@@ -105,6 +155,7 @@ const FormLocais: React.FC = () => {
             Cidade
             <Select
               name="cidade_id"
+              options={cidades}
               getOptionValue={(option) => option.id}
               getOptionLabel={(option) => option.nome}
               isSearchable
@@ -115,6 +166,7 @@ const FormLocais: React.FC = () => {
             Órgão
             <Select
               name="orgao_id"
+              options={orgaos}
               getOptionValue={(option) => option.id}
               getOptionLabel={(option) => option.nome}
               isSearchable
@@ -123,6 +175,12 @@ const FormLocais: React.FC = () => {
           </label>
           <label htmlFor="Locais">
             <Input name="nome" type="text" placeholder="Nome" />
+            <Input
+              name="conteudo"
+              type="text"
+              placeholder="Complemento da informação"
+            />
+            <Switch onChange={changeStatus} checked={checked} />
           </label>
           <hr />
           <div>
