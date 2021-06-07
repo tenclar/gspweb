@@ -3,8 +3,9 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, useParams } from 'react-router-dom';
+import Switch from 'react-switch';
 import { useToast } from '../../../../hooks/Toast';
-
+import Select from '../../../../components/admin/Select';
 import api from '../../../../services/api';
 
 import getValidationErrors from '../../../../utils/getValidationErrors';
@@ -17,29 +18,43 @@ interface ParamTypes {
   id: string;
 }
 
-interface PracasFormData {
+interface ICentrais {
+  id: string;
   nome: string;
+}
+interface PracaFormData {
+  nome: string;
+  slug: string;
+  status: string;
 }
 
 const FormPracas: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const [pracas, setPracas] = useState<PracasFormData>();
-
+  const [checked, setChecked] = useState(false);
+  const [centrais, setCentrais] = useState<ICentrais[]>();
+  const [praca, setPraca] = useState<PracaFormData>();
   const { id } = useParams<ParamTypes>();
 
-  async function loadPracas(idU: string): Promise<void> {
-    const response = await api.get(`/pracas/${idU}`);
-    setPracas(response.data.pracas);
-  }
   useEffect(() => {
+    async function loadCentrais(): Promise<void> {
+      const response = await api.get('/centrais');
+      setCentrais(response.data.centrais);
+    }
+    loadCentrais();
+  }, []);
+  useEffect(() => {
+    async function showPraca(idU: string): Promise<void> {
+      const response = await api.get(`/pracas/${idU}`);
+      setPraca(response.data.praca);
+    }
     if (id) {
-      loadPracas(id);
+      showPraca(id);
     }
   }, [id]);
   const handleSubmit = useCallback(
-    async (data: PracasFormData) => {
+    async (data: PracaFormData) => {
       try {
         const schema = Yup.object().shape({
           nome: Yup.string().required('Nome obrigatório'),
@@ -47,14 +62,14 @@ const FormPracas: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/pracas/${id}`, data);
+          await api.put(`/pracas/${id}`, { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/pracas', data);
+          await api.post('/pracas', { nome: data.nome, status: checked });
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -78,6 +93,9 @@ const FormPracas: React.FC = () => {
     },
     [addToast, history, id],
   );
+  const changeStatus = useCallback((event) => {
+    setChecked(event);
+  }, []);
   return (
     <Container>
       <Title>
@@ -88,12 +106,20 @@ const FormPracas: React.FC = () => {
         <Form
           ref={formRef}
           initialData={{
-            nome: pracas?.nome,
+            nome: praca?.nome,
           }}
           onSubmit={handleSubmit}
         >
+          <Select
+            name="central_id"
+            options={centrais}
+            getOptionValue={(option) => option.id}
+            getOptionLabel={(option) => option.nome}
+            isSearchable
+            isClearable
+          />
           <Input name="nome" type="text" placeholder="Nome" />
-
+          <Switch onChange={changeStatus} checked={checked} />
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
