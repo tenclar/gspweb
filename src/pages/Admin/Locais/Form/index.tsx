@@ -45,7 +45,7 @@ const FormLocais: React.FC = () => {
 
   const { id } = useParams<ParamTypes>();
   useEffect(() => {
-    async function loadLocal(idU: string): Promise<void> {
+    async function showLocal(idU: string): Promise<void> {
       const response = await api.get(`/locais/${idU}`);
       setLocal(response.data.local);
       setChecked(response.data.local.status);
@@ -59,7 +59,7 @@ const FormLocais: React.FC = () => {
       }
     }
     if (id) {
-      loadLocal(id);
+      showLocal(id);
     }
   }, [id]);
 
