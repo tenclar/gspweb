@@ -31,7 +31,7 @@ const EditorQuill: React.FC<InputProps> = ({ name }) => {
     },
   };
 
-  const placeholder = 'Compose an epic...';
+  const placeholder = 'Escreva o texo aqui...';
 
   const formats = [
     'bold',
