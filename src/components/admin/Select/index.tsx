@@ -23,6 +23,7 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
           if (!ref.state.value) {
             return [];
           }
+          console.log('selecionado ', ref.state.value);
           return ref.state.value.map((option: OptionTypeBase) => option.value);
         }
         if (!ref.state.value) {
