@@ -25,6 +25,7 @@ interface CategoriaFormData {
   categoria_id?: string;
   status: boolean;
 }
+
 interface Categoria {
   id?: string | null | '' | undefined;
   categoria_id?: string | null | '' | undefined;
@@ -150,7 +151,6 @@ const FormCategorias: React.FC = () => {
 
   return (
     <Container>
-      {/* JSON.stringify(categoria) */}
       <Title>
         <h1>Formulário Categorias</h1>
         <hr />
