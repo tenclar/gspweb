@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const Title = styled.div`
   margin: 15px 0;
   color: #444;
+
   hr {
     border: 1px solid #f44336;
   }
@@ -27,18 +28,13 @@ export const Panel = styled.div`
     flex-direction: column;
 
     label {
-      font-weight: 500;
-      margin-bottom: 10px;
+      display: block;
+      font-weight: 600;
+      margin-top: 15px;
     }
-    input,
-    textarea,
-    select {
-      color: #000;
-      border-radius: 5px;
-      border: 2px solid #ccc;
-      padding: 10px;
-      width: 100%;
-      margin: 5px 0;
+
+    hr {
+      margin-top: 20px;
     }
   }
 `;
