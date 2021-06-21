@@ -19,6 +19,7 @@ interface Pracas {
   id: string;
   slug: string;
   nome: string;
+  status: boolean;
 }
 interface PracasPesquisaData {
   nome: string;
@@ -80,6 +81,7 @@ const Pracas: React.FC = () => {
               </th>
               <th>Nome da Tag</th>
               <th>Slug</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -104,6 +106,7 @@ const Pracas: React.FC = () => {
                 </td>
                 <td>{tag.nome}</td>
                 <td>{tag.slug}</td>
+                <td>{String(tag.status)}</td>
               </tr>
             ))}
           </tbody>

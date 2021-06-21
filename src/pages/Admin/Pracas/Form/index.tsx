@@ -25,7 +25,8 @@ interface ICentrais {
 interface PracaFormData {
   nome: string;
   slug: string;
-  status: string;
+  status: boolean;
+  centrais?: [];
 }
 
 const FormPracas: React.FC = () => {
@@ -33,14 +34,14 @@ const FormPracas: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
   const [checked, setChecked] = useState(false);
-  const [centrais, setCentrais] = useState<ICentrais[]>();
+  const [centraisop, setCentraisop] = useState<ICentrais[]>();
   const [praca, setPraca] = useState<PracaFormData>();
   const { id } = useParams<ParamTypes>();
 
   useEffect(() => {
     async function loadCentrais(): Promise<void> {
       const response = await api.get('/centrais');
-      setCentrais(response.data.centrais);
+      setCentraisop(response.data.centrais);
     }
     loadCentrais();
   }, []);
@@ -48,6 +49,13 @@ const FormPracas: React.FC = () => {
     async function showPraca(idU: string): Promise<void> {
       const response = await api.get(`/pracas/${idU}`);
       setPraca(response.data.praca);
+      setChecked(response.data.praca.status);
+      if (response.data.praca.central) {
+        const c = response.data.praca.central;
+        formRef.current?.setData({
+          central_id: { id: c.id, nome: c.nome },
+        });
+      }
     }
     if (id) {
       showPraca(id);
@@ -62,7 +70,9 @@ const FormPracas: React.FC = () => {
 
         await schema.validate(data, { abortEarly: false });
         if (id) {
-          await api.put(`/pracas/${id}`, { nome: data.nome, status: checked });
+          // await api.put(`/pracas/${id}`, { nome: data.nome, status: checked });
+          data.status = checked;
+          console.log(data);
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
@@ -77,7 +87,7 @@ const FormPracas: React.FC = () => {
           });
         }
 
-        history.push('/ad/cadastro/pracas');
+        // history.push('/ad/cadastro/pracas');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -91,7 +101,7 @@ const FormPracas: React.FC = () => {
         });
       }
     },
-    [addToast, history, id],
+    [addToast, id, checked],
   );
   const changeStatus = useCallback((event) => {
     setChecked(event);
@@ -107,12 +117,14 @@ const FormPracas: React.FC = () => {
           ref={formRef}
           initialData={{
             nome: praca?.nome,
+            centrais: praca?.centrais,
           }}
           onSubmit={handleSubmit}
         >
           <Select
-            name="central_id"
-            options={centrais}
+            name="centrais"
+            isMulti
+            options={centraisop}
             getOptionValue={(option) => option.id}
             getOptionLabel={(option) => option.nome}
             isSearchable
@@ -120,6 +132,7 @@ const FormPracas: React.FC = () => {
           />
           <Input name="nome" type="text" placeholder="Nome" />
           <Switch onChange={changeStatus} checked={checked} />
+          {JSON.stringify(praca)}
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
