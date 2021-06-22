@@ -23,8 +23,8 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
           if (!ref.state.value) {
             return [];
           }
-          console.log('selecionado ', ref.state.value);
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
+
+          return ref.state.value.map((option: OptionTypeBase) => option);
         }
         if (!ref.state.value) {
           return '';
@@ -37,20 +37,9 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
       },
       setValue: (ref, value) => {
         ref.select.setValue(value || null);
-        // ref.select.setValue(value, 'select-option');
-
-        /*
-        let selectedOptions;
-        if (rest.isMulti) {
-          selectedOptions = options?.filter((option) => value.includes(option));
-        } else {
-          selectedOptions = options?.find((option) => option.id === value);
-        }
-
-        ref.select.setValue(selectedOptions, 'select-option'); */
       },
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, rest.isMulti, options]);
   return (
     <>
       <Container>
@@ -73,3 +62,14 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
 };
 
 export default Select;
+
+// ref.select.setValue(value || null);
+// ref.select.setValue(value, 'select-option');
+/* let selectedOptions;
+        if (rest.isMulti) {
+          selectedOptions = options?.filter((option) => value.includes(option));
+        } else {
+          selectedOptions = options?.find((option) => option.id === value);
+        }
+
+        ref.select.setValue(selectedOptions, 'select-option'); */
