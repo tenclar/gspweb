@@ -13,6 +13,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import Input from '../../../../components/admin/InputForm';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
+import Centrais from '../../Centrais';
 
 interface ParamTypes {
   id: string;
@@ -20,6 +21,11 @@ interface ParamTypes {
 
 interface ICentrais {
   id: string;
+  centrais_id?: string | undefined;
+  nome: string;
+}
+interface ICentral {
+  centrais_id: string;
   nome: string;
 }
 interface PracaFormData {
@@ -41,7 +47,13 @@ const FormPracas: React.FC = () => {
   useEffect(() => {
     async function loadCentrais(): Promise<void> {
       const response = await api.get('/centrais');
-      setCentraisop(response.data.centrais);
+
+      const p = response.data.centrais.map((c: ICentrais) => ({
+        centrais_id: c.id,
+        nome: c.nome,
+      }));
+
+      setCentraisop(p);
     }
     loadCentrais();
   }, []);
@@ -50,12 +62,18 @@ const FormPracas: React.FC = () => {
       const response = await api.get(`/pracas/${idU}`);
       setPraca(response.data.praca);
       setChecked(response.data.praca.status);
-      if (response.data.praca.central) {
-        const c = response.data.praca.central;
+      formRef.current?.setData({
+        centrais: response.data.praca.centrais,
+      });
+      /* if (response.data.praca.centrais) {
+        const c = response.data.praca.centrais.map((cen: ICentrais) => ({
+          centrais_id: cen.centrais_id,
+          nome: cen.nome,
+        }));
         formRef.current?.setData({
-          central_id: { id: c.id, nome: c.nome },
+          centrais: { centrais_id: c.centrais_id, nome: c.nome },
         });
-      }
+      } */
     }
     if (id) {
       showPraca(id);
@@ -69,9 +87,10 @@ const FormPracas: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+        setPraca(data);
         if (id) {
-          // await api.put(`/pracas/${id}`, { nome: data.nome, status: checked });
           data.status = checked;
+          //  await api.put(`/pracas/${id}`, data);
           console.log(data);
           addToast({
             type: 'success',
@@ -79,7 +98,9 @@ const FormPracas: React.FC = () => {
             description: 'Alteração Realizada com Sucesso.',
           });
         } else {
-          await api.post('/pracas', { nome: data.nome, status: checked });
+          data.status = checked;
+
+          await api.post('/pracas', data);
           addToast({
             type: 'success',
             title: 'Sucesso No Cadastro',
@@ -125,14 +146,14 @@ const FormPracas: React.FC = () => {
             name="centrais"
             isMulti
             options={centraisop}
-            getOptionValue={(option) => option.id}
+            getOptionValue={(option) => option.centrais_id}
             getOptionLabel={(option) => option.nome}
             isSearchable
             isClearable
           />
           <Input name="nome" type="text" placeholder="Nome" />
           <Switch onChange={changeStatus} checked={checked} />
-          {JSON.stringify(praca)}
+          <div style={{ color: '#000' }}>{JSON.stringify(praca)}</div>
           <hr />
           <div>
             <Button type="submit">Salvar </Button>
