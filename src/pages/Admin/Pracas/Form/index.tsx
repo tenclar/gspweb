@@ -13,7 +13,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import Input from '../../../../components/admin/InputForm';
 import Button from '../../../../components/admin/Button';
 import { Container, Title, Panel, LinkButton } from './styles';
-import Centrais from '../../Centrais';
+// import Centrais from '../../Centrais';
 
 interface ParamTypes {
   id: string;
@@ -62,18 +62,13 @@ const FormPracas: React.FC = () => {
       const response = await api.get(`/pracas/${idU}`);
       setPraca(response.data.praca);
       setChecked(response.data.praca.status);
+      const pc = response.data.praca.centrais.map((c: any) => ({
+        centrais_id: c.centrais_id,
+        nome: c.central.nome,
+      }));
       formRef.current?.setData({
-        centrais: response.data.praca.centrais,
+        centrais: pc,
       });
-      /* if (response.data.praca.centrais) {
-        const c = response.data.praca.centrais.map((cen: ICentrais) => ({
-          centrais_id: cen.centrais_id,
-          nome: cen.nome,
-        }));
-        formRef.current?.setData({
-          centrais: { centrais_id: c.centrais_id, nome: c.nome },
-        });
-      } */
     }
     if (id) {
       showPraca(id);
@@ -87,11 +82,22 @@ const FormPracas: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
-        setPraca(data);
+
         if (id) {
-          data.status = checked;
-          //  await api.put(`/pracas/${id}`, data);
-          console.log(data);
+          if (data.centrais && praca && praca.centrais) {
+            if (data.centrais?.length > praca?.centrais?.length) {
+              await api.put(`/pracas/${id}`, {
+                nome: data.nome,
+                status: checked,
+                centrais: data.centrais,
+              });
+            }
+          } else {
+            await api.put(`/pracas/${id}`, {
+              nome: data.nome,
+              status: checked,
+            });
+          }
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
@@ -108,7 +114,7 @@ const FormPracas: React.FC = () => {
           });
         }
 
-        // history.push('/ad/cadastro/pracas');
+        history.push('/ad/cadastro/pracas');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -122,7 +128,7 @@ const FormPracas: React.FC = () => {
         });
       }
     },
-    [addToast, id, checked],
+    [addToast, id, history, praca, checked],
   );
   const changeStatus = useCallback((event) => {
     setChecked(event);
