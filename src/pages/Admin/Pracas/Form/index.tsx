@@ -84,20 +84,12 @@ const FormPracas: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         if (id) {
-          if (data.centrais && praca && praca.centrais) {
-            if (data.centrais?.length > praca?.centrais?.length) {
-              await api.put(`/pracas/${id}`, {
-                nome: data.nome,
-                status: checked,
-                centrais: data.centrais,
-              });
-            }
-          } else {
-            await api.put(`/pracas/${id}`, {
-              nome: data.nome,
-              status: checked,
-            });
-          }
+          await api.put(`/pracas/${id}`, {
+            nome: data.nome,
+            status: checked,
+            centrais: data.centrais,
+          });
+
           addToast({
             type: 'success',
             title: 'Sucesso na Atualização',
@@ -128,7 +120,7 @@ const FormPracas: React.FC = () => {
         });
       }
     },
-    [addToast, id, history, praca, checked],
+    [addToast, id, history, checked],
   );
   const changeStatus = useCallback((event) => {
     setChecked(event);
@@ -159,7 +151,7 @@ const FormPracas: React.FC = () => {
           />
           <Input name="nome" type="text" placeholder="Nome" />
           <Switch onChange={changeStatus} checked={checked} />
-          <div style={{ color: '#000' }}>{JSON.stringify(praca)}</div>
+
           <hr />
           <div>
             <Button type="submit">Salvar </Button>

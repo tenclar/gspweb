@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Switch, Route as ReactDOMRoute } from 'react-router-dom';
+import Route from './Route';
 import AvisosRoute from './admin/Avisos.Route';
 import CategoriasRoute from './admin/Categorias.Route';
 import CentraisRoute from './admin/Centrais.Route';
@@ -15,8 +16,6 @@ import TagsRoute from './admin/Tags.Route';
 import TemasRoute from './admin/Temas.Route';
 import UsersRoute from './admin/Users.Route';
 import InformacoesRoute from './admin/Informacoes.Route';
-import Route from './Route';
-
 import Error404 from '../pages/common/Error404';
 import Guide from '../pages/Guide';
 import Search from '../pages/Guide/Search';
