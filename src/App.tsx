@@ -1,18 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import GlobalStyled from './styles/global';
-import AppProvider from './hooks';
-import Routes from './routes';
+import 'bootstrap/dist/css/bootstrap.mim.css';
 
-const App: React.FC = () => (
-  <>
-    <GlobalStyled />
-    <AppProvider>
-      <Router>
-        <Routes />
-      </Router>
-    </AppProvider>
-  </>
-);
+function App() {
+  return (
+    
+    <h1>
+      Hello
+    </h1>
+    
+  );
+}
 
 export default App;
